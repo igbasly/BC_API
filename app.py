@@ -1,5 +1,5 @@
 from flask import Flask, request
-from urllib.request import HTTPError
+
 from bs4 import BeautifulSoup
 import urllib.request
 
