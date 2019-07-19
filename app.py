@@ -111,12 +111,11 @@ def get():
         "cxml_unidad_academica": "TODOS"
     }
     arguments = request.args
-    return arguments, 200
     for p in arguments:
         if p not in parameters_transform:
             return f"Bad Request: parameter {p}.", 400
         parameters[parameters_transform[p]] = arguments[p]
-    
+    return parameters, 200
     web_response = request_curso(parameters)
     if len(web_response) > 0:
         return web_response, 200
