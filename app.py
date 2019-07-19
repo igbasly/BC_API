@@ -1,17 +1,12 @@
 from flask import Flask, request
 from urllib.request import HTTPError
 from bs4 import BeautifulSoup
-import json
 import urllib.request
 
 from Objects import request_curso
 
 app = Flask(__name__)
 app.debug = True
-
-
-with open("info_buscacursos.json", "r") as file:
-    INFO = json.load(file)
 
 
 def ask_url(url):
@@ -106,7 +101,7 @@ parameters_transform = {
 @app.route("/api/v1", methods=["GET"])
 def get():
     parameters = {
-        "cxml_semestre": list(INFO["semestres"].values())[-1],
+        "cxml_semestre": "2019-2",
         "cxml_sigla": "",
         "cxml_nrc": "",
         "cxml_nombre": "",

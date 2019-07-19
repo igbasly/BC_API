@@ -5,9 +5,6 @@ import json
 import urllib.request
 
 
-with open("info_buscacursos.json", "r") as file:
-    INFO = json.load(file)
-
 
 def ask_url(url):
     resp = urllib.request.urlopen(url)
