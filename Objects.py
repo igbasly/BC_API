@@ -79,14 +79,14 @@ def request_curso(params):
             tipo = seccion_html[i + 3]
             i += 11
             mod[tipo].append(modulos)
-        
-        cursos[info["sigla"]] = info
+        if info["Sigla"] not in cursos:
+            cursos[info["Sigla"]] = [info]
+        cursos[info["Sigla"]].append(info)
 
     return cursos
 
 
 class BuscaCursos(Resource):
-
     parameters_transform = {
         "semestre": "cxml_semestre",
         "sigla": "cxml_sigla",
@@ -97,10 +97,10 @@ class BuscaCursos(Resource):
         "campus": "cxml_campus",
         "unidad_academica": "cxml_unidad_academica"
     }
-
-    def get(self, params):
+    
+    def get(self, param):
         parameters = {
-            "cxml_semestre": INFO["semestres"].values()[-1],
+            "cxml_semestre": list(INFO["semestres"].values())[-1],
             "cxml_sigla": "",
             "cxml_nrc": "",
             "cxml_nombre": "",
@@ -109,22 +109,20 @@ class BuscaCursos(Resource):
             "cxml_campus": "TODOS",
             "cxml_unidad_academica": "TODOS"
         }
-        params = params.strip("?").split("&")
-        request = dict()
-        for p in params:
-            parameter, value = p.split("=")
-            request[parameter] = value
-
-        for parameter in request:
-            if parameter not in self.parameters_transform:
-                return f"Bad Request: parameter {parameter}.", 400
-            parameters[self.parameters_transform[parameter]] =\
-                request[parameter]
-
+        arguments = dict()
+        for p in param.strip("?").split("&"):
+            if "=" not in p:
+                return f"Bad Request: parameter {p}.", 400
+            key, value = p.split("=")
+            arguments[key] = value
+        for p in arguments:
+            if p not in self.parameters_transform:
+                return f"Bad Request: parameter {p}.", 400
+            parameters[self.parameters_transform[p]] = arguments[p]
         web_response = request_curso(parameters)
         if len(web_response) > 0:
             return web_response, 200
-        return "Items not found", 404
-
-    def put(self, params):
+        return "Items not found", 40
+    
+    def put(self, paramss):
         return "Method Not Allowed", 405
