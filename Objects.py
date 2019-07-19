@@ -5,8 +5,7 @@ import json
 import urllib.request
 
 
-
-def ask_url(url):
+def request_url(url):
     resp = urllib.request.urlopen(url)
 
     soup = BeautifulSoup(resp, "lxml")
@@ -24,14 +23,13 @@ def ask_url(url):
     return result
 
 
-def request_curso(params):
-    web = f"http://buscacursos.uc.cl/?" \
+def request_buscacursos(params):
+    url = f"http://buscacursos.uc.cl/?" \
           f"{'&'.join(e + '=' + params[e] for e in params)}&cxml_horario_" \
           f"tipo_busqueda=si_tenga&cxml_horario_tipo_busqueda_actividad" \
           f"=TODOS#resultados"
-    #print(web)
     try:
-        search = ask_url(web)
+        search = request_url(url)
     except HTTPError:
 
         search = []
@@ -42,16 +40,36 @@ def request_curso(params):
     info_index3 = {"Nombre": 11, "Profesor": 12, "Campus": 13, "Creditos": 14,
                    "Vacantes totales": 15, "Vacantes disponibles": 16}
     cursos = dict()
-    for e in search:
-        seccion_html = e.get_text().split("\n")
-        info = {"NRC": None, "Sigla": None, "Retiro": None, "Ingles": None,
-                "Seccion": None, "Aprobacion especial": None,
-                "Categoria": None, "Nombre": None, "Profesor": None,
-                "Campus": None, "Creditos": None, "Vacantes totales": None,
-                "Vacantes disponibles": None,
-                "Modulos": {"CLAS": [], "AYU": [], "LAB": [], "LIB": [],
-                            "PRA": [], "SUP": [], "TAL": [], "TER": [],
-                            "TES": []}}
+    for line in search:
+        seccion_html = line.get_text().split("\n")
+
+        info = {
+            "NRC": None,
+            "Sigla": None,
+            "Retiro": None,
+            "Ingles": None,
+            "Seccion": None,
+            "Aprobacion especial": None,
+            "Categoria": None,
+            "Nombre": None,
+            "Profesor": None,
+            "Campus": None,
+            "Creditos": None,
+            "Vacantes totales": None,
+            "Vacantes disponibles": None,
+            "Modulos": {
+                "CLAS": [],
+                "AYU": [],
+                "LAB": [],
+                "LIB": [],
+                "PRA": [],
+                "SUP": [],
+                "TAL": [],
+                "TER": [],
+                "TES": []
+                }
+            }
+
         for i in info_index:
             aux = seccion_html[info_index[i]]
             if aux != "":
@@ -69,6 +87,7 @@ def request_curso(params):
 
         mod = info["Modulos"]
         i = info_index_aux["Vacantes disponibles"] + 6
+
         while True:
             modulos = seccion_html[i]
             if modulos in ["", ":"]:
@@ -76,50 +95,10 @@ def request_curso(params):
             tipo = seccion_html[i + 3]
             i += 11
             mod[tipo].append(modulos)
+
         if info["Sigla"] not in cursos:
-            cursos[info["Sigla"]] = [info]
-        cursos[info["Sigla"]].append(info)
+            cursos[info["Sigla"]] = {info["Seccion"]: info}
+
+        cursos[info["Sigla"]][info["Seccion"]] = info
 
     return cursos
-
-
-class BuscaCursos(Resource):
-    parameters_transform = {
-        "semestre": "cxml_semestre",
-        "sigla": "cxml_sigla",
-        "nrc": "cxml_nrc",
-        "nombre": "cxml_nombre",
-        "profesor": "cxml_profesor",
-        "categoria": "cxml_categoria",
-        "campus": "cxml_campus",
-        "unidad_academica": "cxml_unidad_academica"
-    }
-    
-    def get(self, param):
-        parameters = {
-            "cxml_semestre": list(INFO["semestres"].values())[-1],
-            "cxml_sigla": "",
-            "cxml_nrc": "",
-            "cxml_nombre": "",
-            "cxml_profesor": "",
-            "cxml_categoria": "TODOS",
-            "cxml_campus": "TODOS",
-            "cxml_unidad_academica": "TODOS"
-        }
-        arguments = dict()
-        for p in param.strip("?").split("&"):
-            if "=" not in p:
-                return f"Bad Request: parameter {p}.", 400
-            key, value = p.split("=")
-            arguments[key] = value
-        for p in arguments:
-            if p not in self.parameters_transform:
-                return f"Bad Request: parameter {p}.", 400
-            parameters[self.parameters_transform[p]] = arguments[p]
-        web_response = request_curso(parameters)
-        if len(web_response) > 0:
-            return web_response, 200
-        return "Items not found", 40
-    
-    def put(self, paramss):
-        return "Method Not Allowed", 405

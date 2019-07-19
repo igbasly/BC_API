@@ -1,92 +1,19 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
+import json
 
-from bs4 import BeautifulSoup
-import urllib.request
-
-from Objects import request_curso
+from Objects import request_buscacursos
 
 app = Flask(__name__)
-#app.debug = True
+#app.config.update(
+#    DEBUG=True,
+#    SERVER_NAME="192.168.0.15:8080"
+#)
 
 
-def ask_url(url):
-    resp = urllib.request.urlopen(url)
+with open("info_buscacursos.json", "r") as file:
+    INFO = json.load(file)
 
-    soup = BeautifulSoup(resp, "lxml")
-
-    name_box = soup.find_all('tr', attrs={'class': 'resultadosRowPar'})
-    name_box1 = soup.find_all('tr', attrs={'class': 'resultadosRowImpar'})
-
-    result = []
-
-    for i in range((len(name_box) + len(name_box1))):
-        if name_box and i % 2 == 0:
-            result.append(name_box.pop(0))
-        elif name_box1 and i % 2 != 0:
-            result.append(name_box1.pop(0))
-    return result
-
-
-def request_curso(params):
-    web = f"http://buscacursos.uc.cl/?" \
-          f"{'&'.join(e + '=' + params[e] for e in params)}&cxml_horario_" \
-          f"tipo_busqueda=si_tenga&cxml_horario_tipo_busqueda_actividad" \
-          f"=TODOS#resultados"
-    #print(web)
-    try:
-        search = ask_url(web)
-    except HTTPError:
-
-        search = []
-    info_index = {"NRC": 1, "Sigla": 2, "Retiro": 3, "Ingles": 4, "Seccion": 5,
-                  "Aprobacion especial": 6, "Categoria": 8}
-    info_index2 = {"Nombre": 9, "Profesor": 10, "Campus": 11, "Creditos": 12,
-                   "Vacantes totales": 13, "Vacantes disponibles": 14}
-    info_index3 = {"Nombre": 11, "Profesor": 12, "Campus": 13, "Creditos": 14,
-                   "Vacantes totales": 15, "Vacantes disponibles": 16}
-    cursos = dict()
-    for e in search:
-        seccion_html = e.get_text().split("\n")
-        info = {"NRC": None, "Sigla": None, "Retiro": None, "Ingles": None,
-                "Seccion": None, "Aprobacion especial": None,
-                "Categoria": None, "Nombre": None, "Profesor": None,
-                "Campus": None, "Creditos": None, "Vacantes totales": None,
-                "Vacantes disponibles": None,
-                "Modulos": {"CLAS": [], "AYU": [], "LAB": [], "LIB": [],
-                            "PRA": [], "SUP": [], "TAL": [], "TER": [],
-                            "TES": []}}
-        for i in info_index:
-            aux = seccion_html[info_index[i]]
-            if aux != "":
-                info[i] = aux.strip()
-
-        if info["Categoria"]:
-            info_index_aux = info_index3
-        else:
-            info_index_aux = info_index2
-
-        for i in info_index_aux:
-            aux = seccion_html[info_index_aux[i]]
-            if aux != "":
-                info[i] = aux.strip()
-
-        mod = info["Modulos"]
-        i = info_index_aux["Vacantes disponibles"] + 6
-        while True:
-            modulos = seccion_html[i]
-            if modulos in ["", ":"]:
-                break
-            tipo = seccion_html[i + 3]
-            i += 11
-            mod[tipo].append(modulos)
-        if info["Sigla"] not in cursos:
-            cursos[info["Sigla"]] = [info]
-        cursos[info["Sigla"]].append(info)
-
-    return cursos
-
-
-parameters_transform = {
+key_conversor = {
     "semestre": "cxml_semestre",
     "sigla": "cxml_sigla",
     "nrc": "cxml_nrc",
@@ -98,8 +25,59 @@ parameters_transform = {
 }
 
 
+def response(code: int, data: dict=None):
+    """ Create the response for any request based on the status code.
+
+    Args:
+        code (int): Status code of the response
+        data (dict): Information to be return in necesary cases.
+
+    Returns:
+        dict: Response in dictonary format with all information about the\
+            request.
+        int: Status code of response.
+
+    Codes:
+        200: "Ok"
+        201: "Created"
+        202: "Accepted"
+        204: "No Content"
+        400: "Bad Request"
+        403: "Forbidden"
+        404: "Not Found"
+        405: "Method Not Allowed"
+        500: "Internal Server Error"
+        503: "Service Unavailable"
+    """
+
+    codes = {
+        200: "Ok",
+        201: "Created",
+        202: "Accepted",
+        204: "No Content",
+        400: "Bad Request",
+        403: "Forbidden",
+        404: "Not Found",
+        405: "Method Not Allowed",
+        500: "Internal Server Error",
+        503: "Service Unavailable"
+    }
+
+    response_template = {
+        "code": code,
+        "status": codes[code]
+    }
+
+    if code//400 >= 1:
+        response_template["error"] = data
+    else:
+        response_template["data"] = data
+
+    return response_template, code
+
+
 @app.route("/api/v1", methods=["GET"])
-def get():
+def BC_API_get():
     parameters = {
         "cxml_semestre": "2019-2",
         "cxml_sigla": "",
@@ -110,26 +88,42 @@ def get():
         "cxml_campus": "TODOS",
         "cxml_unidad_academica": "TODOS"
     }
+
     arguments = request.args
-    for p in arguments:
-        if p not in parameters_transform:
-            return f"Bad Request: parameter {p}.", 400
-        parameters[parameters_transform[p]] = arguments[p]
-    #return parameters, 200
+    bad_arguments = []
+    for a in arguments:
+        if a not in key_conversor:
+            bad_arguments.append(a)
+            continue
+        parameters[key_conversor[a]] = "+".join(arguments[a].split(" "))
+    if bad_arguments:
+        return response(400,
+                        {"message": "(#400) Some arguments are not accepted.",
+                         "invalid_arguments": bad_arguments})
+
     try:
-        web_response = request_curso(parameters)
+        data_courses = request_buscacursos(parameters)
     except Exception as exc:
-        return {"status": "ERROR", "msg": f"An exception has ocurred: {exc}"}, 400
-    if len(web_response) > 0:
-        return web_response, 200
-    return "Items not found", 40
+        return response(500, {
+            "message": "(#500) An internal error ocurred, we are working on it."
+            })
+
+    if len(data_courses) > 0:
+        return response(200, data_courses)
+    return response(404, {
+        "message": "(#404) Not data found with this parameters."})
 
 
 @app.route("/api/v1", methods=["POST", "PUT"])
-def put():
-    return "Method Not Allowed", 405
+def BC_API_post():
+    return response(405, {
+        "message": "(#405) This API do not accept the PUT or POST methods."})
+
+
+@app.route("/favicon.ico", methods=["GET"])
+def icon():
+    return send_from_directory("Files", "favicon.png")
 
 
 if __name__ == "__main__":
     app.run()
-    print("Running")
