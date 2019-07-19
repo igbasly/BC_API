@@ -1,4 +1,3 @@
---upgrade pip
 httplib2
 flask
 flask_restful
