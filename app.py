@@ -128,6 +128,5 @@ def put():
 
 
 if __name__ == "__main__":
-    app.testing
     app.run()
     print("Running")
