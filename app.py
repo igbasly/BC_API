@@ -6,7 +6,7 @@ import urllib.request
 from Objects import request_curso
 
 app = Flask(__name__)
-app.debug = True
+#app.debug = True
 
 
 def ask_url(url):
@@ -116,7 +116,10 @@ def get():
             return f"Bad Request: parameter {p}.", 400
         parameters[parameters_transform[p]] = arguments[p]
     #return parameters, 200
-    web_response = request_curso(parameters)
+    try:
+        web_response = request_curso(parameters)
+    except Exception as exc:
+        return {"status": "ERROR", "msg": f"An exception has ocurred: {exc}"}, 400
     if len(web_response) > 0:
         return web_response, 200
     return "Items not found", 40
