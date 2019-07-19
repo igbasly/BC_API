@@ -6,7 +6,7 @@ from Objects import BuscaCursos
 app = Flask(__name__)
 api = Api(app)
 
-api.add_resource(BuscaCursos, "/BuscaCursosAPI/v1/<str:params>")
+api.add_resource(BuscaCursos, "/BuscaCursosAPI/v1/<params>")
 
 
 if __name__ == "__main__":
