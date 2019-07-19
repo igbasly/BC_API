@@ -1,0 +1,6 @@
+flask
+flask_restful
+json
+BeautifulSoup4
+urllib
+gunicorn
