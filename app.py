@@ -115,7 +115,7 @@ def get():
         if p not in parameters_transform:
             return f"Bad Request: parameter {p}.", 400
         parameters[parameters_transform[p]] = arguments[p]
-    return parameters, 200
+    #return parameters, 200
     web_response = request_curso(parameters)
     if len(web_response) > 0:
         return web_response, 200
