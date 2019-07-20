@@ -4,10 +4,10 @@ import json
 from Objects import request_buscacursos, request_vacancy
 
 app = Flask(__name__)
-app.config.update(
-    DEBUG=True,
-    SERVER_NAME="192.168.0.15:8080"
-)
+#app.config.update(
+#    DEBUG=True,
+#    SERVER_NAME="192.168.0.15:8080"
+#)
 
 
 with open("info_buscacursos.json", "r") as file:
