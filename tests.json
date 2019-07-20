@@ -1,5 +1,5 @@
 {
-    "test1": [[["hola", ""]], {
+    "test 1 v1": ["/api/v1?", [["hola", ""]], {
         "code": 400, 
         "error": {
           "invalid_arguments": [
@@ -9,14 +9,14 @@
         }, 
         "status": "Bad Request"
       }],
-    "test2": [[], {
+    "test 2 v1": ["/api/v1?", [], {
         "code": 404, 
         "error": {
           "message": "(#404) Not data found with this parameters."
         }, 
         "status": "Not Found"
       }],
-    "test3": [[["sigla", "iic2233"]], {
+    "test 3 v1": ["/api/v1?", [["sigla", "iic2233"]], {
         "code": 200, 
         "data": {
           "IIC2233": {
@@ -114,7 +114,7 @@
         }, 
         "status": "Ok"
       }],
-    "test4": [[["semestre", "2019-1"], ["sigla", "iic2233"]], {
+    "test 4 v1": ["/api/v1?", [["semestre", "2019-1"], ["sigla", "iic2233"]], {
         "code": 200, 
         "data": {
           "IIC2233": {
@@ -242,11 +242,287 @@
         }, 
         "status": "Ok"
       }],
-    "test5": [[["semestre", "2019-1"], ["sigla", "iic2233"], ["campus", "Casa Central"]], {
+    "test 5 v1": ["/api/v1?", [["semestre", "2019-1"], ["sigla", "iic2233"], ["campus", "Casa Central"]], {
         "code": 404, 
         "error": {
           "message": "(#404) Not data found with this parameters."
         }, 
         "status": "Not Found"
-      }]
+      }],
+    "test 1 v2": ["/api/v2?", [["sigla", "psi1204"], ["vacantes", "true"]],{
+      "code": 200, 
+      "data": {
+        "PSI1204": {
+          "1": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "W:4"
+              ], 
+              "CLAS": [
+                "J:2,3"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
+            }, 
+            "NRC": "12928", 
+            "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento", 
+            "Profesor": "Cosmelli Diego, Lopez Vladimir, Andreu Catherine, Ceric Francisco", 
+            "Retiro": "SI", 
+            "Seccion": "1", 
+            "Semestre": "2019-2", 
+            "Sigla": "PSI1204", 
+            "Vacantes": {
+              "09": [
+                30, 
+                0, 
+                30
+              ], 
+              "29": [
+                55, 
+                1, 
+                54
+              ], 
+              "97": [
+                1, 
+                0, 
+                1
+              ], 
+              "Disponibles": 100, 
+              "Libres": [
+                10, 
+                0, 
+                10
+              ], 
+              "Pregrado": [
+                5, 
+                0, 
+                5
+              ], 
+              "Totales": "101"
+            }
+          }, 
+          "2": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "J:2"
+              ], 
+              "CLAS": [
+                "W:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
+            }, 
+            "NRC": "12933", 
+            "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento", 
+            "Profesor": "Ceric Francisco, Lopez Vladimir, Cosmelli Diego, Andreu Catherine", 
+            "Retiro": "SI", 
+            "Seccion": "2", 
+            "Semestre": "2019-2", 
+            "Sigla": "PSI1204", 
+            "Vacantes": {
+              "09": [
+                30, 
+                0, 
+                30
+              ], 
+              "29": [
+                55, 
+                0, 
+                55
+              ], 
+              "97": [
+                1, 
+                0, 
+                1
+              ], 
+              "Disponibles": 101, 
+              "Libres": [
+                10, 
+                0, 
+                10
+              ], 
+              "Pregrado": [
+                5, 
+                0, 
+                5
+              ], 
+              "Totales": "101"
+            }
+          }, 
+          "3": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "V:2"
+              ], 
+              "CLAS": [
+                "V:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
+            }, 
+            "NRC": "16533", 
+            "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento", 
+            "Profesor": "Lopez Vladimir, Cosmelli Diego, Andreu Catherine, Ceric Francisco", 
+            "Retiro": "SI", 
+            "Seccion": "3", 
+            "Semestre": "2019-2", 
+            "Sigla": "PSI1204", 
+            "Vacantes": {
+              "09": [
+                30, 
+                0, 
+                30
+              ], 
+              "29": [
+                55, 
+                1, 
+                54
+              ], 
+              "97": [
+                1, 
+                0, 
+                1
+              ], 
+              "Disponibles": 100, 
+              "Libres": [
+                10, 
+                0, 
+                10
+              ], 
+              "Pregrado": [
+                5, 
+                0, 
+                5
+              ], 
+              "Totales": "101"
+            }
+          }
+        }
+      }, 
+      "status": "Ok"
+    }],
+  "test 2 v2": ["/api/v2?", [["sigla", "iiq1003"], ["vacantes", "false"]], {
+    "code": 200, 
+    "data": {
+      "IIQ1003": {
+        "1": {
+          "Aprobacion especial": "NO", 
+          "Campus": "San Joaqu\u00edn", 
+          "Categoria": null, 
+          "Creditos": "10", 
+          "Ingles": "NO", 
+          "Modulos": {
+            "AYU": [
+              "V:2"
+            ], 
+            "CLAS": [
+              "L-W:2"
+            ], 
+            "LAB": [], 
+            "LIB": [], 
+            "PRA": [], 
+            "SUP": [], 
+            "TAL": [], 
+            "TER": [], 
+            "TES": []
+          }, 
+          "NRC": "12717", 
+          "Nombre": "Termodin\u00e1mica", 
+          "Profesor": "Gajardo Nicol\u00e1s", 
+          "Retiro": "SI", 
+          "Seccion": "1", 
+          "Semestre": "2019-2", 
+          "Sigla": "IIQ1003", 
+          "Vacantes disponibles": "120", 
+          "Vacantes totales": "120"
+        }, 
+        "2": {
+          "Aprobacion especial": "NO", 
+          "Campus": "San Joaqu\u00edn", 
+          "Categoria": null, 
+          "Creditos": "10", 
+          "Ingles": "NO", 
+          "Modulos": {
+            "AYU": [
+              "V:1"
+            ], 
+            "CLAS": [
+              "L-W:1"
+            ], 
+            "LAB": [], 
+            "LIB": [], 
+            "PRA": [], 
+            "SUP": [], 
+            "TAL": [], 
+            "TER": [], 
+            "TES": []
+          }, 
+          "NRC": "20476", 
+          "Nombre": "Termodin\u00e1mica", 
+          "Profesor": "Gajardo Nicol\u00e1s", 
+          "Retiro": "SI", 
+          "Seccion": "2", 
+          "Semestre": "2019-2", 
+          "Sigla": "IIQ1003", 
+          "Vacantes disponibles": "120", 
+          "Vacantes totales": "120"
+        }
+      }
+    }, 
+    "status": "Ok"
+  }],
+"test 3 v2": ["/api/v2?", [["sigla", "hola"], ["vacantes", "true"]], {
+  "code": 404, 
+  "error": {
+    "message": "(#404) Not data found with this parameters."
+  }, 
+  "status": "Not Found"
+}],
+"test 4 v2": ["/api/v2?", [["sigla", "mat1640"], ["vacantes", "foo"]],  {
+  "code": 400, 
+  "error": {
+    "message": "(#400) Parameter 'vacantes' only accept boolean values."
+  }, 
+  "status": "Bad Request"
+}],
+"test 5 v2": ["/api/v2?", [["sigla", "ing1024"], ["foo", "too"]], {
+  "code": 400, 
+  "error": {
+    "invalid_arguments": [
+      "foo"
+    ], 
+    "message": "(#400) Some arguments are not accepted."
+  }, 
+  "status": "Bad Request"
+}]
 }
