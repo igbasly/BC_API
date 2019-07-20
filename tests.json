@@ -17,238 +17,248 @@
         "status": "Not Found"
       }],
     "test 3 v1": ["/api/v1?", [["sigla", "iic2233"]], {
-        "code": 200, 
-        "data": {
-          "IIC2233": {
-            "1": {
-              "Aprobacion especial": "NO", 
-              "Campus": "San Joaqu\u00edn", 
-              "Categoria": null, 
-              "Creditos": "10", 
-              "Ingles": "NO", 
-              "Modulos": {
-                "AYU": [
-                  "M:4"
-                ], 
-                "CLAS": [
-                  "J:4,5"
-                ], 
-                "LAB": [], 
-                "LIB": [], 
-                "PRA": [], 
-                "SUP": [], 
-                "TAL": [], 
-                "TER": [], 
-                "TES": []
-              }, 
-              "NRC": "12431", 
-              "Nombre": "Programaci\u00f3n Avanzada", 
-              "Profesor": "Ruz Cristian", 
-              "Retiro": "SI", 
-              "Seccion": "1", 
-              "Sigla": "IIC2233", 
-              "Vacantes disponibles": "95", 
-              "Vacantes totales": "95"
+      "code": 200, 
+      "data": {
+        "IIC2233": {
+          "1": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "M:4"
+              ], 
+              "CLAS": [
+                "J:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
             }, 
-            "2": {
-              "Aprobacion especial": "NO", 
-              "Campus": "San Joaqu\u00edn", 
-              "Categoria": null, 
-              "Creditos": "10", 
-              "Ingles": "NO", 
-              "Modulos": {
-                "AYU": [
-                  "M:4"
-                ], 
-                "CLAS": [
-                  "J:4,5"
-                ], 
-                "LAB": [], 
-                "LIB": [], 
-                "PRA": [], 
-                "SUP": [], 
-                "TAL": [], 
-                "TER": [], 
-                "TES": []
-              }, 
-              "NRC": "15428", 
-              "Nombre": "Programaci\u00f3n Avanzada", 
-              "Profesor": "Florenzano Fernando", 
-              "Retiro": "SI", 
-              "Seccion": "2", 
-              "Sigla": "IIC2233", 
-              "Vacantes disponibles": "95", 
-              "Vacantes totales": "95"
+            "NRC": "12431", 
+            "Nombre": "Programaci\u00f3n Avanzada", 
+            "Profesor": "Ruz Cristian", 
+            "Retiro": "SI", 
+            "Seccion": "1", 
+            "Semestre": "2019-2", 
+            "Sigla": "IIC2233", 
+            "Vacantes disponibles": "95", 
+            "Vacantes totales": "95"
+          }, 
+          "2": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "M:4"
+              ], 
+              "CLAS": [
+                "J:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
             }, 
-            "3": {
-              "Aprobacion especial": "NO", 
-              "Campus": "San Joaqu\u00edn", 
-              "Categoria": null, 
-              "Creditos": "10", 
-              "Ingles": "NO", 
-              "Modulos": {
-                "AYU": [
-                  "M:4"
-                ], 
-                "CLAS": [
-                  "J:4,5"
-                ], 
-                "LAB": [], 
-                "LIB": [], 
-                "PRA": [], 
-                "SUP": [], 
-                "TAL": [], 
-                "TER": [], 
-                "TES": []
-              }, 
-              "NRC": "18177", 
-              "Nombre": "Programaci\u00f3n Avanzada", 
-              "Profesor": "Ossa Antonio", 
-              "Retiro": "SI", 
-              "Seccion": "3", 
-              "Sigla": "IIC2233", 
-              "Vacantes disponibles": "95", 
-              "Vacantes totales": "95"
-            }
+            "NRC": "15428", 
+            "Nombre": "Programaci\u00f3n Avanzada", 
+            "Profesor": "Florenzano Fernando", 
+            "Retiro": "SI", 
+            "Seccion": "2", 
+            "Semestre": "2019-2", 
+            "Sigla": "IIC2233", 
+            "Vacantes disponibles": "95", 
+            "Vacantes totales": "95"
+          }, 
+          "3": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "M:4"
+              ], 
+              "CLAS": [
+                "J:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
+            }, 
+            "NRC": "18177", 
+            "Nombre": "Programaci\u00f3n Avanzada", 
+            "Profesor": "Ossa Antonio", 
+            "Retiro": "SI", 
+            "Seccion": "3", 
+            "Semestre": "2019-2", 
+            "Sigla": "IIC2233", 
+            "Vacantes disponibles": "95", 
+            "Vacantes totales": "95"
           }
-        }, 
-        "status": "Ok"
-      }],
+        }
+      }, 
+      "status": "Ok"
+    }],
     "test 4 v1": ["/api/v1?", [["semestre", "2019-1"], ["sigla", "iic2233"]], {
-        "code": 200, 
-        "data": {
-          "IIC2233": {
-            "1": {
-              "Aprobacion especial": "NO", 
-              "Campus": "San Joaqu\u00edn", 
-              "Categoria": null, 
-              "Creditos": "10", 
-              "Ingles": "NO", 
-              "Modulos": {
-                "AYU": [
-                  "M:4"
-                ], 
-                "CLAS": [
-                  "J:4,5"
-                ], 
-                "LAB": [], 
-                "LIB": [], 
-                "PRA": [], 
-                "SUP": [], 
-                "TAL": [], 
-                "TER": [], 
-                "TES": []
-              }, 
-              "NRC": "10760", 
-              "Nombre": "Programaci\u00f3n Avanzada", 
-              "Profesor": "Florenzano Fernando", 
-              "Retiro": "SI", 
-              "Seccion": "1", 
-              "Sigla": "IIC2233", 
-              "Vacantes disponibles": "21", 
-              "Vacantes totales": "81"
+      "code": 200, 
+      "data": {
+        "IIC2233": {
+          "1": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "M:4"
+              ], 
+              "CLAS": [
+                "J:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
             }, 
-            "2": {
-              "Aprobacion especial": "NO", 
-              "Campus": "San Joaqu\u00edn", 
-              "Categoria": null, 
-              "Creditos": "10", 
-              "Ingles": "NO", 
-              "Modulos": {
-                "AYU": [
-                  "M:4"
-                ], 
-                "CLAS": [
-                  "J:4,5"
-                ], 
-                "LAB": [], 
-                "LIB": [], 
-                "PRA": [], 
-                "SUP": [], 
-                "TAL": [], 
-                "TER": [], 
-                "TES": []
-              }, 
-              "NRC": "10754", 
-              "Nombre": "Programaci\u00f3n Avanzada", 
-              "Profesor": "Ossa Antonio", 
-              "Retiro": "SI", 
-              "Seccion": "2", 
-              "Sigla": "IIC2233", 
-              "Vacantes disponibles": "26", 
-              "Vacantes totales": "84"
+            "NRC": "10760", 
+            "Nombre": "Programaci\u00f3n Avanzada", 
+            "Profesor": "Florenzano Fernando", 
+            "Retiro": "SI", 
+            "Seccion": "1", 
+            "Semestre": "2019-1", 
+            "Sigla": "IIC2233", 
+            "Vacantes disponibles": "21", 
+            "Vacantes totales": "81"
+          }, 
+          "2": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "M:4"
+              ], 
+              "CLAS": [
+                "J:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
             }, 
-            "3": {
-              "Aprobacion especial": "NO", 
-              "Campus": "San Joaqu\u00edn", 
-              "Categoria": null, 
-              "Creditos": "10", 
-              "Ingles": "NO", 
-              "Modulos": {
-                "AYU": [
-                  "M:4"
-                ], 
-                "CLAS": [
-                  "J:4,5"
-                ], 
-                "LAB": [], 
-                "LIB": [], 
-                "PRA": [], 
-                "SUP": [], 
-                "TAL": [], 
-                "TER": [], 
-                "TES": []
-              }, 
-              "NRC": "18284", 
-              "Nombre": "Programaci\u00f3n Avanzada", 
-              "Profesor": "Ruz Cristian", 
-              "Retiro": "SI", 
-              "Seccion": "3", 
-              "Sigla": "IIC2233", 
-              "Vacantes disponibles": "19", 
-              "Vacantes totales": "83"
+            "NRC": "10754", 
+            "Nombre": "Programaci\u00f3n Avanzada", 
+            "Profesor": "Ossa Antonio", 
+            "Retiro": "SI", 
+            "Seccion": "2", 
+            "Semestre": "2019-1", 
+            "Sigla": "IIC2233", 
+            "Vacantes disponibles": "26", 
+            "Vacantes totales": "84"
+          }, 
+          "3": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "M:4"
+              ], 
+              "CLAS": [
+                "J:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
             }, 
-            "4": {
-              "Aprobacion especial": "NO", 
-              "Campus": "San Joaqu\u00edn", 
-              "Categoria": null, 
-              "Creditos": "10", 
-              "Ingles": "NO", 
-              "Modulos": {
-                "AYU": [
-                  "M:4"
-                ], 
-                "CLAS": [
-                  "J:4,5"
-                ], 
-                "LAB": [], 
-                "LIB": [], 
-                "PRA": [], 
-                "SUP": [], 
-                "TAL": [], 
-                "TER": [], 
-                "TES": []
-              }, 
-              "NRC": "22154", 
-              "Nombre": "Programaci\u00f3n Avanzada", 
-              "Profesor": "Dominguez Vicente", 
-              "Retiro": "SI", 
-              "Seccion": "4", 
-              "Sigla": "IIC2233", 
-              "Vacantes disponibles": "16", 
-              "Vacantes totales": "77"
-            }
+            "NRC": "18284", 
+            "Nombre": "Programaci\u00f3n Avanzada", 
+            "Profesor": "Ruz Cristian", 
+            "Retiro": "SI", 
+            "Seccion": "3", 
+            "Semestre": "2019-1", 
+            "Sigla": "IIC2233", 
+            "Vacantes disponibles": "19", 
+            "Vacantes totales": "83"
+          }, 
+          "4": {
+            "Aprobacion especial": "NO", 
+            "Campus": "San Joaqu\u00edn", 
+            "Categoria": null, 
+            "Creditos": "10", 
+            "Ingles": "NO", 
+            "Modulos": {
+              "AYU": [
+                "M:4"
+              ], 
+              "CLAS": [
+                "J:4,5"
+              ], 
+              "LAB": [], 
+              "LIB": [], 
+              "PRA": [], 
+              "SUP": [], 
+              "TAL": [], 
+              "TER": [], 
+              "TES": []
+            }, 
+            "NRC": "22154", 
+            "Nombre": "Programaci\u00f3n Avanzada", 
+            "Profesor": "Dominguez Vicente", 
+            "Retiro": "SI", 
+            "Seccion": "4", 
+            "Semestre": "2019-1", 
+            "Sigla": "IIC2233", 
+            "Vacantes disponibles": "16", 
+            "Vacantes totales": "77"
           }
-        }, 
-        "status": "Ok"
-      }],
-    "test 5 v1": ["/api/v1?", [["semestre", "2019-1"], ["sigla", "iic2233"], ["campus", "Casa Central"]], {
-        "code": 404, 
-        "error": {
-          "message": "(#404) Not data found with this parameters."
-        }, 
-        "status": "Not Found"
-      }],
+        }
+      }, 
+      "status": "Ok"
+    }],
+    "test 5 v1": ["/api/v1?", [["sigla", "ING2030"], ["vacantes", "true"]], {
+      "code": 400, 
+      "error": {
+        "invalid_arguments": [
+          "vacantes"
+        ], 
+        "message": "(#400) Some arguments are not accepted."
+      }, 
+      "status": "Bad Request"
+    }],
     "test 1 v2": ["/api/v2?", [["sigla", "psi1204"], ["vacantes", "true"]],{
       "code": 200, 
       "data": {
