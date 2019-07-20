@@ -83,7 +83,7 @@ def icon():
 
 
 @app.route("/api/v1", methods=["GET"])
-def BC_API_get():
+def BC_API_get(vacantes=False):
     parameters = {
         "cxml_semestre": "2019-2",
         "cxml_sigla": "",
@@ -101,7 +101,10 @@ def BC_API_get():
             bad_arguments.append(a)
             continue
         elif a == "vacantes":
-            continue
+            if vacantes:
+                continue
+            else:
+                bad_arguments.append(a)
         parameters[key_conversor[a]] = "+".join(arguments[a].split(" "))
     if bad_arguments:
         return response(400,
@@ -130,10 +133,9 @@ def BC_API_post():
 
 @app.route("/api/v2", methods=["GET"])
 def BC_API_v2_get():
-    resp, code = BC_API_get()
+    resp, code = BC_API_get(True)
     if "vacantes" in request.args and code == 200:
         if request.args["vacantes"] == "true":
-            print(request.args["vacantes"])
             for cla in resp["data"].values():
                 for sec in cla.values():
                     vacancy = request_vacancy(sec["NRC"], sec["Semestre"])
