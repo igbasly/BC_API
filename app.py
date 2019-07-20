@@ -1,13 +1,13 @@
 from flask import Flask, request, send_from_directory
 import json
 
-from Objects import request_buscacursos
+from Objects import request_buscacursos, request_vacancy
 
 app = Flask(__name__)
-#app.config.update(
-#    DEBUG=True,
-#    SERVER_NAME="192.168.0.15:8080"
-#)
+app.config.update(
+    DEBUG=True,
+    SERVER_NAME="192.168.0.15:8080"
+)
 
 
 with open("info_buscacursos.json", "r") as file:
@@ -21,7 +21,8 @@ key_conversor = {
     "profesor": "cxml_profesor",
     "categoria": "cxml_categoria",
     "campus": "cxml_campus",
-    "unidad_academica": "cxml_unidad_academica"
+    "unidad_academica": "cxml_unidad_academica",
+    "vacantes": "vacantes"
 }
 
 
@@ -76,6 +77,11 @@ def response(code: int, data: dict=None):
     return response_template, code
 
 
+@app.route("/favicon.ico", methods=["GET"])
+def icon():
+    return send_from_directory("Files", "favicon.png")
+
+
 @app.route("/api/v1", methods=["GET"])
 def BC_API_get():
     parameters = {
@@ -88,12 +94,13 @@ def BC_API_get():
         "cxml_campus": "TODOS",
         "cxml_unidad_academica": "TODOS"
     }
-
     arguments = request.args
     bad_arguments = []
     for a in arguments:
         if a not in key_conversor:
             bad_arguments.append(a)
+            continue
+        elif a == "vacantes":
             continue
         parameters[key_conversor[a]] = "+".join(arguments[a].split(" "))
     if bad_arguments:
@@ -102,27 +109,44 @@ def BC_API_get():
                          "invalid_arguments": bad_arguments})
 
     try:
-        data_courses = request_buscacursos(parameters)
+        data_classes = request_buscacursos(parameters)
     except Exception as exc:
         return response(500, {
             "message": "(#500) An internal error ocurred, we are working on it."
             })
 
-    if len(data_courses) > 0:
-        return response(200, data_courses)
+    if len(data_classes) > 0:
+        return response(200, data_classes)
     return response(404, {
         "message": "(#404) Not data found with this parameters."})
 
 
 @app.route("/api/v1", methods=["POST", "PUT"])
+@app.route("/api/v2", methods=["POST", "PUT"])
 def BC_API_post():
     return response(405, {
         "message": "(#405) This API do not accept the PUT or POST methods."})
 
 
-@app.route("/favicon.ico", methods=["GET"])
-def icon():
-    return send_from_directory("Files", "favicon.png")
+@app.route("/api/v2", methods=["GET"])
+def BC_API_v2_get():
+    resp, code = BC_API_get()
+    if "vacantes" in request.args and code == 200:
+        if request.args["vacantes"] == "true":
+            print(request.args["vacantes"])
+            for cla in resp["data"].values():
+                for sec in cla.values():
+                    vacancy = request_vacancy(sec["NRC"], sec["Semestre"])
+                    sec["Vacantes"] = vacancy
+                    total = sec.pop("Vacantes totales")
+                    sec["Vacantes"]["Totales"] = total
+                    sec.pop("Vacantes disponibles")
+        elif request.args["vacantes"] != "false":
+            return response(400, {
+                "message": "(#400) Parameter 'vacantes' " +
+                "only accept boolean values."
+                })
+    return resp, code
 
 
 if __name__ == "__main__":

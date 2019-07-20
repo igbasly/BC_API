@@ -45,10 +45,11 @@ def request_buscacursos(params):
 
         info = {
             "NRC": None,
+            "Semestre": params["cxml_semestre"],
             "Sigla": None,
+            "Seccion": None,
             "Retiro": None,
             "Ingles": None,
-            "Seccion": None,
             "Aprobacion especial": None,
             "Categoria": None,
             "Nombre": None,
@@ -102,3 +103,43 @@ def request_buscacursos(params):
         cursos[info["Sigla"]][info["Seccion"]] = info
 
     return cursos
+
+
+def request_vacancy(nrc: str, semester: str):
+    url = f"http://buscacursos.uc.cl/informacionVacReserva" +\
+          f".ajax.php?nrc={nrc}&termcode={semester}"
+    try:
+        search = request_url(url)
+    except HTTPError:
+        search = []
+
+    results = []
+    for line in search:
+        seccion_html = line.get_text().split("\n")
+        remove = []
+        for i in range(len(seccion_html)):
+            seccion_html[i] = seccion_html[i].replace("\t", "")
+            if seccion_html[i] == "":
+                remove.append(i - len(remove))
+        for i in remove:
+            seccion_html.pop(i)
+        seccion_html = [s.strip(" ") for s in seccion_html[0].split("-")] +\
+            seccion_html[1:]
+        results.append(seccion_html)
+    results = results[1:] if len(results) > 0 else []
+    finals = {"Disponibles": 0}
+    for esc in results:
+        if esc[0] == "Vacantes libres" or esc[0] == "Vacantes Libres":
+            if len(esc) == 4:
+                finals["Libres"] = [int(i) for i in esc[-3:]]
+            else:
+                aux = [int(i) for i in esc[-3:]]
+                for i in range(3):
+                    finals["Libres"][i] + aux[i]
+            continue
+        elif "TOTAL DISPONIBLES" in esc[0]:
+            finals["Disponibles"] = int(esc[1])
+            continue
+        finals[esc[0]] = [int(i) for i in esc[-3:]]
+    return finals
+
