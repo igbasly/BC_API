@@ -259,7 +259,7 @@
       }, 
       "status": "Bad Request"
     }],
-    "test 1 v2": ["/api/v2?", [["sigla", "psi1204"], ["vacantes", "true"]],{
+    "test 1 v2": ["/api/v2?", [["sigla", "psi1204"], ["vacantes", "true"]], {
       "code": 200, 
       "data": {
         "PSI1204": {
@@ -307,7 +307,7 @@
                 0, 
                 1
               ], 
-              "Disponibles": 100, 
+              "Disponibles": "100", 
               "Libres": [
                 10, 
                 0, 
@@ -365,7 +365,7 @@
                 0, 
                 1
               ], 
-              "Disponibles": 101, 
+              "Disponibles": "101", 
               "Libres": [
                 10, 
                 0, 
@@ -423,7 +423,7 @@
                 0, 
                 1
               ], 
-              "Disponibles": 100, 
+              "Disponibles": "100", 
               "Libres": [
                 10, 
                 0, 
