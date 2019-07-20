@@ -4,10 +4,10 @@ import json
 from Objects import request_buscacursos, request_vacancy
 
 app = Flask(__name__)
-#app.config.update(
-#    DEBUG=True,
-#    SERVER_NAME="192.168.0.15:8080"
-#)
+app.config.update(
+    DEBUG=True,
+    SERVER_NAME="192.168.0.15:8080"
+)
 
 
 with open("info_buscacursos.json", "r") as file:
@@ -142,7 +142,8 @@ def BC_API_v2_get():
                     sec["Vacantes"] = vacancy
                     total = sec.pop("Vacantes totales")
                     sec["Vacantes"]["Totales"] = total
-                    sec.pop("Vacantes disponibles")
+                    available = sec.pop("Vacantes disponibles")
+                    sec["Vacantes"]["Disponibles"] = available
         elif request.args["vacantes"] != "false":
             return response(400, {
                 "message": "(#400) Parameter 'vacantes' " +

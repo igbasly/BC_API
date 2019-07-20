@@ -128,14 +128,20 @@ def request_vacancy(nrc: str, semester: str):
         results.append(seccion_html)
     results = results[1:] if len(results) > 0 else []
     finals = {"Disponibles": 0}
+    print(results)
     for esc in results:
+        if len(esc) < 3:
+            continue
         if esc[0] == "Vacantes libres" or esc[0] == "Vacantes Libres":
             if len(esc) == 4:
                 finals["Libres"] = [int(i) for i in esc[-3:]]
             else:
-                aux = [int(i) for i in esc[-3:]]
+                print(esc)
+                aux = [int(i) for i in esc[len(esc)-3:]]
+                print(finals["Libres"], aux)
                 for i in range(3):
-                    finals["Libres"][i] + aux[i]
+                    finals["Libres"][i] += aux[i]
+                print(finals["Libres"])
             continue
         elif "TOTAL DISPONIBLES" in esc[0]:
             finals["Disponibles"] = int(esc[1])
