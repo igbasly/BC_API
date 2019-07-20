@@ -1,6 +1,6 @@
 # BuscaCursos UC REST API  | [![Build Status](https://travis-ci.com/igbasly/BC_API.svg?token=rvsCi5nQd3Zv6KdSdS54&branch=master)](https://travis-ci.com/igbasly/BC_API)
 REST API del sistema BuscaCursos de la PUC Chile.\
-La API se encuentra alojada en la url [buscacursos-api.herokuapp.com/api/v1](http://buscacursos-api.herokuapp.com/api/v1)
+La API se encuentra alojada en la url [http://buscacursos-api.herokuapp.com/api/v1](http://buscacursos-api.herokuapp.com/api/v1)
 
 
 ## GET
@@ -21,7 +21,9 @@ Es una API _read-only_ por lo que solo acepta el método HTTP GET con los siguie
 * campus
 * unidad_academica
 
-Las respuesta son en formato JSON de la siguiente forma:
+Las respuesta son en formato JSON, donde en caso de ser aceptado el *request* contendrá un *key* `data` (`dict`) con todos los cursos donde a su vez, cada curso será otro `dict` con las secciones respectivas y su información correspondiente.
+
+Ejemplo:
 ```json
 {
     'code': 200,
@@ -84,3 +86,138 @@ En caso de `ERROR` la respuesta será en formato JSON de la siguiente forma:
 }
 ```
 *Ejemplo de request `HTTP GET api/v1?foo=pass`*
+
+## Ejemplos
+
+Algunos ejemplos de la utilización de esta API mediante python sería:
+
+### Ejemplo 1
+
+```python
+import requests
+
+url_api = "http://buscacursos-api.herokuapp.com/api/v1"
+params = {
+    "sigla": "iic2233",
+    "semestre": "2019-2",
+    "campus": "TODOS"
+    }
+
+response = requests.get(url = url_api, params = params)
+
+print(response.json())
+```
+Respuesta:
+```json
+{
+    "code": 200,
+    "status":"Ok",
+    "data": {
+        "IIC2233": {
+            "1": {
+                "Aprobacion especial":"NO",
+                "Campus":"San Joaqu\u00edn",
+                "Categoria":null,
+                "Creditos":"10",
+                "Ingles":"NO",
+                "Modulos":{
+                    "AYU":["M:4"],
+                    "CLAS":["J:4,5"],
+                    "LAB":[],
+                    "LIB":[],
+                    "PRA":[],
+                    "SUP":[],
+                    "TAL":[],
+                    "TER":[],
+                    "TES":[]
+                    },
+                "NRC":"12431",
+                "Nombre":"Programaci\u00f3n Avanzada",
+                "Profesor":"Ruz Cristian",
+                "Retiro":"SI",
+                "Seccion":"1",
+                "Sigla":"IIC2233",
+                "Vacantes disponibles":"95",
+                "Vacantes totales":"95"
+                },
+            "2": {
+                "Aprobacion especial":"NO",
+                "Campus":"San Joaqu\u00edn",
+                "Categoria":null,
+                "Creditos":"10",
+                "Ingles":"NO",
+                "Modulos":{
+                    "AYU":["M:4"],
+                    "CLAS":["J:4,5"],
+                    "LAB":[],
+                    "LIB":[],
+                    "PRA":[],
+                    "SUP":[],
+                    "TAL":[],
+                    "TER":[],
+                    "TES":[]
+                    },
+                "NRC":"15428",
+                "Nombre":"Programaci\u00f3n Avanzada",
+                "Profesor":"Florenzano Fernando",
+                "Retiro":"SI",
+                "Seccion":"2",
+                "Sigla":"IIC2233",
+                "Vacantes disponibles":"95",
+                "Vacantes totales":"95"
+                },
+            "3": {
+                "Aprobacion especial":"NO",
+                "Campus":"San Joaqu\u00edn",
+                "Categoria":null,
+                "Creditos":"10",
+                "Ingles":"NO",
+                "Modulos":{
+                    "AYU":["M:4"],
+                    "CLAS":["J:4,5"],
+                    "LAB":[],
+                    "LIB":[],
+                    "PRA":[],
+                    "SUP":[],
+                    "TAL":[],
+                    "TER":[],
+                    "TES":[]
+                    },
+                "NRC":"18177",
+                "Nombre":"Programaci\u00f3n Avanzada",
+                "Profesor":"Ossa Antonio",
+                "Retiro":"SI",
+                "Seccion":"3",
+                "Sigla":"IIC2233",
+                "Vacantes disponibles":"95",
+                "Vacantes totales":"95"
+                }
+            }
+        }
+}
+```
+
+### Ejemplo 2
+```python
+import requests
+
+url_api = "http://buscacursos-api.herokuapp.com/api/v1"
+params = {
+    "sigla": "PSI1204",
+    }
+
+response = requests.post(url = url_api, params = params)
+
+print(response.json())
+```
+
+Respuesta:
+```json
+{
+    'code': 405,
+    'status': "Method Not Allowed",
+    'error': {
+        "message": "(#405) This API do not accept PUT or POST methods."
+        }
+}
+```
