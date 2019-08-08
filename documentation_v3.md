@@ -115,6 +115,7 @@ Es decir, en caso de tener una **lista vacía** significa que el campo no contie
 En caso de `ERROR` la respuesta será en formato JSON de la siguiente forma:
 
 
+
 ```json
 {
     'code':400,
