@@ -1,13 +1,13 @@
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, jsonify, Response
 import json
 
 from Objects import request_buscacursos, request_vacancy, request_requirements
 
 app = Flask(__name__)
-#app.config.update(
-#    DEBUG=True,
-#    SERVER_NAME="192.168.0.15:8080"
-#)
+app.config['JSON_AS_ASCII'] = False
+app.config.update(
+    DEBUG=True,
+    SERVER_NAME="localhost:8080")
 
 
 with open("info_buscacursos.json", "r") as file:
@@ -74,7 +74,6 @@ def response(code: int, data: dict=None):
         response_template["error"] = data
     else:
         response_template["data"] = data
-
     return response_template, code
 
 
@@ -121,8 +120,8 @@ def BC_API_get(vacantes=False):
 
     if len(data_classes) > 0:
         return response(200, data_classes)
-    return response(404, {
-        "message": "(#404) Not data found with this parameters."})
+
+    return response(404, {"message": "(#404) No data found with those parameters."})
 
 
 @app.route("/api/v1", methods=["POST", "PUT"])
@@ -186,6 +185,33 @@ def BC_API_v3_get():
                 resp["data"][sigla]["Requisitos"] = req
     return resp, code
 
+
+@app.route("/api/v3/requisitos", methods=["GET"])
+def BC_API_v3_req_get():
+    denied = []
+    sigla = ""
+    for a in request.args:
+        if a == "sigla":
+            sigla = request.args[a]
+        else:
+            denied.append(a)
+    if len(denied) != 0:
+        return response(405, {"message": f"(#405) Parameters {', '.join(denied)} are not accepted."})
+    if not sigla:
+        return response(400, {"message": f"(#400) No value for 'sigla' parameter."})
+    
+    info = request_requirements(sigla)
+
+    i = 0
+    for value in info.values():
+        if not value:
+            i += 1
+            break
+    
+    if not i:
+        return response(404, {"message": "(#404) No data found with this parameters."})
+
+    return response(200, {sigla: info})
 
 if __name__ == "__main__":
     app.run()
