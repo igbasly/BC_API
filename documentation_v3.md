@@ -94,6 +94,7 @@ El parametro `requisitos` recibe únicamente valores **booleanos** *(true o fals
 *Ejemplo correspondiente a los requisitos del curos `MAT1630`*
 
 El detalle de esta respuesta se interpreta como:
+
 | | |
 |:---|:---:
 **Equivalencias**| MAT1523 o MAT230E o MLM1130

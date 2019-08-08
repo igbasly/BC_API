@@ -95,6 +95,7 @@ Un ejemplo mas detallado podría verse:
 Donde `04` es el código de **Ingeniería**, `06` de **Matemáticas** y 09 de **College**.
 
 Por otro lado, las vacantes que cada uno de estos incluye se detallan como:
+
 | | Ofrecidas | Ocupadas | Disponibles|
 |---|:---:|:---:|:---:|
 |04 - Ingeniería|83|83|0|
