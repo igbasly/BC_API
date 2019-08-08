@@ -1,13 +1,13 @@
 from flask import Flask, request, send_from_directory
 import json
 
-from Objects import request_buscacursos, request_vacancy
+from Objects import request_buscacursos, request_vacancy, request_requirements
 
 app = Flask(__name__)
-#app.config.update(
-#    DEBUG=True,
-#    SERVER_NAME="192.168.0.15:8080"
-#)
+app.config.update(
+    DEBUG=True,
+    SERVER_NAME="192.168.0.15:8080"
+)
 
 
 with open("info_buscacursos.json", "r") as file:
@@ -22,7 +22,8 @@ key_conversor = {
     "categoria": "cxml_categoria",
     "campus": "cxml_campus",
     "unidad_academica": "cxml_unidad_academica",
-    "vacantes": "vacantes"
+    "vacantes": "vacantes",
+    "requisitos": "requisitos"
 }
 
 
@@ -126,6 +127,7 @@ def BC_API_get(vacantes=False):
 
 @app.route("/api/v1", methods=["POST", "PUT"])
 @app.route("/api/v2", methods=["POST", "PUT"])
+@app.route("/api/v3", methods=["POST", "PUT"])
 def BC_API_post():
     return response(405, {
         "message": "(#405) This API do not accept the PUT or POST methods."})
@@ -149,6 +151,39 @@ def BC_API_v2_get():
                 "message": "(#400) Parameter 'vacantes' " +
                 "only accept boolean values."
                 })
+    return resp, code
+
+
+@app.route("/api/v3", methods=["GET"])
+def BC_API_v3_get():
+    if "vacantes" in request.args and\
+        request.args["vacantes"] not in ["true", "false"]:
+        return response(400, {
+                "message": "(#400) Parameter 'requisitos' " +
+                "only accept boolean values."
+                })
+    if "requisitos" in request.args and\
+        request.args["requisitos"] not in ["true", "false"]:
+            return response(400, {
+                "message": "(#400) Parameter 'requisitos' " +
+                "only accept boolean values."
+                })
+    resp, code = BC_API_get(True)
+    if "vacantes" in request.args and code == 200:
+        if request.args["vacantes"] == "true":
+            for cla in resp["data"].values():
+                for sec in cla.values():
+                    vacancy = request_vacancy(sec["NRC"], sec["Semestre"])
+                    sec["Vacantes"] = vacancy
+                    total = sec.pop("Vacantes totales")
+                    sec["Vacantes"]["Totales"] = total
+                    available = sec.pop("Vacantes disponibles")
+                    sec["Vacantes"]["Disponibles"] = available
+    if "requisitos" in request.args and code == 200:
+        if request.args["requisitos"] == "true":
+            for sigla in resp["data"]:
+                req = request_requirements(sigla)
+                resp["data"][sigla]["Requisitos"] = req
     return resp, code
 
 
