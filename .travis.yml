@@ -2,8 +2,6 @@ language: python
 branches:
   only:
   - master
-  except:
-  - gh-pages
 python:
   - "3.6"
 # command to install dependencies
