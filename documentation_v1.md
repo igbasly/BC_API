@@ -1,10 +1,12 @@
 # BuscaCursos UC REST API  | V1 | [![Build Status](https://travis-ci.com/igbasly/BC_API.svg?token=rvsCi5nQd3Zv6KdSdS54&branch=master)](https://travis-ci.com/igbasly/BC_API)
-REST API del sistema BuscaCursos de la PUC Chile.\
+REST API del sistema BuscaCursos de la PUC Chile.
+
 La versión 1 de la API se encuentra alojada en la url [http://buscacursos-api.herokuapp.com/api/v1](http://buscacursos-api.herokuapp.com/api/v1)
 
 
 ## GET
-### Requests
+---
+### **Requests**
 
 Es una API _read-only_ por lo que solo acepta el método HTTP GET con los siguientes parametros:
 * semestre
@@ -61,8 +63,8 @@ Ejemplo:
 ```
 *Ejemplo de request `HTTP GET /api/v1?sigla=irb2001`*
 
-
-### ERRORS
+---
+### **ERRORES**
 En caso de `ERROR` la respuesta será en formato JSON de la siguiente forma:
 ```json
 {
@@ -87,6 +89,7 @@ En caso de `ERROR` la respuesta será en formato JSON de la siguiente forma:
 ```
 *Ejemplo de request `HTTP GET api/v1?foo=pass`*
 
+---
 ## Ejemplos
 
 Algunos ejemplos de la utilización de esta API mediante python sería:

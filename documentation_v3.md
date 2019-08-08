@@ -1,10 +1,12 @@
-# BuscaCursos UC REST API  | V1 | [![Build Status](https://travis-ci.com/igbasly/BC_API.svg?token=rvsCi5nQd3Zv6KdSdS54&branch=master)](https://travis-ci.com/igbasly/BC_API)
-REST API del sistema BuscaCursos de la PUC Chile.\
-La versión 1 de la API se encuentra alojada en la url [http://buscacursos-api.herokuapp.com/api/v1](http://buscacursos-api.herokuapp.com/api/v1)
+# BuscaCursos UC REST API  | V3 | [![Build Status](https://travis-ci.com/igbasly/BC_API.svg?token=rvsCi5nQd3Zv6KdSdS54&branch=master)](https://travis-ci.com/igbasly/BC_API)
+REST API del sistema BuscaCursos de la PUC Chile.
+
+La versión 3 de la API se encuentra alojada en la url [http://buscacursos-api.herokuapp.com/api/v3](http://buscacursos-api.herokuapp.com/api/v3)
 
 
 ## GET
-### Requests
+---
+### **Requests**
 
 Es una API _read-only_ por lo que solo acepta el método HTTP GET con los siguientes parametros:
 * semestre
@@ -20,6 +22,12 @@ Es una API _read-only_ por lo que solo acepta el método HTTP GET con los siguie
 * categoria
 * campus
 * unidad_academica
+* vacantes
+    - true
+    - false
+* requisitos
+    - true
+    - false
 
 Las respuesta son en formato JSON, donde en caso de ser aceptado el *request* contendrá un *key* `data` (`dict`) con todos los cursos donde a su vez, cada curso será otro `dict` con las secciones respectivas y su información correspondiente.
 
@@ -54,39 +62,64 @@ Ejemplo:
                 "Seccion":"1",
                 "Sigla":"IRB2001",
                 "Vacantes disponibles":"31",
-                "Vacantes totales":"31"}
-                }
+                "Vacantes totales":"31"
+                },
+            "Requisitos": {
+                "Equivalencias": ["IRB1001"],
+                "Prerequisitos": ["FIS1513","ICE1513","FIS1514","ICE1514"],
+                "Relacion entre prerequisitos y restricciones": [],
+                "Restricciones": []
+               }
             }
-}
-```
-*Ejemplo de request `HTTP GET /api/v1?sigla=irb2001`*
-
-
-### ERRORS
-En caso de `ERROR` la respuesta será en formato JSON de la siguiente forma:
-```json
-{
-    'code':404,
-    'status':"Not Found",
-    'error':{
-        "message":"(#404) Not data found with this parameters."
         }
 }
 ```
-*Ejemplo de request `HTTP GET /api/v1?sigla=abc`*
+*Ejemplo de request `HTTP GET /api/v3?sigla=irb2001&requisitos=true`*
+
+---
+
+### **Requisitos**
+El parametro `requisitos` recibe únicamente valores **booleanos** *(true o false)* donde la respuesta corresponde a un diccionario en la *keyword* **requisitos** para cada **curso** que se encuentre en la consulta.
+
+```json
+...
+    'Requisitos': {
+        "Equivalencias": ["MAT1523","MAT230E","MLM1130"],
+        "Prerequisitos": [["MAT1202","MAT1512"],["MAT1202","MAT1620"],["MAT1203","MAT1512"],["MAT1203","MAT1620"]],
+        "Relacion entre prerequisitos y restricciones": [],
+        "Restricciones": []
+    }
+...
+```
+*Ejemplo correspondiente a los requisitos del curos `MAT1630`*
+
+El detalle de esta respuesta se interpreta como:
+| | |
+|:---|:---:
+**Equivalencias**| MAT1523 o MAT230E o MLM1130
+**Prerequisitos** | (MAT1202 Y MAT1512) o (MAT1202 y MAT1620) o (MAT1203 y MAT1512) o (MAT1203 y MAT1620)
+**Relacion entre prerequisitos y restricciones** | No tiene
+**Restricciones** | No tiene
+
+Es decir, en caso de tener una **lista vacía** significa que el campo no contiene valores, en caso de **compartir la lista principal** son equivalentes y en caso de **compartir una sublista** estos (*de la sublista*) son todos requeridos y entre sublistas son equivalentes.
+
+---
+### **ERRORES**
+En caso de `ERROR` la respuesta será en formato JSON de la siguiente forma:
+
 
 ```json
 {
     'code':400,
     'status':"Bad Request",
     'error':{
-        "invalid_arguments":["foo"],
-        "message":"(#400) Some arguments are not accepted."
+        "message":"(#400) Parameter 'requisitos' only accept boolean values."
         }
 }
 ```
-*Ejemplo de request `HTTP GET api/v1?foo=pass`*
+*Ejemplo de request `HTTP GET api/v3?sigla=DPT6100&requisitos=foo`*
 
+---
 ## Ejemplos
 
 Algunos ejemplos de la utilización de esta API mediante python sería:

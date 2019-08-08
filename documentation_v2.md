@@ -1,10 +1,12 @@
-# BuscaCursos UC REST API  | V1 | [![Build Status](https://travis-ci.com/igbasly/BC_API.svg?token=rvsCi5nQd3Zv6KdSdS54&branch=master)](https://travis-ci.com/igbasly/BC_API)
-REST API del sistema BuscaCursos de la PUC Chile.\
-La versión 1 de la API se encuentra alojada en la url [http://buscacursos-api.herokuapp.com/api/v1](http://buscacursos-api.herokuapp.com/api/v1)
+# BuscaCursos UC REST API  | V2 | [![Build Status](https://travis-ci.com/igbasly/BC_API.svg?token=rvsCi5nQd3Zv6KdSdS54&branch=master)](https://travis-ci.com/igbasly/BC_API)
+REST API del sistema BuscaCursos de la PUC Chile.
+
+La versión 2 de la API se encuentra alojada en la url [http://buscacursos-api.herokuapp.com/api/v2](http://buscacursos-api.herokuapp.com/api/v2)
 
 
 ## GET
-### Requests
+---
+### **Requests**
 
 Es una API _read-only_ por lo que solo acepta el método HTTP GET con los siguientes parametros:
 * semestre
@@ -20,6 +22,9 @@ Es una API _read-only_ por lo que solo acepta el método HTTP GET con los siguie
 * categoria
 * campus
 * unidad_academica
+* vacantes
+    - true
+    - false
 
 Las respuesta son en formato JSON, donde en caso de ser aceptado el *request* contendrá un *key* `data` (`dict`) con todos los cursos donde a su vez, cada curso será otro `dict` con las secciones respectivas y su información correspondiente.
 
@@ -29,7 +34,7 @@ Ejemplo:
     'code': 200,
     'status': "OK",
     'data': {
-        "IRB2001": {
+        "ICC2304": {
             "1": {
                 "Aprobacion especial":"NO",
                 "Campus":"San Joaqu\u00edn",
@@ -38,54 +43,84 @@ Ejemplo:
                 "Ingles":"NO",
                 "Modulos":{
                     "AYU":[],
-                    "CLAS":["M:4,5"],
-                    "LAB":["V:5"],
+                    "CLAS":["M-J:2"],
+                    "LAB":[],
                     "LIB":[],
                     "PRA":[],
                     "SUP":[],
                     "TAL":[],
-                    "TER":[],
+                    "TER":["V:1,2,3"],
                     "TES":[]
                     },
-                "NRC":"12002",
-                "Nombre":"Fundamentos de Rob\u00f3tica",
-                "Profesor":"Torres Miguel, Troni Giancarlo, Calabi Daniel, Soto Alvaro",
+                "NRC":"10659",
+                "Nombre":"Ingenier\u00eda de Construcci\u00f3n",
+                "Profesor":"Vera Sergio, Carpio Manuel",
                 "Retiro":"NO",
                 "Seccion":"1",
-                "Sigla":"IRB2001",
-                "Vacantes disponibles":"31",
-                "Vacantes totales":"31"}
+                "Sigla":"ICC2304",
+                "Semestre": "2019-2",
+                "Vacantes": {
+                    "Libres": [100, 76, 24],
+                    "Disponibles": 24,
+                    "Totales": 100
+                    }
                 }
             }
+        }
 }
 ```
-*Ejemplo de request `HTTP GET /api/v1?sigla=irb2001`*
+*Ejemplo de request `HTTP GET /api/v2?sigla=ICC2304`*
+
+---
+### **Vacantes**
+
+En caso de utilizarse el parametro `vacantes`, el cual solo permite el uso de un booleano como valor *(true o false)*, la respuesta inluirá para cada **sección** un *keyword* **Vacantes** que corresponde a un diccionario con las vacantes reservadas para las distintas **unidades** representadas por su código o **Libres** junto con el **total disponible** y el **total de vacantes**.
+
+Un ejemplo mas detallado podría verse:
+```json
+...
+
+"Vacantes": {
+    "04": [83,83,0],
+    "06": [4,4,0],
+    "09": [7,7,0],
+    "Libres": [15,15,0],
+    "Disponibles": "0",
+    "Totales": "109"
+},
+
+...
+```
+
+Donde `04` es el código de **Ingeniería**, `06` de **Matemáticas** y 09 de **College**.
+
+Por otro lado, las vacantes que cada uno de estos incluye se detallan como:
+| | Ofrecidas | Ocupadas | Disponibles|
+|---|:---:|:---:|:---:|
+|04 - Ingeniería|83|83|0|
+|06 - Matemáticas | 4|4|0
+09 - College | 7 |7 |0
+Libres | 15 |15 |0
+**Totales** | **109** | **109** | **0**
 
 
-### ERRORS
+
+---
+## ERRORES
 En caso de `ERROR` la respuesta será en formato JSON de la siguiente forma:
-```json
-{
-    'code':404,
-    'status':"Not Found",
-    'error':{
-        "message":"(#404) Not data found with this parameters."
-        }
-}
-```
-*Ejemplo de request `HTTP GET /api/v1?sigla=abc`*
 
 ```json
 {
-    'code':400,
-    'status':"Bad Request",
-    'error':{
-        "invalid_arguments":["foo"],
-        "message":"(#400) Some arguments are not accepted."
+    'code': 400,
+    'status': "Bad Request",
+    'error': {
+        "message": "(#400) Parameter 'vacantes' only accept boolean values."
         }
 }
 ```
-*Ejemplo de request `HTTP GET api/v1?foo=pass`*
+*Ejemplo de request `HTTP GET api/v2?sigla=DPT6100&vacantes=foo`*
+
+---
 
 ## Ejemplos
 
