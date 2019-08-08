@@ -3,7 +3,7 @@ import json
 
 from Objects import request_buscacursos, request_vacancy, request_requirements
 
-#app = Flask(__name__)
+app = Flask(__name__)
 #app.config.update(
 #    DEBUG=True,
 #    SERVER_NAME="192.168.0.15:8080"
