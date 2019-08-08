@@ -95,12 +95,18 @@ El parametro `requisitos` recibe únicamente valores **booleanos** *(true o fals
 
 El detalle de esta respuesta se interpreta como:
 
-| | |
-|:---|:---:
-**Equivalencias**| MAT1523 o MAT230E o MLM1130
-**Prerequisitos** | (MAT1202 Y MAT1512) o (MAT1202 y MAT1620) o (MAT1203 y MAT1512) o (MAT1203 y MAT1620)
-**Relacion entre prerequisitos y restricciones** | No tiene
-**Restricciones** | No tiene
+<table>
+<tr>
+<th> </th>
+<th> </th>
+</tr>
+<tr> <td>Equivalencias</td><td> MAT1523 o MAT230E o MLM1130</td></tr>
+<tr><td>Prerequisitos </td><td> (MAT1202 Y MAT1512) o (MAT1202 y MAT1620) o (MAT1203 y MAT1512) o (MAT1203 y MAT1620)</td></tr>
+<tr><td>Relacion entre prerequisitos y restricciones </td><td> No tiene</td></tr>
+<tr><td>Restricciones </td><td> No tiene</td></tr>
+
+</table>
+
 
 Es decir, en caso de tener una **lista vacía** significa que el campo no contiene valores, en caso de **compartir la lista principal** son equivalentes y en caso de **compartir una sublista** estos (*de la sublista*) son todos requeridos y entre sublistas son equivalentes.
 

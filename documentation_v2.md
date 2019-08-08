@@ -96,13 +96,20 @@ Donde `04` es el código de **Ingeniería**, `06` de **Matemáticas** y 09 de **
 
 Por otro lado, las vacantes que cada uno de estos incluye se detallan como:
 
-| | Ofrecidas | Ocupadas | Disponibles|
-|---|:---:|:---:|:---:|
-|04 - Ingeniería|83|83|0|
-|06 - Matemáticas | 4|4|0
-09 - College | 7 |7 |0
-Libres | 15 |15 |0
-**Totales** | **109** | **109** | **0**
+<table>
+<tr>
+<th> </th>
+<th> Ofrecidas </th>
+<th> Ocupadas </th>
+<th> Disponibles </th>
+</tr>
+<tr> <td>04 - Ingeniería </td><td>83</td><td>83</td><td>0</td></tr>
+<tr><td>06 - Matemáticas </td><td> 4</td><td>4</td><td>0</td></tr>
+<tr><td>09 - College </td><td> 7 </td><td>7 </td><td>0</td></tr>
+<tr><td>Libres</td><td> 15 </td><td>15 </td><td>0</td></tr>
+<tr><td>Totales</td><td> 109 </td><td>109 </td><td>0</td></tr>
+
+</table>
 
 
 
