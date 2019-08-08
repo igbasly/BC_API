@@ -2,4 +2,4 @@
 REST API del sistema BuscaCursos de la PUC Chile.
 
 La API cuenta con 3 versiones:
-* **v1:** Versión básica para consultas de BuscaCursos. [Documentación](/documentation_v1.html)
+* **v1:** Versión básica para consultas de BuscaCursos. [Documentación](/BC_API/documentation_v1.html)
