@@ -5,9 +5,9 @@ from Objects import request_buscacursos, request_vacancy, request_requirements
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
-app.config.update(
-    DEBUG=True,
-    SERVER_NAME="localhost:8080")
+#app.config.update(
+#    DEBUG=True,
+#    SERVER_NAME="192.168.0.15:8080")
 
 
 with open("info_buscacursos.json", "r") as file:
