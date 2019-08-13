@@ -1,13 +1,13 @@
 from flask import Flask, request, send_from_directory, jsonify, Response
 import json
 
-from Objects import request_buscacursos, request_vacancy, request_requirements
+from Requests import request_buscacursos, request_vacancy, request_requirements
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 #app.config.update(
 #    DEBUG=True,
-#    SERVER_NAME="192.168.0.15:8080")
+#    SERVER_NAME="localhost:8080")
 
 
 with open("info_buscacursos.json", "r") as file:
@@ -79,11 +79,25 @@ def response(code: int, data: dict=None):
 
 @app.route("/favicon.ico", methods=["GET"])
 def icon():
+    """ Return the favicon for explorers
+    Returns:
+        'Favicon' file
+    """
     return send_from_directory("Files", "favicon.png")
 
 
 @app.route("/api/v1", methods=["GET"])
 def BC_API_get(vacantes=False):
+    """ HTTP GET method for v1
+    Args:
+        vancante (bool): Allow the use of 'vacantes' paramters in the request.
+
+    Returns:
+        dict: Response in dictonary format with all information about the\
+            request.
+        int: Status code of response.
+
+    """
     parameters = {
         "cxml_semestre": "2019-2",
         "cxml_sigla": "",
@@ -134,6 +148,15 @@ def BC_API_post():
 
 @app.route("/api/v2", methods=["GET"])
 def BC_API_v2_get():
+    """ HTTP GET method for v2
+    This methods allows use of 'vacantes' parameter in the request.
+
+    Returns:
+        dict: Response in dictonary format with all information about the\
+            request.
+        int: Status code of response.
+    """
+
     resp, code = BC_API_get(True)
     if "vacantes" in request.args and code == 200:
         if request.args["vacantes"] == "true":
@@ -155,6 +178,14 @@ def BC_API_v2_get():
 
 @app.route("/api/v3", methods=["GET"])
 def BC_API_v3_get():
+    """ HTTP GET method for v3
+    This method allow the use of 'requisitos' parameter in the request.
+
+    Return:
+        dict: Response in dictonary format with all information about the\
+            request.
+        int: Status code of response.
+    """
     if "vacantes" in request.args and\
         request.args["vacantes"] not in ["true", "false"]:
         return response(400, {
@@ -188,6 +219,15 @@ def BC_API_v3_get():
 
 @app.route("/api/v3/requisitos", methods=["GET"])
 def BC_API_v3_req_get():
+    """ HTTP GET method for v3 with 'requisitos' scope.
+    This method just return 'requisitos' info of the courses found with the
+    initials given in 'sigla' parameters.
+
+    Return:
+        dict: Response in dictonary format with all information about the\
+            request.
+        int: Status code of response.
+    """
     denied = []
     sigla = ""
     for a in request.args:
