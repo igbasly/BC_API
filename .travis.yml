@@ -8,7 +8,5 @@ python:
 install:
   - pip install --upgrade pip
   - pip install -r requirements.txt
-virtualenv:
-  system_site_packages: true
 # command to run tests
 script: python3.6 pytest.py || python pytest.py
