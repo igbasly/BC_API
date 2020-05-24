@@ -1,7 +1,0 @@
-pytest
-httplib2
-flask
-flask_restful
-lxml
-BeautifulSoup4
-gunicorn
