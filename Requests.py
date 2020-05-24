@@ -6,7 +6,15 @@ import urllib.request
 import unicodedata
 
 
-def strip_accents(text):
+"""
+Requests module
+
+Handle the url requests from BuscaCursos page, the scrape work to get all the
+data and assable the json structure to return.
+"""
+
+
+  def strip_accents(text):
     """
     Strip accents from input String.
 
@@ -22,7 +30,7 @@ def strip_accents(text):
         return text.upper()
     try:
         text = unicode(text, 'utf-8')
-    except (TypeError, NameError): # unicode is a default on python 3 
+    except (TypeError, NameError):
         pass
     text = unicodedata.normalize('NFD', text)
     text = text.encode('ascii', 'ignore')
@@ -31,6 +39,15 @@ def strip_accents(text):
 
 
 def request_url(url):
+    """Make the requests to BuscaCursos server and parse the xml response to
+    separete all the results in a single list.
+
+    Args:
+        url (str): A valid complete BuscaCursos url.
+
+    Returns:
+        list: List with sublists with all the contents of BuscaCursos reponse.
+    """
     resp = urllib.request.urlopen(url)
 
     soup = BeautifulSoup(resp, "lxml")
@@ -49,6 +66,16 @@ def request_url(url):
 
 
 def request_buscacursos(params):
+    """Assamble the BuscaCursos url and make the requests. In case of a valid
+    response, clean all the information and put them on a dict with the API
+    format response.
+
+    Args:
+        params (dict): Dict with valid BuscaCursos requests parameters.
+
+    Returns:
+        dict: Dict with courses data response in API format.
+    """
     url = f"http://buscacursos.uc.cl/?" \
           f"{'&'.join(e + '=' + strip_accents(params[e]) for e in params)}&cxml_horario_" \
           f"tipo_busqueda=si_tenga&cxml_horario_tipo_busqueda_actividad" \
@@ -132,6 +159,18 @@ def request_buscacursos(params):
 
 
 def request_vacancy(nrc: str, semester: str):
+    """Make the requests for vacancies to BuscaCursos serves and format the
+    info into the API response format to vancany.
+
+    Args:
+        nrc (str): The nrc code from a specific section of a course. This
+        need to be a valid nrc from the semestre requested.
+        semester (str): Semester code of interes.
+
+    Returns:
+        dict: Dict with the vacancy information of the section given in the API
+        response format.
+    """
     url = f"http://buscacursos.uc.cl/informacionVacReserva" +\
           f".ajax.php?nrc={nrc}&termcode={semester}"
     try:
@@ -173,6 +212,15 @@ def request_vacancy(nrc: str, semester: str):
 
 
 def request_requirements(sigla: str):
+    """Assamble the url with the course code of interest, request the url to UC
+    server and parse the response into a dict with the API response format.
+
+    Args:
+        sigla (str): Course code of interest.
+
+    Returns:
+        dict: Dict with course requirements in API response format.
+    """
     url = f"http://catalogo.uc.cl/index.php?tmpl=component&" +\
           f"option=com_catalogo&view=requisitos&sigla={sigla.upper()}"
     try:

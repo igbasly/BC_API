@@ -1,1 +1,1416 @@
-{"Test 1 v1": ["/api/v1?", [["hola", ""]], {"code": 400, "error": {"invalid_arguments": ["hola"], "message": "(#400) Some arguments are not accepted."}, "status": "Bad Request"}], "Test 2 v1": ["/api/v1?", [["", ""]], {"code": 400, "error": {"invalid_arguments": [""], "message": "(#400) Some arguments are not accepted."}, "status": "Bad Request"}], "Test 3 v1": ["/api/v1?", [["sigla", "iic2233"]], {"code": 200, "data": {"IIC2233": {"1": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "12431", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Ruz Cristian", "Retiro": "SI", "Seccion": "1", "Semestre": "2019-2", "Sigla": "IIC2233", "Vacantes disponibles": "12", "Vacantes totales": "110"}, "2": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "15428", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Florenzano Fernando", "Retiro": "SI", "Seccion": "2", "Semestre": "2019-2", "Sigla": "IIC2233", "Vacantes disponibles": "14", "Vacantes totales": "111"}, "3": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "18177", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Ossa Antonio", "Retiro": "SI", "Seccion": "3", "Semestre": "2019-2", "Sigla": "IIC2233", "Vacantes disponibles": "18", "Vacantes totales": "111"}, "4": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "23787", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Dom\u00ednguez Vicente", "Retiro": "SI", "Seccion": "4", "Semestre": "2019-2", "Sigla": "IIC2233", "Vacantes disponibles": "37", "Vacantes totales": "88"}}}, "status": "Ok"}], "Test 4 v1": ["/api/v1?", [["semestre", "2019-1"], ["sigla", "iic2233"]], {"code": 200, "data": {"IIC2233": {"1": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "10760", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Florenzano Fernando", "Retiro": "SI", "Seccion": "1", "Semestre": "2019-1", "Sigla": "IIC2233", "Vacantes disponibles": "22", "Vacantes totales": "81"}, "2": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "10754", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Ossa Antonio", "Retiro": "SI", "Seccion": "2", "Semestre": "2019-1", "Sigla": "IIC2233", "Vacantes disponibles": "26", "Vacantes totales": "84"}, "3": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "18284", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Ruz Cristian", "Retiro": "SI", "Seccion": "3", "Semestre": "2019-1", "Sigla": "IIC2233", "Vacantes disponibles": "19", "Vacantes totales": "83"}, "4": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "22154", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Dom\u00ednguez Vicente", "Retiro": "SI", "Seccion": "4", "Semestre": "2019-1", "Sigla": "IIC2233", "Vacantes disponibles": "16", "Vacantes totales": "77"}}}, "status": "Ok"}], "Test 5 v1": ["/api/v1?", [["sigla", "ING2030"], ["vacantes", "true"]], {"code": 400, "error": {"invalid_arguments": ["vacantes"], "message": "(#400) Some arguments are not accepted."}, "status": "Bad Request"}], "Test 1 v2": ["/api/v2?", [["sigla", "psi1204"], ["vacantes", "true"]], {"code": 200, "data": {"PSI1204": {"1": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["W:4"], "CLAS": ["J:2,3"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "12928", "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento", "Profesor": "Cosmelli Diego, Lopez Vladimir, Andreu Catherine, Ceric Francisco", "Retiro": "SI", "Seccion": "1", "Semestre": "2019-2", "Sigla": "PSI1204", "Vacantes": {"09": [36, 33, 3], "29": [62, 61, 1], "97": [1, 1, 0], "Disponibles": "5", "Libres": [10, 10, 0], "Pregrado": [7, 6, 1], "Totales": "116"}}, "2": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["J:2"], "CLAS": ["W:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "12933", "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento", "Profesor": "Ceric Francisco, Lopez Vladimir, Cosmelli Diego, Andreu Catherine", "Retiro": "SI", "Seccion": "2", "Semestre": "2019-2", "Sigla": "PSI1204", "Vacantes": {"09": [35, 31, 4], "29": [62, 60, 2], "97": [2, 1, 1], "Disponibles": "13", "Libres": [10, 6, 4], "Pregrado": [8, 6, 2], "Totales": "117"}}, "3": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["V:2"], "CLAS": ["V:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "16533", "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento", "Profesor": "Lopez Vladimir, Cosmelli Diego, Andreu Catherine, Ceric Francisco", "Retiro": "SI", "Seccion": "3", "Semestre": "2019-2", "Sigla": "PSI1204", "Vacantes": {"09": [30, 25, 5], "29": [55, 52, 3], "Disponibles": "11", "Libres": [10, 8, 2], "Pregrado": [5, 4, 1], "Totales": "100"}}}}, "status": "Ok"}], "Test 2 v2": ["/api/v2?", [["sigla", "iiq1003"], ["vacantes", "false"]], {"code": 200, "data": {"IIQ1003": {"1": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["V:2"], "CLAS": ["L-W:2"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "12717", "Nombre": "Termodin\u00e1mica", "Profesor": "Gajardo Nicol\u00e1s", "Retiro": "SI", "Seccion": "1", "Semestre": "2019-2", "Sigla": "IIQ1003", "Vacantes disponibles": "6", "Vacantes totales": "120"}, "2": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["V:1"], "CLAS": ["L-W:1"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "20476", "Nombre": "Termodin\u00e1mica", "Profesor": "Gajardo Nicol\u00e1s", "Retiro": "SI", "Seccion": "2", "Semestre": "2019-2", "Sigla": "IIQ1003", "Vacantes disponibles": "4", "Vacantes totales": "120"}}}, "status": "Ok"}], "Test 3 v2": ["/api/v2?", [["sigla", "hola"], ["vacantes", "true"]], {"code": 404, "error": {"message": "(#404) No data found with those parameters."}, "status": "Not Found"}], "Test 4 v2": ["/api/v2?", [["sigla", "mat1640"], ["vacantes", "foo"]], {"code": 400, "error": {"message": "(#400) Parameter 'vacantes' only accept boolean values."}, "status": "Bad Request"}], "Test 5 v2": ["/api/v2?", [["sigla", "ing1024"], ["foo", "too"]], {"code": 400, "error": {"invalid_arguments": ["foo"], "message": "(#400) Some arguments are not accepted."}, "status": "Bad Request"}], "Test 1 v3": ["/api/v3?", [["3", ""]], {"code": 400, "error": {"invalid_arguments": ["3"], "message": "(#400) Some arguments are not accepted."}, "status": "Bad Request"}], "Test 2 v3": ["/api/v3?", [["sigla", "2233"], ["vacantes", "true"], ["requisitos", "true"]], {"code": 200, "data": {"ICT2233": {"1": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["L:6"], "CLAS": ["M-J:1"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "18574", "Nombre": "Flujo en Redes", "Profesor": "Larrain Homero", "Retiro": "SI", "Seccion": "1", "Semestre": "2019-2", "Sigla": "ICT2233", "Vacantes": {"Disponibles": "49", "Totales": "90"}}, "Requisitos": {"Equivalencias": ["ICT2232"], "Prerequisitos": [["ICS1113", "ICT2904(c"], ["ICS1102", "ICT2904(c"], ["ICS113H", "ICT2904(c"], ["ICS1102", "ICT2902(c"], ["ICS113H", "ICT2902(c"], ["ICS1113", "ICT2902(c"]], "Relacion entre prerequisitos y restricciones": [], "Restricciones": []}}, "IIC2233": {"1": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "12431", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Ruz Cristian", "Retiro": "SI", "Seccion": "1", "Semestre": "2019-2", "Sigla": "IIC2233", "Vacantes": {"04": [84, 77, 7], "06": [4, 3, 1], "09": [7, 6, 1], "Disponibles": "12", "Libres": [15, 12, 3], "Totales": "110"}}, "2": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "15428", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Florenzano Fernando", "Retiro": "SI", "Seccion": "2", "Semestre": "2019-2", "Sigla": "IIC2233", "Vacantes": {"04": [95, 87, 8], "06": [4, 1, 3], "09": [7, 6, 1], "Disponibles": "14", "Libres": [5, 3, 2], "Totales": "111"}}, "3": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "18177", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Ossa Antonio", "Retiro": "SI", "Seccion": "3", "Semestre": "2019-2", "Sigla": "IIC2233", "Vacantes": {"04": [87, 76, 11], "09": [11, 8, 3], "Disponibles": "18", "Libres": [13, 9, 4], "Totales": "111"}}, "4": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["J:4,5"], "LAB": [], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "23787", "Nombre": "Programaci\u00f3n Avanzada", "Profesor": "Dom\u00ednguez Vicente", "Retiro": "SI", "Seccion": "4", "Semestre": "2019-2", "Sigla": "IIC2233", "Vacantes": {"Disponibles": "37", "Totales": "88"}}, "Requisitos": {"Equivalencias": ["IIC1222"], "Prerequisitos": ["IIC1103", "IIC1102"], "Relacion entre prerequisitos y restricciones": [], "Restricciones": []}}}, "status": "Ok"}], "Test 4 v3": ["/api/v3?", [["sigla", "iic2143"], ["vacantes", "false"], ["requisitos", "foo"]], {"code": 400, "error": {"message": "(#400) Parameter 'requisitos' only accept boolean values."}, "status": "Bad Request"}], "Test 3 v3": ["/api/v3?", [["sigla", "mat1630"], ["requisitos", "true"]], {"code": 200, "data": {"MAT1630": {"1": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:6"], "CLAS": ["L-W:3"], "LAB": ["J:5"], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "14202", "Nombre": "C\u00e1lculo III", "Profesor": "Del Campo Constanza, Vidal Daniel", "Retiro": "SI", "Seccion": "1", "Semestre": "2019-2", "Sigla": "MAT1630", "Vacantes disponibles": "39", "Vacantes totales": "77"}, "2": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:6"], "CLAS": ["L-W:3"], "LAB": ["J:5"], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "14205", "Nombre": "C\u00e1lculo III", "Profesor": "Del Campo Constanza, Vidal Daniel", "Retiro": "SI", "Seccion": "2", "Semestre": "2019-2", "Sigla": "MAT1630", "Vacantes disponibles": "51", "Vacantes totales": "75"}, "3": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["J:4"], "CLAS": ["L-W:2"], "LAB": ["M:4"], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "14223", "Nombre": "C\u00e1lculo III", "Profesor": "Huerta Ivan, Vidal Daniel", "Retiro": "SI", "Seccion": "3", "Semestre": "2019-2", "Sigla": "MAT1630", "Vacantes disponibles": "5", "Vacantes totales": "75"}, "4": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["J:4"], "CLAS": ["L-W:2"], "LAB": ["M:4"], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "14220", "Nombre": "C\u00e1lculo III", "Profesor": "Huerta Ivan, Vidal Daniel", "Retiro": "SI", "Seccion": "4", "Semestre": "2019-2", "Sigla": "MAT1630", "Vacantes disponibles": "5", "Vacantes totales": "75"}, "5": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["L-W:3"], "LAB": ["J:4"], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "14216", "Nombre": "C\u00e1lculo III", "Profesor": "Vargas Rodrigo, Vidal Daniel", "Retiro": "SI", "Seccion": "5", "Semestre": "2019-2", "Sigla": "MAT1630", "Vacantes disponibles": "16", "Vacantes totales": "85"}, "6": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:4"], "CLAS": ["L-W:3"], "LAB": ["J:4"], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "14213", "Nombre": "C\u00e1lculo III", "Profesor": "Vargas Rodrigo, Vidal Daniel", "Retiro": "SI", "Seccion": "6", "Semestre": "2019-2", "Sigla": "MAT1630", "Vacantes disponibles": "29", "Vacantes totales": "85"}, "7": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:5"], "CLAS": ["L-W:2"], "LAB": ["J:6"], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "19964", "Nombre": "C\u00e1lculo III", "Profesor": "Cabezas Manuel, Vidal Daniel", "Retiro": "SI", "Seccion": "7", "Semestre": "2019-2", "Sigla": "MAT1630", "Vacantes disponibles": "39", "Vacantes totales": "75"}, "8": {"Aprobacion especial": "NO", "Campus": "San Joaqu\u00edn", "Categoria": null, "Creditos": "10", "Ingles": "NO", "Modulos": {"AYU": ["M:5"], "CLAS": ["L-W:2"], "LAB": ["J:6"], "LIB": [], "PRA": [], "SUP": [], "TAL": [], "TER": [], "TES": []}, "NRC": "19965", "Nombre": "C\u00e1lculo III", "Profesor": "Cabezas Manuel, Vidal Daniel", "Retiro": "SI", "Seccion": "8", "Semestre": "2019-2", "Sigla": "MAT1630", "Vacantes disponibles": "50", "Vacantes totales": "75"}, "Requisitos": {"Equivalencias": ["MAT1523", "MAT230E", "MLM1130"], "Prerequisitos": [["MAT1202", "MAT1512"], ["MAT1202", "MAT1620"], ["MAT1203", "MAT1512"], ["MAT1203", "MAT1620"]], "Relacion entre prerequisitos y restricciones": [], "Restricciones": []}}}, "status": "Ok"}], "Test 5 v3": ["/api/v3?", [["sigla", "iic2233"], ["foo", "too"]], {"code": 400, "error": {"invalid_arguments": ["foo"], "message": "(#400) Some arguments are not accepted."}, "status": "Bad Request"}], "Test 6 v3": ["/api/v3/requisitos?", [["sigla", "iic2233"]], {"code": 200, "data": {"iic2233": {"Equivalencias": ["IIC1222"], "Prerequisitos": ["IIC1103", "IIC1102"], "Relacion entre prerequisitos y restricciones": [], "Restricciones": []}}, "status": "Ok"}], "Test 7 v3": ["/api/v3/requisitos?", [["sigla", "ing1024"], ["semestre", "2019-1"]], {"code": 405, "error": {"message": "(#405) Parameters semestre are not accepted."}, "status": "Method Not Allowed"}], "Test 8 v3": ["/api/v3/requisitos?", [["foo", "too"]], {"code": 405, "error": {"message": "(#405) Parameters foo are not accepted."}, "status": "Method Not Allowed"}]}
+{
+    "Test 1 v1": [
+        "/api/v1?",
+        [
+            [
+                "hola",
+                ""
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "invalid_arguments": [
+                    "hola"
+                ],
+                "message": "(#400) Some arguments are not accepted."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 2 v1": [
+        "/api/v1?",
+        [
+            [
+                "",
+                ""
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "invalid_arguments": [
+                    ""
+                ],
+                "message": "(#400) Some arguments are not accepted."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 3 v1": [
+        "/api/v1?",
+        [
+            [
+                "sigla",
+                "iic2233"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "IIC2233": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "12431",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ruz Cristian",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "12",
+                        "Vacantes totales": "110"
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "15428",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Florenzano Fernando",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "14",
+                        "Vacantes totales": "111"
+                    },
+                    "3": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "18177",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ossa Antonio",
+                        "Retiro": "SI",
+                        "Seccion": "3",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "18",
+                        "Vacantes totales": "111"
+                    },
+                    "4": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "23787",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Dom\u00ednguez Vicente",
+                        "Retiro": "SI",
+                        "Seccion": "4",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "37",
+                        "Vacantes totales": "88"
+                    }
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 4 v1": [
+        "/api/v1?",
+        [
+            [
+                "semestre",
+                "2019-1"
+            ],
+            [
+                "sigla",
+                "iic2233"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "IIC2233": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "10760",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Florenzano Fernando",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-1",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "22",
+                        "Vacantes totales": "81"
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "10754",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ossa Antonio",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-1",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "26",
+                        "Vacantes totales": "84"
+                    },
+                    "3": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "18284",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ruz Cristian",
+                        "Retiro": "SI",
+                        "Seccion": "3",
+                        "Semestre": "2019-1",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "19",
+                        "Vacantes totales": "83"
+                    },
+                    "4": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "22154",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Dom\u00ednguez Vicente",
+                        "Retiro": "SI",
+                        "Seccion": "4",
+                        "Semestre": "2019-1",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "16",
+                        "Vacantes totales": "77"
+                    }
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 5 v1": [
+        "/api/v1?",
+        [
+            [
+                "sigla",
+                "ING2030"
+            ],
+            [
+                "vacantes",
+                "true"
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "invalid_arguments": [
+                    "vacantes"
+                ],
+                "message": "(#400) Some arguments are not accepted."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 1 v2": [
+        "/api/v2?",
+        [
+            [
+                "sigla",
+                "psi1204"
+            ],
+            [
+                "vacantes",
+                "true"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "PSI1204": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "W:4"
+                            ],
+                            "CLAS": [
+                                "J:2,3"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "12928",
+                        "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento",
+                        "Profesor": "Cosmelli Diego, Lopez Vladimir, Andreu Catherine, Ceric Francisco",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "PSI1204",
+                        "Vacantes": {
+                            "09": [
+                                36,
+                                33,
+                                3
+                            ],
+                            "29": [
+                                62,
+                                61,
+                                1
+                            ],
+                            "97": [
+                                1,
+                                1,
+                                0
+                            ],
+                            "Disponibles": "5",
+                            "Libres": [
+                                10,
+                                10,
+                                0
+                            ],
+                            "Pregrado": [
+                                7,
+                                6,
+                                1
+                            ],
+                            "Totales": "116"
+                        }
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "J:2"
+                            ],
+                            "CLAS": [
+                                "W:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "12933",
+                        "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento",
+                        "Profesor": "Ceric Francisco, Lopez Vladimir, Cosmelli Diego, Andreu Catherine",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-2",
+                        "Sigla": "PSI1204",
+                        "Vacantes": {
+                            "09": [
+                                35,
+                                31,
+                                4
+                            ],
+                            "29": [
+                                62,
+                                60,
+                                2
+                            ],
+                            "97": [
+                                2,
+                                1,
+                                1
+                            ],
+                            "Disponibles": "13",
+                            "Libres": [
+                                10,
+                                6,
+                                4
+                            ],
+                            "Pregrado": [
+                                8,
+                                6,
+                                2
+                            ],
+                            "Totales": "117"
+                        }
+                    },
+                    "3": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "V:2"
+                            ],
+                            "CLAS": [
+                                "V:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "16533",
+                        "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento",
+                        "Profesor": "Lopez Vladimir, Cosmelli Diego, Andreu Catherine, Ceric Francisco",
+                        "Retiro": "SI",
+                        "Seccion": "3",
+                        "Semestre": "2019-2",
+                        "Sigla": "PSI1204",
+                        "Vacantes": {
+                            "09": [
+                                30,
+                                25,
+                                5
+                            ],
+                            "29": [
+                                55,
+                                52,
+                                3
+                            ],
+                            "Disponibles": "11",
+                            "Libres": [
+                                10,
+                                8,
+                                2
+                            ],
+                            "Pregrado": [
+                                5,
+                                4,
+                                1
+                            ],
+                            "Totales": "100"
+                        }
+                    }
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 2 v2": [
+        "/api/v2?",
+        [
+            [
+                "sigla",
+                "iiq1003"
+            ],
+            [
+                "vacantes",
+                "false"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "IIQ1003": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "V:2"
+                            ],
+                            "CLAS": [
+                                "L-W:2"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "12717",
+                        "Nombre": "Termodin\u00e1mica",
+                        "Profesor": "Gajardo Nicol\u00e1s",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIQ1003",
+                        "Vacantes disponibles": "6",
+                        "Vacantes totales": "120"
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "V:1"
+                            ],
+                            "CLAS": [
+                                "L-W:1"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "20476",
+                        "Nombre": "Termodin\u00e1mica",
+                        "Profesor": "Gajardo Nicol\u00e1s",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIQ1003",
+                        "Vacantes disponibles": "4",
+                        "Vacantes totales": "120"
+                    }
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 3 v2": [
+        "/api/v2?",
+        [
+            [
+                "sigla",
+                "hola"
+            ],
+            [
+                "vacantes",
+                "true"
+            ]
+        ],
+        {
+            "code": 404,
+            "error": {
+                "message": "(#404) No data found with those parameters."
+            },
+            "status": "Not Found"
+        }
+    ],
+    "Test 4 v2": [
+        "/api/v2?",
+        [
+            [
+                "sigla",
+                "mat1640"
+            ],
+            [
+                "vacantes",
+                "foo"
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "message": "(#400) Parameter 'vacantes' only accept boolean values."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 5 v2": [
+        "/api/v2?",
+        [
+            [
+                "sigla",
+                "ing1024"
+            ],
+            [
+                "foo",
+                "too"
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "invalid_arguments": [
+                    "foo"
+                ],
+                "message": "(#400) Some arguments are not accepted."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 1 v3": [
+        "/api/v3?",
+        [
+            [
+                "3",
+                ""
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "invalid_arguments": [
+                    "3"
+                ],
+                "message": "(#400) Some arguments are not accepted."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 2 v3": [
+        "/api/v3?",
+        [
+            [
+                "sigla",
+                "2233"
+            ],
+            [
+                "vacantes",
+                "true"
+            ],
+            [
+                "requisitos",
+                "true"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "ICT2233": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "L:6"
+                            ],
+                            "CLAS": [
+                                "M-J:1"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "18574",
+                        "Nombre": "Flujo en Redes",
+                        "Profesor": "Larrain Homero",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "ICT2233",
+                        "Vacantes": {
+                            "Disponibles": "49",
+                            "Totales": "90"
+                        }
+                    },
+                    "Requisitos": {
+                        "Equivalencias": [
+                            "ICT2232"
+                        ],
+                        "Prerequisitos": [
+                            [
+                                "ICS1113",
+                                "ICT2904(c"
+                            ],
+                            [
+                                "ICS1102",
+                                "ICT2904(c"
+                            ],
+                            [
+                                "ICS113H",
+                                "ICT2904(c"
+                            ],
+                            [
+                                "ICS1102",
+                                "ICT2902(c"
+                            ],
+                            [
+                                "ICS113H",
+                                "ICT2902(c"
+                            ],
+                            [
+                                "ICS1113",
+                                "ICT2902(c"
+                            ]
+                        ],
+                        "Relacion entre prerequisitos y restricciones": [],
+                        "Restricciones": []
+                    }
+                },
+                "IIC2233": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "12431",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ruz Cristian",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes": {
+                            "04": [
+                                84,
+                                77,
+                                7
+                            ],
+                            "06": [
+                                4,
+                                3,
+                                1
+                            ],
+                            "09": [
+                                7,
+                                6,
+                                1
+                            ],
+                            "Disponibles": "12",
+                            "Libres": [
+                                15,
+                                12,
+                                3
+                            ],
+                            "Totales": "110"
+                        }
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "15428",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Florenzano Fernando",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes": {
+                            "04": [
+                                95,
+                                87,
+                                8
+                            ],
+                            "06": [
+                                4,
+                                1,
+                                3
+                            ],
+                            "09": [
+                                7,
+                                6,
+                                1
+                            ],
+                            "Disponibles": "14",
+                            "Libres": [
+                                5,
+                                3,
+                                2
+                            ],
+                            "Totales": "111"
+                        }
+                    },
+                    "3": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "18177",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ossa Antonio",
+                        "Retiro": "SI",
+                        "Seccion": "3",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes": {
+                            "04": [
+                                87,
+                                76,
+                                11
+                            ],
+                            "09": [
+                                11,
+                                8,
+                                3
+                            ],
+                            "Disponibles": "18",
+                            "Libres": [
+                                13,
+                                9,
+                                4
+                            ],
+                            "Totales": "111"
+                        }
+                    },
+                    "4": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "23787",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Dom\u00ednguez Vicente",
+                        "Retiro": "SI",
+                        "Seccion": "4",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes": {
+                            "Disponibles": "37",
+                            "Totales": "88"
+                        }
+                    },
+                    "Requisitos": {
+                        "Equivalencias": [
+                            "IIC1222"
+                        ],
+                        "Prerequisitos": [
+                            "IIC1103",
+                            "IIC1102"
+                        ],
+                        "Relacion entre prerequisitos y restricciones": [],
+                        "Restricciones": []
+                    }
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 4 v3": [
+        "/api/v3?",
+        [
+            [
+                "sigla",
+                "iic2143"
+            ],
+            [
+                "vacantes",
+                "false"
+            ],
+            [
+                "requisitos",
+                "foo"
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "message": "(#400) Parameter 'requisitos' only accept boolean values."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 3 v3": [
+        "/api/v3?",
+        [
+            [
+                "sigla",
+                "mat1630"
+            ],
+            [
+                "requisitos",
+                "true"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "MAT1630": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:6"
+                            ],
+                            "CLAS": [
+                                "L-W:3"
+                            ],
+                            "LAB": [
+                                "J:5"
+                            ],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "14202",
+                        "Nombre": "C\u00e1lculo III",
+                        "Profesor": "Del Campo Constanza, Vidal Daniel",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "MAT1630",
+                        "Vacantes disponibles": "39",
+                        "Vacantes totales": "77"
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:6"
+                            ],
+                            "CLAS": [
+                                "L-W:3"
+                            ],
+                            "LAB": [
+                                "J:5"
+                            ],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "14205",
+                        "Nombre": "C\u00e1lculo III",
+                        "Profesor": "Del Campo Constanza, Vidal Daniel",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-2",
+                        "Sigla": "MAT1630",
+                        "Vacantes disponibles": "51",
+                        "Vacantes totales": "75"
+                    },
+                    "3": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "J:4"
+                            ],
+                            "CLAS": [
+                                "L-W:2"
+                            ],
+                            "LAB": [
+                                "M:4"
+                            ],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "14223",
+                        "Nombre": "C\u00e1lculo III",
+                        "Profesor": "Huerta Ivan, Vidal Daniel",
+                        "Retiro": "SI",
+                        "Seccion": "3",
+                        "Semestre": "2019-2",
+                        "Sigla": "MAT1630",
+                        "Vacantes disponibles": "5",
+                        "Vacantes totales": "75"
+                    },
+                    "4": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "J:4"
+                            ],
+                            "CLAS": [
+                                "L-W:2"
+                            ],
+                            "LAB": [
+                                "M:4"
+                            ],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "14220",
+                        "Nombre": "C\u00e1lculo III",
+                        "Profesor": "Huerta Ivan, Vidal Daniel",
+                        "Retiro": "SI",
+                        "Seccion": "4",
+                        "Semestre": "2019-2",
+                        "Sigla": "MAT1630",
+                        "Vacantes disponibles": "5",
+                        "Vacantes totales": "75"
+                    },
+                    "5": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "L-W:3"
+                            ],
+                            "LAB": [
+                                "J:4"
+                            ],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "14216",
+                        "Nombre": "C\u00e1lculo III",
+                        "Profesor": "Vargas Rodrigo, Vidal Daniel",
+                        "Retiro": "SI",
+                        "Seccion": "5",
+                        "Semestre": "2019-2",
+                        "Sigla": "MAT1630",
+                        "Vacantes disponibles": "16",
+                        "Vacantes totales": "85"
+                    },
+                    "6": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "L-W:3"
+                            ],
+                            "LAB": [
+                                "J:4"
+                            ],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "14213",
+                        "Nombre": "C\u00e1lculo III",
+                        "Profesor": "Vargas Rodrigo, Vidal Daniel",
+                        "Retiro": "SI",
+                        "Seccion": "6",
+                        "Semestre": "2019-2",
+                        "Sigla": "MAT1630",
+                        "Vacantes disponibles": "29",
+                        "Vacantes totales": "85"
+                    },
+                    "7": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:5"
+                            ],
+                            "CLAS": [
+                                "L-W:2"
+                            ],
+                            "LAB": [
+                                "J:6"
+                            ],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "19964",
+                        "Nombre": "C\u00e1lculo III",
+                        "Profesor": "Cabezas Manuel, Vidal Daniel",
+                        "Retiro": "SI",
+                        "Seccion": "7",
+                        "Semestre": "2019-2",
+                        "Sigla": "MAT1630",
+                        "Vacantes disponibles": "39",
+                        "Vacantes totales": "75"
+                    },
+                    "8": {
+                        "Aprobacion especial": "NO",
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:5"
+                            ],
+                            "CLAS": [
+                                "L-W:2"
+                            ],
+                            "LAB": [
+                                "J:6"
+                            ],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "19965",
+                        "Nombre": "C\u00e1lculo III",
+                        "Profesor": "Cabezas Manuel, Vidal Daniel",
+                        "Retiro": "SI",
+                        "Seccion": "8",
+                        "Semestre": "2019-2",
+                        "Sigla": "MAT1630",
+                        "Vacantes disponibles": "50",
+                        "Vacantes totales": "75"
+                    },
+                    "Requisitos": {
+                        "Equivalencias": [
+                            "MAT1523",
+                            "MAT230E",
+                            "MLM1130"
+                        ],
+                        "Prerequisitos": [
+                            [
+                                "MAT1202",
+                                "MAT1512"
+                            ],
+                            [
+                                "MAT1202",
+                                "MAT1620"
+                            ],
+                            [
+                                "MAT1203",
+                                "MAT1512"
+                            ],
+                            [
+                                "MAT1203",
+                                "MAT1620"
+                            ]
+                        ],
+                        "Relacion entre prerequisitos y restricciones": [],
+                        "Restricciones": []
+                    }
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 5 v3": [
+        "/api/v3?",
+        [
+            [
+                "sigla",
+                "iic2233"
+            ],
+            [
+                "foo",
+                "too"
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "invalid_arguments": [
+                    "foo"
+                ],
+                "message": "(#400) Some arguments are not accepted."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 6 v3": [
+        "/api/v3/requisitos?",
+        [
+            [
+                "sigla",
+                "iic2233"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "iic2233": {
+                    "Equivalencias": [
+                        "IIC1222"
+                    ],
+                    "Prerequisitos": [
+                        "IIC1103",
+                        "IIC1102"
+                    ],
+                    "Relacion entre prerequisitos y restricciones": [],
+                    "Restricciones": []
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 7 v3": [
+        "/api/v3/requisitos?",
+        [
+            [
+                "sigla",
+                "ing1024"
+            ],
+            [
+                "semestre",
+                "2019-1"
+            ]
+        ],
+        {
+            "code": 405,
+            "error": {
+                "message": "(#405) Parameters semestre are not accepted."
+            },
+            "status": "Method Not Allowed"
+        }
+    ],
+    "Test 8 v3": [
+        "/api/v3/requisitos?",
+        [
+            [
+                "foo",
+                "too"
+            ]
+        ],
+        {
+            "code": 405,
+            "error": {
+                "message": "(#405) Parameters foo are not accepted."
+            },
+            "status": "Method Not Allowed"
+        }
+    ]
+}

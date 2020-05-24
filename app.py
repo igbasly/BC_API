@@ -13,7 +13,7 @@ app.config['JSON_AS_ASCII'] = False
 with open("info_buscacursos.json", "r") as file:
     INFO = json.load(file)
 
-key_conversor = {
+KEY_CONVERSOR = {
     "semestre": "cxml_semestre",
     "sigla": "cxml_sigla",
     "nrc": "cxml_nrc",
@@ -41,8 +41,6 @@ def response(code: int, data: dict=None):
 
     Codes:
         200: "Ok"
-        201: "Created"
-        202: "Accepted"
         204: "No Content"
         400: "Bad Request"
         403: "Forbidden"
@@ -54,8 +52,6 @@ def response(code: int, data: dict=None):
 
     codes = {
         200: "Ok",
-        201: "Created",
-        202: "Accepted",
         204: "No Content",
         400: "Bad Request",
         403: "Forbidden",
@@ -110,8 +106,11 @@ def BC_API_get(vacantes=False):
     }
     arguments = request.args
     bad_arguments = []
+    if not arguments:
+        return response(400,
+                        {"message": "(#400) Requests with no arguments."})
     for a in arguments:
-        if a not in key_conversor:
+        if a not in KEY_CONVERSOR:
             bad_arguments.append(a)
             continue
         elif a == "vacantes":
@@ -119,7 +118,7 @@ def BC_API_get(vacantes=False):
                 continue
             else:
                 bad_arguments.append(a)
-        parameters[key_conversor[a]] = "+".join(arguments[a].split(" "))
+        parameters[KEY_CONVERSOR[a]] = "+".join(arguments[a].split(" "))
     if bad_arguments:
         return response(400,
                         {"message": "(#400) Some arguments are not accepted.",
@@ -135,12 +134,13 @@ def BC_API_get(vacantes=False):
     if len(data_classes) > 0:
         return response(200, data_classes)
 
-    return response(404, {"message": "(#404) No data found with those parameters."})
+    return response(204,
+                    {"message": "(#204) No data found with those parameters."})
 
 
-@app.route("/api/v1", methods=["POST", "PUT"])
-@app.route("/api/v2", methods=["POST", "PUT"])
-@app.route("/api/v3", methods=["POST", "PUT"])
+@app.route("/api/v1", methods=["POST", "PUT", "PATCH", "DELETE"])
+@app.route("/api/v2", methods=["POST", "PUT", "PATCH", "DELETE"])
+@app.route("/api/v3", methods=["POST", "PUT", "PATCH", "DELETE"])
 def BC_API_post():
     return response(405, {
         "message": "(#405) This API do not accept the PUT or POST methods."})
@@ -249,7 +249,7 @@ def BC_API_v3_req_get():
             break
     
     if not i:
-        return response(404, {"message": "(#404) No data found with this parameters."})
+        return response(204, {"message": "(#204) No data found with this parameters."})
 
     return response(200, {sigla: info})
 
