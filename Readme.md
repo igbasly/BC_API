@@ -9,15 +9,15 @@ Toda la documentación de las versiones, se puede encontrar en el sitio de [Docu
 
 | Versión | Campos de búsqueda | Vacantes | Requisitos de cursos |
 |:---:|:---:|:---:| :---: |
-V1| :white_check_mark: | :X: | :X: |
-V2| :white_check_mark: | :white_check_mark: | :X: |
+V1| :white_check_mark: | :x: | :x: |
+V2| :white_check_mark: | :white_check_mark: | :x: |
 V3\ (Actual)| :white_check_mark: | :white_check_mark: | :white_check_mark:
 
 ## Códigos de Error
 | Código | Tipo de error | Descripción |
 |:---:|:---:|:---|
 |`200`| Ok| La consulta fue exitosa |
-|`204`| No Content| No se encontró información con los parametros dados. |
+|`202`| Accepted | No se encontró información con los parametros dados. |
 |`400`| Bad Request| Hay errores en la formulación de la consulta. |
 |`405`| Method Not Allowed| Se utilizó un método HTTP no autorizado (`PUT`, `POST`, `PATCH`, `DELETE`) |
 |`500`| Internal Server Error| Ha ocurrido un error en el servidor al manejar la consulta.|
