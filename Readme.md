@@ -11,6 +11,6 @@ Toda los archivos de las versiones, se pueden encontrar en la rama [Master](http
 
 | Versión | Campos de búsqueda | Vacantes | Requisitos de cursos | URL |
 |:---:|:---:|:---:| :---: | :---: |
-V1| :white_check_mark: | :X: | :X: | https://buscacursos-api.herokuapp.com/api/v1 |
-V2| :white_check_mark: | :white_check_mark: | :X: | https://buscacursos-api.herokuapp.com/api/v2 |
+V1| :white_check_mark: | :x: | :x: | https://buscacursos-api.herokuapp.com/api/v1 |
+V2| :white_check_mark: | :white_check_mark: | :x: | https://buscacursos-api.herokuapp.com/api/v2 |
 V3\ (Actual)| :white_check_mark: | :white_check_mark: | :white_check_mark: | https://buscacursos-api.herokuapp.com/api/v3 |
