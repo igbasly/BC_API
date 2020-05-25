@@ -632,7 +632,7 @@
             ]
         ],
         {
-            "code": 404,
+            "code": 204,
             "error": {
                 "message": "(#404) No data found with those parameters."
             },
