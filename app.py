@@ -1,13 +1,13 @@
 from flask import Flask, request, send_from_directory, jsonify, Response
+from flask_cors import CORS
 import json
 
 from Requests import request_buscacursos, request_vacancy, request_requirements
 
+
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
-# app.config.update(
-#     DEBUG=True,
-#     SERVER_NAME="localhost:8080")
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
 with open("info_buscacursos.json", "r") as file:
@@ -127,6 +127,7 @@ def BC_API_get(vacantes=False):
     try:
         data_classes = request_buscacursos(parameters)
     except Exception as exc:
+        print(exc)
         return response(500, {
             "message": "(#500) An internal error ocurred, we are working on it."
             })
@@ -253,5 +254,11 @@ def BC_API_v3_req_get():
 
     return response(200, {sigla: info})
 
-if __name__ == "__main__":
-    app.run()
+
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = 'igbasly.github.io'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    return response
+
+
+app.run(debug=True)

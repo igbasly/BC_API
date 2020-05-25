@@ -14,7 +14,7 @@ data and assable the json structure to return.
 """
 
 
-  def strip_accents(text):
+def strip_accents(text):
     """
     Strip accents from input String.
 
