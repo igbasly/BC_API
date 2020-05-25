@@ -255,10 +255,5 @@ def BC_API_v3_req_get():
     return response(200, {sigla: info})
 
 
-def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = 'igbasly.github.io'
-    response.headers['Access-Control-Allow-Credentials'] = 'true'
-    return response
-
-
-app.run(debug=False)
+if __name__ == "__main__":
+    app.run(debug=False)
