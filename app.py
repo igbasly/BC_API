@@ -261,4 +261,4 @@ def add_cors_headers(response):
     return response
 
 
-app.run(debug=True)
+app.run(debug=False)
