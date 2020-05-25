@@ -5,7 +5,6 @@ from json import load, loads
 with open("tests.json", "r") as file:
     TESTS = load(file)
 
-url_1 = "/api/v1?"
 print("\n---- Starting Tests ----\n")
 for test in TESTS:
     print(f"Running {test}")
