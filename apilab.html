@@ -13,7 +13,7 @@
         const str = PR.prettyPrintOne(text);
         resp.innerHTML = str;
         urlText.innerText = url;
-        if (url != 'http://buscacursos-api.herokuapp.com/api/v3?') {
+        if (url != 'https://buscacursos-api.herokuapp.com/api/v3?') {
             urlText.href = url;
         } else{
             urlText.href = "";
@@ -157,7 +157,7 @@
       <h2>Respuesta</h2>
       <div class="w3-container w3-card w3-text-white" style="background-color: #267CB9;">
         <h4 style="text-align: left;">URL:</h4>
-        <h6 class="w3-white" style="text-align: left;"><a href="" id="url">http://buscacursos-api.herokuapp.com/api/v3?</a></h6>
+        <h6 class="w3-white" style="text-align: left;"><a href="" id="url">https://buscacursos-api.herokuapp.com/api/v3?</a></h6>
         
         <h4  style="text-align: left;">Response:</h4>
         <pre class="w3-white" style="text-align: justify; overflow: scroll; height: 45vh;"><code class="prettyprint lang-json"  id="response"> {} </code></pre>

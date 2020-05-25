@@ -32,14 +32,14 @@ async function callAPI() {
     };
     if (query.length > 0){
         query.unshift(semester);
-        query = 'http://buscacursos-api.herokuapp.com/api/v3?' + query.join("&");
+        query = 'https://buscacursos-api.herokuapp.com/api/v3?' + query.join("&");
         console.log(query)
         let resp = await fetch(query);
         response = await resp.json();
         console.log(response)
     } else {
         console.log("No query")
-        query = "http://buscacursos-api.herokuapp.com/api/v3?";
+        query = "https://buscacursos-api.herokuapp.com/api/v3?";
     };
     response = JSON.stringify(response, null, 4);
     return [query, response];
