@@ -34,7 +34,7 @@ async function callAPI() {
         query.unshift(semester);
         query = 'https://buscacursos-api.herokuapp.com/api/v3?' + query.join("&");
         console.log(query)
-        let resp = await fetch("http://cors.io/?" + query);
+        let resp = await fetch(query);
         response = await resp.json();
         console.log(response)
     } else {
