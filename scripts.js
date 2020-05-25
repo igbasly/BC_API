@@ -12,6 +12,10 @@ function checkCheckbox() {
     } else{
         check2.value = "true";
     };
+};
+
+function callBack(data) {
+    console.log(data);
 }
 
 async function callAPI() {
@@ -34,9 +38,15 @@ async function callAPI() {
         query.unshift(semester);
         query = 'https://buscacursos-api.herokuapp.com/api/v3?' + query.join("&");
         console.log(query)
+        /*
+        let script = document.createElement("script");
+        script.src = query + "&callback=callBack";
+        document.body.append(script);
+        */
         let resp = await fetch(query);
         response = await resp.json();
         console.log(response)
+        
     } else {
         console.log("No query")
         query = "https://buscacursos-api.herokuapp.com/api/v3?";
