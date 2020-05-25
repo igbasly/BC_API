@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<title>BC API - BCLab</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+<script>
+    function setResponse(url, text) {
+        let resp = document.getElementById("response");
+        let urlText = document.getElementById("url");
+        const str = PR.prettyPrintOne(text);
+        resp.innerHTML = str;
+        urlText.innerText = url;
+        if (url != 'http://buscacursos-api.herokuapp.com/api/v3?') {
+            urlText.href = url;
+        } else{
+            urlText.href = "";
+        };
+    };
+</script>
+
+<body class="w3-content" style="max-width:1300px;">
+
+<!-- First Grid: Logo & About -->
+<div class="w3-row" style="height: 100vh;">
+    <div class="w3-half w3-container w3-center" style="background-color: #267CB9; min-height: 100%;">
+        <div class="w3-padding-64">
+            <h1 class="w3-text-white">BuscaCursos REST API Lab</h1>
+            <form class="w3-container w3-card w3-white" onsubmit="callAPI().then(data => setResponse(data[0], data[1])); return false;" id="form">
+                <div class="w3-row-padding">
+                    <div class="w3-half">
+                <div class="w3-section">
+                    <label class="w3-left">Semestre:</label>
+                    <select class="w3-select" name="semestre">
+                        <option value="2020-1">2020 Primer Semestre</option>
+                        <option value="2019-3">2020 TAV</option>
+                        <option value="2019-2">2019 Segundo Semestre</option>
+                        <option value="2019-1">2019 Primer Semestre</option>
+                    </select>
+                </div>
+                <div class="w3-section">
+                    <label class="w3-left">Sigla:</label>
+                    <input class="w3-input" style="width:100%;" type="text" name="sigla" placeholder="Sigla">
+                </div>
+                <div class="w3-section">
+                    <label class="w3-left">NRC:</label>
+                    <input class="w3-input" style="width:100%;" type="number" name="nrc" placeholder="NRC">
+                </div>
+                <div class="w3-section">
+                    <label class="w3-left">Nombre:</label>
+                    <input class="w3-input" style="width:100%;" type="text" name="nombre" placeholder="Nombre">
+                </div>
+                <div class="w3-section">
+                    <label class="w3-left">Profesor:</label>
+                    <input class="w3-input" style="width:100%;" type="text" name="profesor" placeholder="Profesor">
+                </div>
+                    </div>
+                    <div class="w3-half">
+                        <div class="w3-section">
+                            <label class="w3-left">Categoría:</label>
+                            <select class="w3-select"       name="categoria">
+                        <option value="TODOS" selected="selected">-- Todos --</option>
+                        <option value="AE">Formación Antropológica Ética</option>
+                        <option value="AS">Aprendizaje Servicio</option>
+                        <option value="FT">Formación Teológica</option>
+                        <option value="IN">Cursos orientados a la Investi</option>
+                        <option value="MA">Metodología Aprendizaje Activo</option>
+                        <option value="TD">Formación Transversal Als Doct</option>
+                            </select>
+                        </div>
+                        <div class="w3-section">
+                            <label class="w3-left">Campus:</label>
+                            <select class="w3-select" name="campus">
+                        <option value="TODOS" selected="selected">-- Todos --</option>
+                        <option value="Campus Externo">Campus Externo</option>
+                        <option value="Casa Central">Casa Central</option>
+                        <option value="Lo Contador">Lo Contador</option>
+                        <option value="Oriente">Oriente</option>
+                        <option value="San Joaquín">San Joaquín</option>
+                        <option value="Villarrica">Villarrica</option>
+                            </select>
+                        </div>
+                        <div class="w3-section">
+                            <label class="w3-left">Unidad Académica:</label>
+                            <select class="w3-select"       name="unidad_academica">
+                        <option value="TODOS" selected="selected">-- Todas --</option>
+                        <option value="68">Acad Inter de Filosofía</option>
+                        <option value="0">Actividades Universitarias</option>
+                        <option value="34">Actuación</option>
+                        <option value="11">Agronomía e Ing. Forestal</option>
+                        <option value="92">Antropología</option>
+                        <option value="94">Arquitectura</option>
+                        <option value="33">Arte</option>
+                        <option value="2">Astrofísica</option>
+                        <option value="7">Bachillerato</option>
+                        <option value="52">CARA</option>
+                        <option value="45">Ciencia Política</option>
+                        <option value="12">Ciencias Biológicas</option>
+                        <option value="16">Ciencias de la Salud</option>
+                        <option value="40">Colegio Programas Doctorales</option>
+                        <option value="28">Comunicaciones</option>
+                        <option value="1">Construcción Civil</option>
+                        <option value="53">Deportes</option>
+                        <option value="17">Derecho</option>
+                        <option value="59">Diseño</option>
+                        <option value="5">Economía y Administración</option>
+                        <option value="20">Educación</option>
+                        <option value="13">Enfermería</option>
+                        <option value="19">Escuela de Gobierno</option>
+                        <option value="95">Estudios Urbanos</option>
+                        <option value="51">Estética</option>
+                        <option value="67">Filosofía</option>
+                        <option value="3">Física</option>
+                        <option value="57">Geografía</option>
+                        <option value="56">Historia</option>
+                        <option value="23">Ing Matemática y Computacional</option>
+                        <option value="4">Ingeniería</option>
+                        <option value="18">Ingeniería Biológica y Médica</option>
+                        <option value="64">Letras</option>
+                        <option value="9">Lic. Generales (College)</option>
+                        <option value="6">Matemática</option>
+                        <option value="14">Medicina</option>
+                        <option value="24">Medicina Veterinaria</option>
+                        <option value="70">Música</option>
+                        <option value="15">Odontología</option>
+                        <option value="29">Psicología</option>
+                        <option value="10">Química</option>
+                        <option value="54">Requisito Idioma</option>
+                        <option value="91">Sociología</option>
+                        <option value="38">Teología</option>
+                        <option value="30">Trabajo Social</option>
+                        <option value="21">Villarrica</option>
+                            </select>
+                        </div>
+                        <div class="w3-section">
+                            <input class="w3-check" id="vac"        type="checkbox" value="true"    name="vacantes">
+                            <label class="w3-left">Vacantes</label>
+
+                        </div>
+                        <div class="w3-section">
+                            <input class="w3-check" id="req"        type="checkbox" value="true"    name="requisitos">
+                            <label class="w3-left">Requisitos</label>
+                        </div>
+                        <button type="submit" class="w3-button w3-teal w3-right">Enviar</button>
+                        <button type="reset" class="w3-button w3-gray">Limpiar</button>
+                    </div>
+                    
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="w3-half w3-container">
+    <div class="w3-padding-64 w3-center">
+      <h1>Consulta</h1>
+      <div class="w3-container w3-card w3-text-white" style="background-color: #267CB9;">
+        <h4 style="text-align: left;">URL:</h4>
+        <h6 class="w3-white" style="text-align: left;"><a href="" id="url">http://buscacursos-api.herokuapp.com/api/v3?</a></h6>
+        
+        <h4  style="text-align: left;">Response:</h4>
+        <pre class="w3-white" style="text-align: justify; overflow: scroll; height: 45vh;"><code class="prettyprint lang-json"  id="response"> {} </code></pre>
+      </div>
+    </div>
+    </div>
+    
+</div>
+</body>
+<script src="scripts.js"></script>
+</html>
+
