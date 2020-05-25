@@ -28,7 +28,7 @@ async function callAPI() {
         const element = form.elements[i];
         if (element.type != "submit" && element.name != "semestre") {
             if (!(element.value == "" || element.value == "TODOS")){
-                query.push(element.name + "=" + element.value)
+                query.push(element.name + "=" + element.value.replace(" ", "+"))
             };
         } else if (element.name == "semestre"){
             semester = "semestre=" + element.value;
