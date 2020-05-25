@@ -52,6 +52,7 @@ def response(code: int, data: dict=None):
 
     codes = {
         200: "Ok",
+        202: "Accepted",
         204: "No Content",
         400: "Bad Request",
         403: "Forbidden",
@@ -135,8 +136,8 @@ def BC_API_get(vacantes=False):
     if len(data_classes) > 0:
         return response(200, data_classes)
 
-    return response(204,
-                    {"message": "(#204) No data found with those parameters."})
+    return response(202,
+                    {"message": "(#202) No data found with those parameters."})
 
 
 @app.route("/api/v1", methods=["POST", "PUT", "PATCH", "DELETE"])
@@ -250,7 +251,7 @@ def BC_API_v3_req_get():
             break
     
     if not i:
-        return response(204, {"message": "(#204) No data found with this parameters."})
+        return response(202, {"message": "(#202) No data found with this parameters."})
 
     return response(200, {sigla: info})
 
