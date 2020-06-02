@@ -1,6 +1,6 @@
 from app import app
 from flask import request
-from json import load, loads
+from json import load
 
 with open("tests.json", "r") as file:
     TESTS = load(file)

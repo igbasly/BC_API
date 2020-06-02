@@ -1,7 +1,5 @@
-from flask_restful import Resource
 from urllib.request import HTTPError
 from bs4 import BeautifulSoup
-import json
 import urllib.request
 import unicodedata
 
