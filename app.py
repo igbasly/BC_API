@@ -32,10 +32,10 @@ def response(code: int, data: dict = None):
 
     Args:
         code (int): Status code of the response
-        data (dict): Information to be return in necesary cases.
+        data (dict): Information to be returned if required.
 
     Returns:
-        dict: Response in dictonary format with all information about the\
+        dict: Response in dictionary format with all the information about the\
             request.
         int: Status code of response.
 
@@ -84,10 +84,10 @@ def icon():
 def BC_API_get(vacantes=False):
     """ HTTP GET method for v1
     Args:
-        vancante (bool): Allow the use of 'vacantes' paramters in the request.
+        vancante (bool): Allow the use of 'vacantes' parameters in the request.
 
     Returns:
-        dict: Response in dictonary format with all information about the\
+        dict: Response in dictionary format with all information about the\
             request.
         int: Status code of response.
 
@@ -144,7 +144,7 @@ def BC_API_get(vacantes=False):
 @app.route("/api/v3", methods=["POST", "PUT", "PATCH", "DELETE"])
 def BC_API_post():
     return response(
-        405, {"message": "(#405) This API do not accept the PUT or POST methods."}
+        405, {"message": "(#405) This API does not accept PUT or POST methods."}
     )
 
 
@@ -175,7 +175,7 @@ def BC_API_v2_get():
                 400,
                 {
                     "message": "(#400) Parameter 'vacantes' "
-                    + "only accept boolean values."
+                    + "only accepts boolean values."
                 },
             )
     return resp, code
@@ -184,10 +184,10 @@ def BC_API_v2_get():
 @app.route("/api/v3", methods=["GET"])
 def BC_API_v3_get():
     """ HTTP GET method for v3
-    This method allow the use of 'requisitos' parameter in the request.
+    This method allows the use of 'requisitos' parameter in the request.
 
     Return:
-        dict: Response in dictonary format with all information about the\
+        dict: Response in dictionary format with all information about the\
             request.
         int: Status code of response.
     """
@@ -196,7 +196,7 @@ def BC_API_v3_get():
             400,
             {
                 "message": "(#400) Parameter 'requisitos' "
-                + "only accept boolean values."
+                + "only accepts boolean values."
             },
         )
     if "requisitos" in request.args and request.args["requisitos"] not in [
@@ -207,7 +207,7 @@ def BC_API_v3_get():
             400,
             {
                 "message": "(#400) Parameter 'requisitos' "
-                + "only accept boolean values."
+                + "only accepts boolean values."
             },
         )
     resp, code = BC_API_get(True)
@@ -232,8 +232,7 @@ def BC_API_v3_get():
 @app.route("/api/v3/requisitos", methods=["GET"])
 def BC_API_v3_req_get():
     """ HTTP GET method for v3 with 'requisitos' scope.
-    This method just return 'requisitos' info of the courses found with the
-    initials given in 'sigla' parameters.
+    This method returns course requisities associated with an identifier.
 
     Return:
         dict: Response in dictonary format with all information about the\
@@ -252,7 +251,7 @@ def BC_API_v3_req_get():
             405, {"message": f"(#405) Parameters {', '.join(denied)} are not accepted."}
         )
     if not sigla:
-        return response(400, {"message": f"(#400) No value for 'sigla' parameter."})
+        return response(400, {"message": f"(#400) No value for the 'sigla' parameter."})
 
     info = request_requirements(sigla)
 
@@ -263,7 +262,7 @@ def BC_API_v3_req_get():
             break
 
     if not i:
-        return response(202, {"message": "(#202) No data found with this parameters."})
+        return response(202, {"message": "(#202) No data found with these parameters."})
 
     return response(200, {sigla: info})
 

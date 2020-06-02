@@ -654,7 +654,7 @@
         {
             "code": 400,
             "error": {
-                "message": "(#400) Parameter 'vacantes' only accept boolean values."
+                "message": "(#400) Parameter 'vacantes' only accepts boolean values."
             },
             "status": "Bad Request"
         }
@@ -1011,7 +1011,7 @@
         {
             "code": 400,
             "error": {
-                "message": "(#400) Parameter 'requisitos' only accept boolean values."
+                "message": "(#400) Parameter 'requisitos' only accepts boolean values."
             },
             "status": "Bad Request"
         }
