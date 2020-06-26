@@ -82,19 +82,27 @@ def request_buscacursos(params):
           f"=TODOS#resultados"
     try:
         search = request_url(url)
-        
     except HTTPError:
-
         search = []
-    info_index = {"NRC": 1, "Sigla": 2, "Retiro": 3, "Ingles": 4, "Seccion": 5,
-                  "Aprobacion especial": 6, "Categoria": 8}
-    info_index2 = {"Nombre": 9, "Profesor": 10, "Campus": 11, "Creditos": 12,
-                   "Vacantes totales": 13, "Vacantes disponibles": 14}
-    info_index3 = {"Nombre": 11, "Profesor": 12, "Campus": 13, "Creditos": 14,
-                   "Vacantes totales": 15, "Vacantes disponibles": 16}
+    info_index = {"NRC": 0, "Sigla": 1, "Retiro": 2, "Ingles": 3, "Seccion": 4,
+                  "Aprobacion especial": 5, "Area de FG": 6,  "Formato": 7,
+                  "Categoria": 8, "Nombre": 9, "Profesor": 10, "Campus": 11,
+                  "Creditos": 12, "Vacantes totales": 13,
+                  "Vacantes disponibles": 14}
     cursos = dict()
     for line in search:
-        seccion_html = line.get_text().split("\n")
+        seccion_html = []
+        for elem in line.find_all("td"):
+            if elem.find_all("table"):
+                aux = []
+                for e in elem.find_all("tr"):
+                    mods = e.find_all("td")
+                    aux.append([m.get_text().replace("\n", "") for m in mods])
+                seccion_html.append(aux)
+                break
+            else:
+                seccion_html.append(elem.get_text().replace("\n", ""))
+        print(seccion_html)
 
         info = {
             "NRC": None,
@@ -104,6 +112,8 @@ def request_buscacursos(params):
             "Retiro": None,
             "Ingles": None,
             "Aprobacion especial": None,
+            "Area de FG": None,
+            "Formato": None,
             "Categoria": None,
             "Nombre": None,
             "Profesor": None,
@@ -129,26 +139,8 @@ def request_buscacursos(params):
             if aux != "":
                 info[i] = aux.strip()
 
-        if info["Categoria"]:
-            info_index_aux = info_index3
-        else:
-            info_index_aux = info_index2
-
-        for i in info_index_aux:
-            aux = seccion_html[info_index_aux[i]]
-            if aux != "":
-                info[i] = aux.strip()
-
-        mod = info["Modulos"]
-        i = info_index_aux["Vacantes disponibles"] + 6
-
-        while True:
-            modulos = seccion_html[i]
-            if modulos in ["", ":"]:
-                break
-            tipo = seccion_html[i + 3]
-            i += 11
-            mod[tipo].append(modulos)
+        for list_ in seccion_html[-1]:
+            info["Modulos"][list_[1]].append(list_[0])
 
         if info["Sigla"] not in cursos:
             cursos[info["Sigla"]] = {info["Seccion"]: info}
