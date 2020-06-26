@@ -114,18 +114,23 @@ Es decir, en caso de tener una **lista vacía** significa que el campo no contie
 ### **ERRORES**
 En caso de `ERROR` la respuesta será en formato JSON de la siguiente forma:
 
+* **Código de error:** 400 o 500
+* **Status:** Estado general del *request*.
+* **Error:** Contendrá la información respectiva a la consulta y el error generado.
+
 
 
 ```json
 {
-    'code':400,
-    'status':"Bad Request",
-    'error':{
-        "message":"(#400) Parameter 'requisitos' only accept boolean values."
+    "code":400,
+    "status": "Bad Request",
+    "error": {
+        "invalid_arguments": ["formato", "vacantes"],
+        "message": "(#400) Some arguments are not accepted."
         }
 }
 ```
-*Ejemplo de request `HTTP GET api/v3?sigla=DPT6100&requisitos=foo`*
+*Ejemplo de request `HTTP GET api/v1?sigla=iic2233&vacantes=true&formato=foo`*
 
 ---
 ## Ejemplos
