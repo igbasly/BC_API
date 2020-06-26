@@ -70,5 +70,21 @@
     "Teología": "38",
     "Trabajo Social": "30",
     "Villarrica": "21"
+  },
+  "formato": {
+      "-- TODOS --": "TODOS",
+      "Remoto": "OL",
+      "Presencial": "PR",
+      "Remoto-Presencial": "REPR"
+  },
+  "formacion_general": {
+      "-- TODOS --": "TODOS",
+      "Artes": "ARTS",
+      "Ciencias Sociales": "CSOC",
+      "Ciencia y Tecnología": "CTEC",
+      "Ecolog Integra y Sustentavilidad": "EISU",
+      "Humanidades": "HUMS",
+      "Pensamiento Matemático": "PMAT",
+      "Salud y Bienestar": "SBIE"
   }
 }
