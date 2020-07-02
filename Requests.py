@@ -188,13 +188,17 @@ def request_vacancy(nrc: str, semester: str):
     for esc in results:
         if len(esc) < 3:
             continue
+        print(esc)
         if esc[0] == "Vacantes libres" or esc[0] == "Vacantes Libres":
             if len(esc) == 4:
                 finals["Libres"] = [int(i) for i in esc[-3:]]
             else:
                 aux = [int(i) for i in esc[len(esc)-3:]]
                 for i in range(3):
-                    finals["Libres"][i] += aux[i]
+                    if finals.get("Libre"):
+                        finals["Libres"][i] += aux[i]
+                    else:
+                        finals["Libres"] = aux[i]
             continue
         elif "TOTAL DISPONIBLES" in esc[0]:
             finals["Disponibles"] = int(esc[1])
