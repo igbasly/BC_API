@@ -1,7 +1,7 @@
 # BuscaCursos UC REST API  | V2 | [![Build Status](https://travis-ci.com/igbasly/BC_API.svg?token=rvsCi5nQd3Zv6KdSdS54&branch=master)](https://travis-ci.com/igbasly/BC_API)
 REST API del sistema BuscaCursos de la PUC Chile.
 
-La versión 2 de la API se encuentra alojada en la url [http://buscacursos-api.herokuapp.com/api/v2](http://buscacursos-api.herokuapp.com/api/v2)
+La versión 2 de la API se encuentra alojada en la url [http://bc.horariomaker.com/api/v2](http://bc.horariomaker.com/api/v2)
 
 
 ## GET
