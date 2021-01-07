@@ -81,6 +81,7 @@ def icon():
     """
     return send_from_directory("Files", "favicon.png")
 
+
 @app.route("/", methods=["GET"])
 def index():
 
@@ -214,33 +215,35 @@ def BC_API_v3_get():
         return response(
             400,
             {
-                "message": "(#400) Parameter 'requisitos' " +
+                "message": "(#400) Parameter 'vacantes' "
                 "only accepts boolean values."
             }
         )
     elif "vacantes" in request.args and request.args["vacantes"] == "true":
         vac = True
+
     if "formato" in request.args and request.args["formato"] not in ["true", "false"]:
-            return response(
-                400,
-                {
-                    "message": "(#400) Parameter 'formato' " +
-                    "only accepts boolean values."
-                }
-            )
+        return response(
+            400,
+            {
+                "message": "(#400) Parameter 'formato' "
+                "only accepts boolean values."
+            }
+        )
     elif "formato" in request.args and request.args["formato"] == "true":
         form = True
+
     if "requisitos" in request.args and request.args["requisitos"] not in [
         "true",
         "false",
     ]:
-            return response(
-                400,
-                {
-                    "message": "(#400) Parameter 'requisitos' " +
-                    "only accepts boolean values."
-                }
-            )
+        return response(
+            400,
+            {
+                "message": "(#400) Parameter 'requisitos' "
+                "only accepts boolean values."
+            }
+        )
 
     resp, code = BC_API_get(vac, form, True)
 

@@ -1,9 +1,7 @@
 from urllib.request import HTTPError
 from urllib.parse import urlencode
 from bs4 import BeautifulSoup
-import json
 import urllib.request
-import unicodedata
 
 
 """
@@ -56,19 +54,17 @@ def request_buscacursos(params):
         {
             "cxml_horario_tipo_busqueda": "si_tenga",
             "cxml_horario_tipo_busqueda_actividad": "TODOS",
-            }
-            )
-
-    url = (
-        f"http://buscacursos.uc.cl/?"
-        f"{urlencode(params)}#resultados"
+        }
     )
+
+    url = f"http://buscacursos.uc.cl/?{urlencode(params)}#resultados"
+
     try:
         search = request_url(url)
 
     except HTTPError:
         search = []
- 
+
     info_index = {
         "NRC": 0,
         "Sigla": 1,
@@ -162,8 +158,8 @@ def request_vacancy(nrc: str, semester: str):
         response format.
     """
     url = (
-        f"http://buscacursos.uc.cl/informacionVacReserva"
-        + f".ajax.php?nrc={nrc}&termcode={semester}"
+        "http://buscacursos.uc.cl/informacionVacReserva"
+        f".ajax.php?nrc={nrc}&termcode={semester}"
     )
     try:
         search = request_url(url)
@@ -194,7 +190,7 @@ def request_vacancy(nrc: str, semester: str):
             if len(esc) == 4:
                 finals["Libres"] = [int(i) for i in esc[-3:]]
             else:
-                aux = [int(i) for i in esc[len(esc) - 3 :]]
+                aux = [int(i) for i in esc[len(esc) - 3:]]
                 for i in range(3):
                     if finals.get("Libre"):
                         finals["Libres"][i] += aux[i]
@@ -219,8 +215,8 @@ def request_requirements(sigla: str):
         dict: Dict with course requirements in API response format.
     """
     url = (
-        f"http://catalogo.uc.cl/index.php?tmpl=component&"
-        + f"option=com_catalogo&view=requisitos&sigla={sigla.upper()}"
+        "http://catalogo.uc.cl/index.php?tmpl=component&"
+        f"option=com_catalogo&view=requisitos&sigla={sigla.upper()}"
     )
     try:
         resp = urllib.request.urlopen(url)
