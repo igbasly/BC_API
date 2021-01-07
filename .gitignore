@@ -14,3 +14,7 @@ make_tests.py
 tests old.json
 
 tests_cases.json
+
+apilab_dev.html
+
+script_dev.js
