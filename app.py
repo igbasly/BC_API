@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, redirect
 from flask_cors import CORS
 import json
 
@@ -214,7 +214,7 @@ def BC_API_v3_get():
             400,
             {
                 "message": "(#400) Parameter 'requisitos' " +
-                "only accept boolean values."
+                "only accepts boolean values."
             }
         )
     elif "vacantes" in request.args and request.args["vacantes"] == "true":
@@ -231,13 +231,13 @@ def BC_API_v3_get():
         form = True
     if "requisitos" in request.args and request.args["requisitos"] not in [
         "true",
-        "false"
+        "false",
     ]:
             return response(
                 400,
                 {
                     "message": "(#400) Parameter 'requisitos' " +
-                    "only accept boolean values."
+                    "only accepts boolean values."
                 }
             )
 
