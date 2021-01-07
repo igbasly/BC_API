@@ -131,7 +131,8 @@ def BC_API_get(vacantes=False, formato=False, formacion_general=False):
                 bad_arguments.append(a)
             parameters[KEY_CONVERSOR[a]] = "TODOS"
             continue
-        parameters[KEY_CONVERSOR[a]] = "+".join(arguments[a].split(" "))
+
+        parameters[KEY_CONVERSOR[a]] = arguments[a]
     if bad_arguments:
         return response(
             400,
@@ -300,4 +301,4 @@ def BC_API_v3_req_get():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

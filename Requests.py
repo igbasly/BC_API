@@ -1,5 +1,7 @@
 from urllib.request import HTTPError
+from urllib.parse import urlencode
 from bs4 import BeautifulSoup
+import json
 import urllib.request
 import unicodedata
 
@@ -10,30 +12,6 @@ Requests module
 Handle the url requests from BuscaCursos page, the scrape work to get all the
 data and assable the json structure to return.
 """
-
-
-def strip_accents(text):
-    """
-    Strip accents from input String.
-
-    :param text: The input string.
-    :type text: String.
-
-    :returns: The processed String.
-    :rtype: String.
-    """
-    if text == "TODOS":
-        return text
-    elif text == "todos":
-        return text.upper()
-    try:
-        text = unicode(text, "utf-8")
-    except (TypeError, NameError):
-        pass
-    text = unicodedata.normalize("NFD", text)
-    text = text.encode("ascii", "ignore")
-    text = text.decode("utf-8")
-    return str(text)
 
 
 def request_url(url):
@@ -74,11 +52,16 @@ def request_buscacursos(params):
     Returns:
         dict: Dict with courses data response in API format.
     """
+    params.update(
+        {
+            "cxml_horario_tipo_busqueda": "si_tenga",
+            "cxml_horario_tipo_busqueda_actividad": "TODOS",
+            }
+            )
+
     url = (
         f"http://buscacursos.uc.cl/?"
-        f"{'&'.join(e + '=' + strip_accents(params[e]) for e in params)}&cxml_horario_"
-        f"tipo_busqueda=si_tenga&cxml_horario_tipo_busqueda_actividad"
-        f"=TODOS#resultados"
+        f"{urlencode(params)}#resultados"
     )
     try:
         search = request_url(url)
