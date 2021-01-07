@@ -1,6 +1,6 @@
 from app import app
 from flask import request
-from json import load, loads
+from json import load
 
 with open("tests.json", "r") as file:
     TESTS = load(file)
@@ -12,8 +12,7 @@ for test in TESTS:
     url = data[0]
     req = data[1]
     res = data[2]
-    url_test = url + "&".join(
-        [f"{t[0]}={'+'.join(t[1].split(' '))}" for t in req])
+    url_test = url + "&".join([f"{t[0]}={'+'.join(t[1].split(' '))}" for t in req])
     with app.test_client() as C:
         resp_test = C.get(url_test)
         for r in req:

@@ -1,9 +1,7 @@
-from flask_restful import Resource
 from urllib.request import HTTPError
+from urllib.parse import urlencode
 from bs4 import BeautifulSoup
-import json
 import urllib.request
-import unicodedata
 
 
 """
@@ -12,30 +10,6 @@ Requests module
 Handle the url requests from BuscaCursos page, the scrape work to get all the
 data and assable the json structure to return.
 """
-
-
-def strip_accents(text):
-    """
-    Strip accents from input String.
-
-    :param text: The input string.
-    :type text: String.
-
-    :returns: The processed String.
-    :rtype: String.
-    """
-    if text == "TODOS":
-        return text
-    elif text == "todos":
-        return text.upper()
-    try:
-        text = unicode(text, 'utf-8')
-    except (TypeError, NameError):
-        pass
-    text = unicodedata.normalize('NFD', text)
-    text = text.encode('ascii', 'ignore')
-    text = text.decode("utf-8")
-    return str(text)
 
 
 def request_url(url):
@@ -52,8 +26,8 @@ def request_url(url):
 
     soup = BeautifulSoup(resp, "lxml")
 
-    name_box = soup.find_all('tr', attrs={'class': 'resultadosRowPar'})
-    name_box1 = soup.find_all('tr', attrs={'class': 'resultadosRowImpar'})
+    name_box = soup.find_all("tr", attrs={"class": "resultadosRowPar"})
+    name_box1 = soup.find_all("tr", attrs={"class": "resultadosRowImpar"})
 
     result = []
 
@@ -76,19 +50,39 @@ def request_buscacursos(params):
     Returns:
         dict: Dict with courses data response in API format.
     """
-    url = f"http://buscacursos.uc.cl/?" \
-          f"{'&'.join(e + '=' + strip_accents(params[e]) for e in params)}&cxml_horario_" \
-          f"tipo_busqueda=si_tenga&cxml_horario_tipo_busqueda_actividad" \
-          f"=TODOS#resultados"
+    params.update(
+        {
+            "cxml_horario_tipo_busqueda": "si_tenga",
+            "cxml_horario_tipo_busqueda_actividad": "TODOS",
+        }
+    )
+
+    url = f"http://buscacursos.uc.cl/?{urlencode(params)}#resultados"
+
     try:
         search = request_url(url)
+
     except HTTPError:
         search = []
-    info_index = {"NRC": 0, "Sigla": 1, "Retiro": 2, "Ingles": 3, "Seccion": 4,
-                  "Aprobacion especial": 5, "Area de FG": 6,  "Formato": 7,
-                  "Categoria": 8, "Nombre": 9, "Profesor": 10, "Campus": 11,
-                  "Creditos": 12, "Vacantes totales": 13,
-                  "Vacantes disponibles": 14}
+
+    info_index = {
+        "NRC": 0,
+        "Sigla": 1,
+        "Retiro": 2,
+        "Ingles": 3,
+        "Seccion": 4,
+        "Aprobacion especial": 5,
+        "Area de FG": 6,
+        "Formato": 7,
+        "Categoria": 8,
+        "Nombre": 9,
+        "Profesor": 10,
+        "Campus": 11,
+        "Creditos": 12,
+        "Vacantes totales": 13,
+        "Vacantes disponibles": 14
+    }
+
     cursos = dict()
     for line in search:
         seccion_html = []
@@ -130,9 +124,9 @@ def request_buscacursos(params):
                 "SUP": [],
                 "TAL": [],
                 "TER": [],
-                "TES": []
-                }
-            }
+                "TES": [],
+            },
+        }
 
         for i in info_index:
             aux = seccion_html[info_index[i]]
@@ -163,8 +157,10 @@ def request_vacancy(nrc: str, semester: str):
         dict: Dict with the vacancy information of the section given in the API
         response format.
     """
-    url = f"http://buscacursos.uc.cl/informacionVacReserva" +\
-          f".ajax.php?nrc={nrc}&termcode={semester}"
+    url = (
+        "http://buscacursos.uc.cl/informacionVacReserva"
+        f".ajax.php?nrc={nrc}&termcode={semester}"
+    )
     try:
         search = request_url(url)
     except HTTPError:
@@ -180,8 +176,9 @@ def request_vacancy(nrc: str, semester: str):
                 remove.append(i - len(remove))
         for i in remove:
             seccion_html.pop(i)
-        seccion_html = [s.strip(" ") for s in seccion_html[0].split("-")] +\
-            seccion_html[1:]
+        seccion_html = [
+            s.strip(" ") for s in seccion_html[0].split("-")
+        ] + seccion_html[1:]
         results.append(seccion_html)
     results = results[1:] if len(results) > 0 else []
     finals = {"Disponibles": 0}
@@ -193,7 +190,7 @@ def request_vacancy(nrc: str, semester: str):
             if len(esc) == 4:
                 finals["Libres"] = [int(i) for i in esc[-3:]]
             else:
-                aux = [int(i) for i in esc[len(esc)-3:]]
+                aux = [int(i) for i in esc[len(esc) - 3:]]
                 for i in range(3):
                     if finals.get("Libre"):
                         finals["Libres"][i] += aux[i]
@@ -217,15 +214,16 @@ def request_requirements(sigla: str):
     Returns:
         dict: Dict with course requirements in API response format.
     """
-    url = f"http://catalogo.uc.cl/index.php?tmpl=component&" +\
-          f"option=com_catalogo&view=requisitos&sigla={sigla.upper()}"
+    url = (
+        "http://catalogo.uc.cl/index.php?tmpl=component&"
+        f"option=com_catalogo&view=requisitos&sigla={sigla.upper()}"
+    )
     try:
         resp = urllib.request.urlopen(url)
 
         soup = BeautifulSoup(resp, "lxml")
 
-        search = soup.find_all('table',
-                               attrs={'class': 'tablesorter tablesorter-blue'})
+        search = soup.find_all("table", attrs={"class": "tablesorter tablesorter-blue"})
     except HTTPError:
         search = []
 
@@ -241,7 +239,7 @@ def request_requirements(sigla: str):
             line.pop(i)
         result = [row.split("\xa0\xa0") for row in line]
         results.extend(result)
-  
+
     for item in results:
         item[1] = item[1].strip(")").strip("(").split(" o ")
         item[1] = [s.strip(")").strip("(").split(" y ") for s in item[1]]
@@ -253,8 +251,8 @@ def request_requirements(sigla: str):
         "Relacion entre prerequisitos y restricciones": [],
         "Prerequisitos": [],
         "Equivalencias": [],
-        "Restricciones": []
-        }
+        "Restricciones": [],
+    }
 
     if results:
         response["Prerequisitos"] = results[0][1]
