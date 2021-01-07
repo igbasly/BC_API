@@ -24,6 +24,8 @@ KEY_CONVERSOR = {
     "unidad_academica": "cxml_unidad_academica",
     "vacantes": "vacantes",
     "requisitos": "requisitos",
+    "formato": "cxml_formato_cur",
+    "formacion_general": "cxml_area_fg"
 }
 
 
@@ -79,9 +81,14 @@ def icon():
     """
     return send_from_directory("Files", "favicon.png")
 
+@app.route("/", methods=["GET"])
+def index():
+
+    return redirect("https://igbasly.github.io/BC_API")
+
 
 @app.route("/api/v1", methods=["GET"])
-def BC_API_get(vacantes=False):
+def BC_API_get(vacantes=False, formato=False, formacion_general=False):
     """ HTTP GET method for v1
     Args:
         vancante (bool): Allow the use of 'vacantes' parameters in the request.
@@ -111,10 +118,19 @@ def BC_API_get(vacantes=False):
             bad_arguments.append(a)
             continue
         elif a == "vacantes":
-            if vacantes:
-                continue
-            else:
+            if not vacantes:
                 bad_arguments.append(a)
+            continue
+        elif a == "formato":
+            if not formato:
+                bad_arguments.append(a)
+            parameters[KEY_CONVERSOR[a]] = "TODOS"
+            continue
+        elif a == "formacion_general":
+            if not formacion_general:
+                bad_arguments.append(a)
+            parameters[KEY_CONVERSOR[a]] = "TODOS"
+            continue
         parameters[KEY_CONVERSOR[a]] = "+".join(arguments[a].split(" "))
     if bad_arguments:
         return response(
@@ -191,28 +207,44 @@ def BC_API_v3_get():
             request.
         int: Status code of response.
     """
+    vac = False
+    form = False
     if "vacantes" in request.args and request.args["vacantes"] not in ["true", "false"]:
         return response(
             400,
             {
-                "message": "(#400) Parameter 'requisitos' "
-                + "only accepts boolean values."
-            },
+                "message": "(#400) Parameter 'requisitos' " +
+                "only accept boolean values."
+            }
         )
+    elif "vacantes" in request.args and request.args["vacantes"] == "true":
+        vac = True
+    if "formato" in request.args and request.args["formato"] not in ["true", "false"]:
+            return response(
+                400,
+                {
+                    "message": "(#400) Parameter 'formato' " +
+                    "only accept boolean values."
+                }
+            )
+    elif "formato" in request.args and request.args["formato"] == "true":
+        form = True
     if "requisitos" in request.args and request.args["requisitos"] not in [
         "true",
-        "false",
+        "false"
     ]:
-        return response(
-            400,
-            {
-                "message": "(#400) Parameter 'requisitos' "
-                + "only accepts boolean values."
-            },
-        )
-    resp, code = BC_API_get(True)
+            return response(
+                400,
+                {
+                    "message": "(#400) Parameter 'requisitos' " +
+                    "only accept boolean values."
+                }
+            )
+
+    resp, code = BC_API_get(vac, form, True)
+
     if "vacantes" in request.args and code == 200:
-        if request.args["vacantes"] == "true":
+        if vac:
             for cla in resp["data"].values():
                 for sec in cla.values():
                     vacancy = request_vacancy(sec["NRC"], sec["Semestre"])
@@ -251,7 +283,7 @@ def BC_API_v3_req_get():
             405, {"message": f"(#405) Parameters {', '.join(denied)} are not accepted."}
         )
     if not sigla:
-        return response(400, {"message": f"(#400) No value for the 'sigla' parameter."})
+        return response(400, {"message": "(#400) No value for the 'sigla' parameter."})
 
     info = request_requirements(sigla)
 

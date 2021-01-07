@@ -51,9 +51,11 @@
                 "IIC2233": {
                     "1": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -82,9 +84,11 @@
                     },
                     "2": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -113,9 +117,11 @@
                     },
                     "3": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -144,9 +150,11 @@
                     },
                     "4": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -196,9 +204,11 @@
                 "IIC2233": {
                     "1": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -227,9 +237,11 @@
                     },
                     "2": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -258,9 +270,11 @@
                     },
                     "3": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -289,9 +303,11 @@
                     },
                     "4": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -346,6 +362,29 @@
             "status": "Bad Request"
         }
     ],
+    "Test 6 v1": [
+        "/api/v1?",
+        [
+            [
+                "sigla",
+                "IIC2233"
+            ],
+            [
+                "formato",
+                "true"
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "invalid_arguments": [
+                    "formato"
+                ],
+                "message": "(#400) Some arguments are not accepted."
+            },
+            "status": "Bad Request"
+        }
+    ],
     "Test 1 v2": [
         "/api/v2?",
         [
@@ -364,9 +403,11 @@
                 "PSI1204": {
                     "1": {
                         "Aprobacion especial": "NO",
-                        "Campus": "San Joaquín",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -384,7 +425,7 @@
                             "TES": []
                         },
                         "NRC": "12928",
-                        "Nombre": "Fundamentos Biológicos del Comportamiento",
+                        "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento",
                         "Profesor": "Cosmelli Diego, Lopez Vladimir, Andreu Catherine, Ceric Francisco",
                         "Retiro": "SI",
                         "Seccion": "1",
@@ -422,9 +463,11 @@
                     },
                     "2": {
                         "Aprobacion especial": "NO",
-                        "Campus": "San Joaquín",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -442,7 +485,7 @@
                             "TES": []
                         },
                         "NRC": "12933",
-                        "Nombre": "Fundamentos Biológicos del Comportamiento",
+                        "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento",
                         "Profesor": "Ceric Francisco, Lopez Vladimir, Cosmelli Diego, Andreu Catherine",
                         "Retiro": "SI",
                         "Seccion": "2",
@@ -480,9 +523,11 @@
                     },
                     "3": {
                         "Aprobacion especial": "NO",
-                        "Campus": "San Joaquín",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -500,7 +545,7 @@
                             "TES": []
                         },
                         "NRC": "16533",
-                        "Nombre": "Fundamentos Biológicos del Comportamiento",
+                        "Nombre": "Fundamentos Biol\u00f3gicos del Comportamiento",
                         "Profesor": "Lopez Vladimir, Cosmelli Diego, Andreu Catherine, Ceric Francisco",
                         "Retiro": "SI",
                         "Seccion": "3",
@@ -554,9 +599,11 @@
                 "IIQ1003": {
                     "1": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -585,9 +632,11 @@
                     },
                     "2": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -654,7 +703,7 @@
         {
             "code": 400,
             "error": {
-                "message": "(#400) Parameter 'vacantes' only accepts boolean values."
+                "message": "(#400) Parameter 'vacantes' only accept boolean values."
             },
             "status": "Bad Request"
         }
@@ -676,6 +725,29 @@
             "error": {
                 "invalid_arguments": [
                     "foo"
+                ],
+                "message": "(#400) Some arguments are not accepted."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 6 v2": [
+        "/api/v2?",
+        [
+            [
+                "sigla",
+                "ing1024"
+            ],
+            [
+                "formato",
+                "false"
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "invalid_arguments": [
+                    "formato"
                 ],
                 "message": "(#400) Some arguments are not accepted."
             },
@@ -723,9 +795,11 @@
                 "ICT2233": {
                     "1": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -791,9 +865,11 @@
                 "IIC2233": {
                     "1": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -844,9 +920,11 @@
                     },
                     "2": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -897,9 +975,11 @@
                     },
                     "3": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -945,9 +1025,11 @@
                     },
                     "4": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1011,7 +1093,7 @@
         {
             "code": 400,
             "error": {
-                "message": "(#400) Parameter 'requisitos' only accepts boolean values."
+                "message": "(#400) Parameter 'requisitos' only accept boolean values."
             },
             "status": "Bad Request"
         }
@@ -1034,9 +1116,11 @@
                 "MAT1630": {
                     "1": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1067,9 +1151,11 @@
                     },
                     "2": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1100,9 +1186,11 @@
                     },
                     "3": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1133,9 +1221,11 @@
                     },
                     "4": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1166,9 +1256,11 @@
                     },
                     "5": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1199,9 +1291,11 @@
                     },
                     "6": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1232,9 +1326,11 @@
                     },
                     "7": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1265,9 +1361,11 @@
                     },
                     "8": {
                         "Aprobacion especial": "NO",
+                        "Area de FG": null,
                         "Campus": "San Joaqu\u00edn",
                         "Categoria": null,
                         "Creditos": "10",
+                        "Formato": "Presencial",
                         "Ingles": "NO",
                         "Modulos": {
                             "AYU": [
@@ -1411,6 +1509,485 @@
                 "message": "(#405) Parameters foo are not accepted."
             },
             "status": "Method Not Allowed"
+        }
+    ],
+    "Test 9 v3": [
+        "/api/v3?",
+        [
+            [
+                "sigla",
+                "iic2233"
+            ],
+            [
+                "formato",
+                "true"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "IIC2233": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "12431",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ruz Cristian",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "12",
+                        "Vacantes totales": "110"
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "15428",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Florenzano Fernando",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "14",
+                        "Vacantes totales": "111"
+                    },
+                    "3": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "18177",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ossa Antonio",
+                        "Retiro": "SI",
+                        "Seccion": "3",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "18",
+                        "Vacantes totales": "111"
+                    },
+                    "4": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "23787",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Dom\u00ednguez Vicente",
+                        "Retiro": "SI",
+                        "Seccion": "4",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "37",
+                        "Vacantes totales": "88"
+                    }
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 10 v3": [
+        "/api/v3?",
+        [
+            [
+                "sigla",
+                "iic2233"
+            ],
+            [
+                "formato",
+                "foo"
+            ]
+        ],
+        {
+            "code": 400,
+            "error": {
+                "message": "(#400) Parameter 'formato' only accept boolean values."
+            },
+            "status": "Bad Request"
+        }
+    ],
+    "Test 11 v3": [
+        "/api/v3?",
+        [
+            [
+                "sigla",
+                "iic2233"
+            ],
+            [
+                "formacion_general",
+                "true"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "IIC2233": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "12431",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ruz Cristian",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "12",
+                        "Vacantes totales": "110"
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "15428",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Florenzano Fernando",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "14",
+                        "Vacantes totales": "111"
+                    },
+                    "3": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "18177",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ossa Antonio",
+                        "Retiro": "SI",
+                        "Seccion": "3",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "18",
+                        "Vacantes totales": "111"
+                    },
+                    "4": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "23787",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Dom\u00ednguez Vicente",
+                        "Retiro": "SI",
+                        "Seccion": "4",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "37",
+                        "Vacantes totales": "88"
+                    }
+                }
+            },
+            "status": "Ok"
+        }
+    ],
+    "Test 12 v3": [
+        "/api/v3?",
+        [
+            [
+                "sigla",
+                "iic2233"
+            ],
+            [
+                "formacion_general",
+                "TODOS"
+            ]
+        ],
+        {
+            "code": 200,
+            "data": {
+                "IIC2233": {
+                    "1": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "12431",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ruz Cristian",
+                        "Retiro": "SI",
+                        "Seccion": "1",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "12",
+                        "Vacantes totales": "110"
+                    },
+                    "2": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "15428",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Florenzano Fernando",
+                        "Retiro": "SI",
+                        "Seccion": "2",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "14",
+                        "Vacantes totales": "111"
+                    },
+                    "3": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "18177",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Ossa Antonio",
+                        "Retiro": "SI",
+                        "Seccion": "3",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "18",
+                        "Vacantes totales": "111"
+                    },
+                    "4": {
+                        "Aprobacion especial": "NO",
+                        "Area de FG": null,
+                        "Campus": "San Joaqu\u00edn",
+                        "Categoria": null,
+                        "Creditos": "10",
+                        "Formato": "Presencial",
+                        "Ingles": "NO",
+                        "Modulos": {
+                            "AYU": [
+                                "M:4"
+                            ],
+                            "CLAS": [
+                                "J:4,5"
+                            ],
+                            "LAB": [],
+                            "LIB": [],
+                            "PRA": [],
+                            "SUP": [],
+                            "TAL": [],
+                            "TER": [],
+                            "TES": []
+                        },
+                        "NRC": "23787",
+                        "Nombre": "Programaci\u00f3n Avanzada",
+                        "Profesor": "Dom\u00ednguez Vicente",
+                        "Retiro": "SI",
+                        "Seccion": "4",
+                        "Semestre": "2019-2",
+                        "Sigla": "IIC2233",
+                        "Vacantes disponibles": "37",
+                        "Vacantes totales": "88"
+                    }
+                }
+            },
+            "status": "Ok"
         }
     ]
 }
