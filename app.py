@@ -171,7 +171,7 @@ def BC_API_v2_get():
     This methods allows use of 'vacantes' parameter in the request.
 
     Returns:
-        dict: Response in dictonary format with all information about the\
+        dict: Response in dictionary format with all information about the\
             request.
         int: Status code of response.
     """
@@ -225,7 +225,7 @@ def BC_API_v3_get():
                 400,
                 {
                     "message": "(#400) Parameter 'formato' " +
-                    "only accept boolean values."
+                    "only accepts boolean values."
                 }
             )
     elif "formato" in request.args and request.args["formato"] == "true":
@@ -268,7 +268,7 @@ def BC_API_v3_req_get():
     This method returns course requisities associated with an identifier.
 
     Return:
-        dict: Response in dictonary format with all information about the\
+        dict: Response in dictionary format with all information about the\
             request.
         int: Status code of response.
     """
