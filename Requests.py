@@ -1,6 +1,7 @@
 from urllib.request import HTTPError
 from urllib.parse import urlencode
 from bs4 import BeautifulSoup
+from requests_functions import parse_search, parse_vacancy_search, parse_vacancy_results
 import requests
 
 
@@ -12,7 +13,7 @@ data and assable the json structure to return.
 """
 
 
-def request_url(url):
+def request_table_url(url):
     """Make the requests to BuscaCursos server and parse the xml response to
     separete all the results in a single list.
 
@@ -58,91 +59,16 @@ def request_buscacursos(params):
     )
 
     url = f"http://buscacursos.uc.cl/?{urlencode(params)}#resultados"
-    print(url)
 
     try:
-        search = request_url(url)
+        search = request_table_url(url)
 
     except HTTPError:
         search = []
 
-    info_index = {
-        "NRC": 0,
-        "Sigla": 1,
-        "Retiro": 2,
-        "Ingles": 3,
-        "Seccion": 4,
-        "Aprobacion especial": 5,
-        "Area de FG": 6,
-        "Formato": 7,
-        "Categoria": 8,
-        "Nombre": 9,
-        "Profesor": 10,
-        "Campus": 11,
-        "Creditos": 12,
-        "Vacantes totales": 13,
-        "Vacantes disponibles": 14
-    }
+    courses = parse_search(params, search)
 
-    cursos = dict()
-    for line in search:
-        seccion_html = []
-        for elem in line.find_all("td"):
-            if elem.find_all("table"):
-                aux = []
-                for e in elem.find_all("tr"):
-                    mods = e.find_all("td")
-                    aux.append([m.get_text().replace("\n", "") for m in mods])
-                seccion_html.append(aux)
-                break
-            else:
-                seccion_html.append(elem.get_text().replace("\n", ""))
-        print(seccion_html)
-
-        info = {
-            "NRC": None,
-            "Semestre": params["cxml_semestre"],
-            "Sigla": None,
-            "Seccion": None,
-            "Retiro": None,
-            "Ingles": None,
-            "Aprobacion especial": None,
-            "Area de FG": None,
-            "Formato": None,
-            "Categoria": None,
-            "Nombre": None,
-            "Profesor": None,
-            "Campus": None,
-            "Creditos": None,
-            "Vacantes totales": None,
-            "Vacantes disponibles": None,
-            "Modulos": {
-                "CLAS": [],
-                "AYU": [],
-                "LAB": [],
-                "LIB": [],
-                "PRA": [],
-                "SUP": [],
-                "TAL": [],
-                "TER": [],
-                "TES": [],
-            },
-        }
-
-        for i in info_index:
-            aux = seccion_html[info_index[i]]
-            if aux != "":
-                info[i] = aux.strip()
-
-        for list_ in seccion_html[-1]:
-            info["Modulos"][list_[1]].append(list_[0])
-
-        if info["Sigla"] not in cursos:
-            cursos[info["Sigla"]] = {info["Seccion"]: info}
-
-        cursos[info["Sigla"]][info["Seccion"]] = info
-
-    return cursos
+    return courses
 
 
 def request_vacancy(nrc: str, semester: str):
@@ -163,45 +89,15 @@ def request_vacancy(nrc: str, semester: str):
         f".ajax.php?nrc={nrc}&termcode={semester}"
     )
     try:
-        search = request_url(url)
+        search = request_table_url(url)
     except HTTPError:
         search = []
 
-    results = []
-    for line in search:
-        seccion_html = line.get_text().split("\n")
-        remove = []
-        for i in range(len(seccion_html)):
-            seccion_html[i] = seccion_html[i].replace("\t", "")
-            if seccion_html[i] == "":
-                remove.append(i - len(remove))
-        for i in remove:
-            seccion_html.pop(i)
-        seccion_html = [
-            s.strip(" ") for s in seccion_html[0].split("-")
-        ] + seccion_html[1:]
-        results.append(seccion_html)
+    results = parse_vacancy_search(search)
     results = results[1:] if len(results) > 0 else []
-    finals = {"Disponibles": 0}
-    for esc in results:
-        if len(esc) < 3:
-            continue
-        print(esc)
-        if esc[0] == "Vacantes libres" or esc[0] == "Vacantes Libres":
-            if len(esc) == 4:
-                finals["Libres"] = [int(i) for i in esc[-3:]]
-            else:
-                aux = [int(i) for i in esc[len(esc) - 3:]]
-                for i in range(3):
-                    if finals.get("Libre"):
-                        finals["Libres"][i] += aux[i]
-                    else:
-                        finals["Libres"] = aux[i]
-            continue
-        elif "TOTAL DISPONIBLES" in esc[0]:
-            finals["Disponibles"] = int(esc[1])
-            continue
-        finals[esc[0]] = [int(i) for i in esc[-3:]]
+
+    finals = parse_vacancy_results(results)
+
     return finals
 
 
@@ -224,7 +120,8 @@ def request_requirements(sigla: str):
 
         soup = BeautifulSoup(resp, "lxml")
 
-        search = soup.find_all("table", attrs={"class": "tablesorter tablesorter-blue"})
+        search = soup.find_all(
+            "table", attrs={"class": "tablesorter tablesorter-blue"})
     except HTTPError:
         search = []
 
