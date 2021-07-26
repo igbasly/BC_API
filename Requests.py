@@ -1,7 +1,7 @@
 from urllib.request import HTTPError
 from urllib.parse import urlencode
 from bs4 import BeautifulSoup
-import urllib.request
+import requests
 
 
 """
@@ -22,7 +22,7 @@ def request_url(url):
     Returns:
         list: List with sublists with all the contents of BuscaCursos reponse.
     """
-    resp = urllib.request.urlopen(url)
+    resp = requests.get(url).text
 
     soup = BeautifulSoup(resp, "lxml")
 
@@ -58,6 +58,7 @@ def request_buscacursos(params):
     )
 
     url = f"http://buscacursos.uc.cl/?{urlencode(params)}#resultados"
+    print(url)
 
     try:
         search = request_url(url)
@@ -219,7 +220,7 @@ def request_requirements(sigla: str):
         f"option=com_catalogo&view=requisitos&sigla={sigla.upper()}"
     )
     try:
-        resp = urllib.request.urlopen(url)
+        resp = requests.get(url).text
 
         soup = BeautifulSoup(resp, "lxml")
 
