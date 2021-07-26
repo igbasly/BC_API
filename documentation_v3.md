@@ -6,15 +6,82 @@ La versión 3 de la API se encuentra alojada en la url [http://bc.horariomaker.c
 
 ## GET
 ---
+
+### **Parametros**
+```
+GET /api/v3/parametros
+```
+
+Endpoint para obtener los parametros permitidos y vigentes de la API.
+
+Response:
+```json
+{
+    "code": 200,
+    "data": {
+        "parametros": {
+            "semestre": [
+            {
+              "name": "2021 Segundo Semestre", 
+              "value": "2021-2"
+            }, 
+            {
+              "name": "2021 Primer Semestre", 
+              "value": "2021-1"
+            }, 
+            {
+              "name": "2020 TAV", 
+              "value": "2020-3"
+            }, 
+            {
+              "name": "2020 Segundo Semestre", 
+              "value": "2020-2"
+            }, 
+            {
+              "name": "2020 Primer Semestre", 
+              "value": "2020-1"
+            }
+          ],
+          "formato": [
+            {
+              "name": "-- Todos --", 
+              "value": "TODOS"
+            }, 
+            {
+              "name": "HIB - HÃ­brido", 
+              "value": "HIB"
+            }, 
+            {
+              "name": "OL - Remoto", 
+              "value": "OL"
+            }, 
+            {
+              "name": "PR - Presencial", 
+              "value": "PR"
+            }, 
+            {
+              "name": "REPR - Remoto con Act.Presencial", 
+              "value": "REPR"
+            }
+          ],
+          "campus": [...],
+          "categoria": [...],
+          "formacion_general": [...],
+          "unidad_academica": [...],
+        }
+    }
+}
+```
+
 ### **Requests**
 
 Es una API _read-only_ por lo que solo acepta el método HTTP GET con los siguientes parametros:
 * semestre
-    - 2018-1
-    - 2018-2
-    - 2018-3 (TAV verano 2019)
-    - 2019-1
-    - 2019-2
+    - 2020-1
+    - 2020-2
+    - 2020-3 (TAV verano 2021)
+    - 2021-1
+    - 2021-2
 * sigla
 * nrc
 * nombre
@@ -28,6 +95,7 @@ Es una API _read-only_ por lo que solo acepta el método HTTP GET con los siguie
 * requisitos
     - true
     - false
+
 
 Las respuesta son en formato JSON, donde en caso de ser aceptado el *request* contendrá un *key* `data` (`dict`) con todos los cursos donde a su vez, cada curso será otro `dict` con las secciones respectivas y su información correspondiente.
 
