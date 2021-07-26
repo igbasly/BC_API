@@ -1,8 +1,9 @@
+from endpoints_functions import check_arguments, manage_requirements, manage_vacancies
+from Requests import (request_buscacursos, request_vacancy,
+                      request_requirements, request_parameters)
 from flask import Flask, request, send_from_directory, redirect
 from flask_cors import CORS
 import json
-
-from Requests import request_buscacursos, request_vacancy, request_requirements
 
 
 app = Flask(__name__)
@@ -12,21 +13,6 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 with open("info_buscacursos.json", "r") as file:
     INFO = json.load(file)
-
-KEY_CONVERSOR = {
-    "semestre": "cxml_semestre",
-    "sigla": "cxml_sigla",
-    "nrc": "cxml_nrc",
-    "nombre": "cxml_nombre",
-    "profesor": "cxml_profesor",
-    "categoria": "cxml_categoria",
-    "campus": "cxml_campus",
-    "unidad_academica": "cxml_unidad_academica",
-    "vacantes": "vacantes",
-    "requisitos": "requisitos",
-    "formato": "cxml_formato_cur",
-    "formacion_general": "cxml_area_fg"
-}
 
 
 def response(code: int, data: dict = None):
@@ -81,6 +67,7 @@ def icon():
     """
     return send_from_directory("Files", "favicon.png")
 
+
 @app.route("/", methods=["GET"])
 def index():
 
@@ -99,39 +86,12 @@ def BC_API_get(vacantes=False, formato=False, formacion_general=False):
         int: Status code of response.
 
     """
-    parameters = {
-        "cxml_semestre": "2019-2",
-        "cxml_sigla": "",
-        "cxml_nrc": "",
-        "cxml_nombre": "",
-        "cxml_profesor": "",
-        "cxml_categoria": "TODOS",
-        "cxml_campus": "TODOS",
-        "cxml_unidad_academica": "TODOS",
-    }
     arguments = request.args
-    bad_arguments = []
+    parameters, bad_arguments = check_arguments(
+        arguments, vacantes, formato, formacion_general)
+
     if not arguments:
         return response(400, {"message": "(#400) Requests with no arguments."})
-    for a in arguments:
-        if a not in KEY_CONVERSOR:
-            bad_arguments.append(a)
-            continue
-        elif a == "vacantes":
-            if not vacantes:
-                bad_arguments.append(a)
-            continue
-        elif a == "formato":
-            if not formato:
-                bad_arguments.append(a)
-            parameters[KEY_CONVERSOR[a]] = "TODOS"
-            continue
-        elif a == "formacion_general":
-            if not formacion_general:
-                bad_arguments.append(a)
-            parameters[KEY_CONVERSOR[a]] = "TODOS"
-            continue
-        parameters[KEY_CONVERSOR[a]] = "+".join(arguments[a].split(" "))
     if bad_arguments:
         return response(
             400,
@@ -146,7 +106,8 @@ def BC_API_get(vacantes=False, formato=False, formacion_general=False):
     except Exception as exc:
         print(exc)
         return response(
-            500, {"message": "(#500) An internal error ocurred, we are working on it."}
+            500, {
+                "message": "(#500) An internal error ocurred, we are working on it."}
         )
 
     if len(data_classes) > 0:
@@ -160,7 +121,8 @@ def BC_API_get(vacantes=False, formato=False, formacion_general=False):
 @app.route("/api/v3", methods=["POST", "PUT", "PATCH", "DELETE"])
 def BC_API_post():
     return response(
-        405, {"message": "(#405) This API does not accept PUT or POST methods."}
+        405, {
+            "message": "(#405) This API does not accept PUT or POST methods."}
     )
 
 
@@ -170,7 +132,7 @@ def BC_API_v2_get():
     This methods allows use of 'vacantes' parameter in the request.
 
     Returns:
-        dict: Response in dictonary format with all information about the\
+        dict: Response in dictionary format with all information about the\
             request.
         int: Status code of response.
     """
@@ -213,51 +175,47 @@ def BC_API_v3_get():
         return response(
             400,
             {
-                "message": "(#400) Parameter 'requisitos' " +
+                "message": "(#400) Parameter 'vacantes' "
                 "only accepts boolean values."
             }
         )
     elif "vacantes" in request.args and request.args["vacantes"] == "true":
         vac = True
+
     if "formato" in request.args and request.args["formato"] not in ["true", "false"]:
-            return response(
-                400,
-                {
-                    "message": "(#400) Parameter 'formato' " +
-                    "only accept boolean values."
-                }
-            )
+        return response(
+            400,
+            {
+                "message": "(#400) Parameter 'formato' "
+                "only accepts boolean values."
+            }
+        )
     elif "formato" in request.args and request.args["formato"] == "true":
         form = True
+
     if "requisitos" in request.args and request.args["requisitos"] not in [
         "true",
         "false",
     ]:
-            return response(
-                400,
-                {
-                    "message": "(#400) Parameter 'requisitos' " +
-                    "only accepts boolean values."
-                }
-            )
+        return response(
+            400,
+            {
+                "message": "(#400) Parameter 'requisitos' "
+                "only accepts boolean values."
+            }
+        )
 
     resp, code = BC_API_get(vac, form, True)
 
-    if "vacantes" in request.args and code == 200:
-        if vac:
-            for cla in resp["data"].values():
-                for sec in cla.values():
-                    vacancy = request_vacancy(sec["NRC"], sec["Semestre"])
-                    sec["Vacantes"] = vacancy
-                    total = sec.pop("Vacantes totales")
-                    sec["Vacantes"]["Totales"] = total
-                    available = sec.pop("Vacantes disponibles")
-                    sec["Vacantes"]["Disponibles"] = available
-    if "requisitos" in request.args and code == 200:
-        if request.args["requisitos"] == "true":
-            for sigla in resp["data"]:
-                req = request_requirements(sigla)
-                resp["data"][sigla]["Requisitos"] = req
+    if "vacantes" in request.args and code == 200 and vac:
+        resp["data"] = manage_vacancies(resp["data"])
+
+    if (
+        "requisitos" in request.args
+        and code == 200
+        and request.args["requisitos"] == "true"
+    ):
+        resp["data"] = manage_requirements(resp["data"])
     return resp, code
 
 
@@ -267,7 +225,7 @@ def BC_API_v3_req_get():
     This method returns course requisities associated with an identifier.
 
     Return:
-        dict: Response in dictonary format with all information about the\
+        dict: Response in dictionary format with all information about the\
             request.
         int: Status code of response.
     """
@@ -278,9 +236,13 @@ def BC_API_v3_req_get():
             sigla = request.args[a]
         else:
             denied.append(a)
-    if len(denied) != 0:
+    if denied:
         return response(
-            405, {"message": f"(#405) Parameters {', '.join(denied)} are not accepted."}
+            400,
+            {
+                "message": "(#400) Some arguments are not accepted.",
+                "invalid_arguments": denied,
+            },
         )
     if not sigla:
         return response(400, {"message": "(#400) No value for the 'sigla' parameter."})
@@ -299,5 +261,30 @@ def BC_API_v3_req_get():
     return response(200, {sigla: info})
 
 
+@app.route("/api/v3/parametros", methods=["GET"])
+def BC_API_v3_params_get():
+    """ HTTP GET method for v3 with 'requisitos' scope.
+    This method returns course requisities associated with an identifier.
+
+    Return:
+        dict: Response in dictionary format with all information about the\
+            request.
+        int: Status code of response.
+    """
+    if len(request.args) > 0:
+        return response(
+            400,
+            {"message": "(#400) Arguments not accepted with this endpoint."}
+        )
+
+    params = request_parameters()
+
+    return response(200, {"parametros": params})
+
+
 if __name__ == "__main__":
-    app.run(debug=False)
+    params = {
+        # "debug": True,
+        # "host": "192.168.1.8"
+    }
+    app.run(**params)
