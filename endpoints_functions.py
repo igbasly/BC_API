@@ -19,7 +19,7 @@ KEY_CONVERSOR = {
 
 def check_arguments(arguments, vacantes, formato, formacion_general):
     parameters = {
-        "cxml_semestre": "2019-2",
+        "cxml_semestre": "2021-2",
         "cxml_sigla": "",
         "cxml_nrc": "",
         "cxml_nombre": "",

@@ -159,3 +159,39 @@ def request_requirements(sigla: str):
         response["Equivalencias"] = results[3][1]
 
     return response
+
+
+def request_parameters():
+    """Make the requests to BuscaCursos server and parse the xml response to
+    separete all the parameters in a single object.
+
+    Returns:
+        dict: Object with all accepted paramters and its options values and names.
+    """
+    resp = requests.get("http://buscacursos.uc.cl/").text
+
+    soup = BeautifulSoup(resp, "lxml")
+
+    params_names = {
+        "semestre": "cxml_semestre",
+        "categoria": "cxml_categoria",
+        "campus": "cxml_campus",
+        "unidad_academica": "cxml_unidad_academica",
+        "formato": "cxml_formato_cur",
+        "formacion_general": "cxml_area_fg"
+    }
+
+    parameters = {}
+
+    for param in params_names:
+        selects = soup.find_all("select", attrs={"name": params_names[param]})
+        options = []
+        if selects:
+            select = selects[0]
+            options_html = select.find_all("option")
+            for op in options_html:
+                option = {"value": op["value"], "name": op.get_text()}
+                options.append(option)
+        parameters[param] = options
+
+    return parameters

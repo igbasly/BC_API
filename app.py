@@ -1,5 +1,6 @@
 from endpoints_functions import check_arguments, manage_requirements, manage_vacancies
-from Requests import request_buscacursos, request_vacancy, request_requirements
+from Requests import (request_buscacursos, request_vacancy,
+                      request_requirements, request_parameters)
 from flask import Flask, request, send_from_directory, redirect
 from flask_cors import CORS
 import json
@@ -235,10 +236,13 @@ def BC_API_v3_req_get():
             sigla = request.args[a]
         else:
             denied.append(a)
-    if len(denied) != 0:
+    if denied:
         return response(
-            405, {
-                "message": f"(#405) Parameters {', '.join(denied)} are not accepted."}
+            400,
+            {
+                "message": "(#400) Some arguments are not accepted.",
+                "invalid_arguments": denied,
+            },
         )
     if not sigla:
         return response(400, {"message": "(#400) No value for the 'sigla' parameter."})
@@ -255,6 +259,27 @@ def BC_API_v3_req_get():
         return response(202, {"message": "(#202) No data found with these parameters."})
 
     return response(200, {sigla: info})
+
+
+@app.route("/api/v3/parametros", methods=["GET"])
+def BC_API_v3_params_get():
+    """ HTTP GET method for v3 with 'requisitos' scope.
+    This method returns course requisities associated with an identifier.
+
+    Return:
+        dict: Response in dictionary format with all information about the\
+            request.
+        int: Status code of response.
+    """
+    if len(request.args) > 0:
+        return response(
+            400,
+            {"message": "(#400) Arguments not accepted with this endpoint."}
+        )
+
+    params = request_parameters()
+
+    return response(200, {"parameters": params})
 
 
 if __name__ == "__main__":
