@@ -17,35 +17,36 @@ INFO_INDEX = {
 }
 
 
-INFO_TEMPLATE = {
-    "NRC": None,
-    "Semestre": None,
-    "Sigla": None,
-    "Seccion": None,
-    "Retiro": None,
-    "Ingles": None,
-    "Aprobacion especial": None,
-    "Area de FG": None,
-    "Formato": None,
-    "Categoria": None,
-    "Nombre": None,
-    "Profesor": None,
-    "Campus": None,
-    "Creditos": None,
-    "Vacantes totales": None,
-    "Vacantes disponibles": None,
-    "Modulos": {
-        "CLAS": [],
-        "AYU": [],
-        "LAB": [],
-        "LIB": [],
-        "PRA": [],
-        "SUP": [],
-        "TAL": [],
-        "TER": [],
-        "TES": [],
-    },
-}
+def generate_template():
+    return {
+        "NRC": None,
+        "Semestre": None,
+        "Sigla": None,
+        "Seccion": None,
+        "Retiro": None,
+        "Ingles": None,
+        "Aprobacion especial": None,
+        "Area de FG": None,
+        "Formato": None,
+        "Categoria": None,
+        "Nombre": None,
+        "Profesor": None,
+        "Campus": None,
+        "Creditos": None,
+        "Vacantes totales": None,
+        "Vacantes disponibles": None,
+        "Modulos": {
+            "CLAS": [],
+            "AYU": [],
+            "LAB": [],
+            "LIB": [],
+            "PRA": [],
+            "SUP": [],
+            "TAL": [],
+            "TER": [],
+            "TES": [],
+        },
+    }
 
 
 def parse_search(params, results):
@@ -63,7 +64,7 @@ def parse_search(params, results):
             else:
                 section_html.append(elem.get_text().replace("\n", ""))
 
-        info = INFO_TEMPLATE.copy()
+        info = generate_template()
         info["Semestre"] = params["cxml_semestre"]
 
         for i in INFO_INDEX:
