@@ -279,7 +279,7 @@ def BC_API_v3_params_get():
 
     params = request_parameters()
 
-    return response(200, {"parameters": params})
+    return response(200, {"parametros": params})
 
 
 if __name__ == "__main__":
