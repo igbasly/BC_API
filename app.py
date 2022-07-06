@@ -11,10 +11,6 @@ app.config["JSON_AS_ASCII"] = False
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
-with open("info_buscacursos.json", "r") as file:
-    INFO = json.load(file)
-
-
 def response(code: int, data: dict = None):
     """ Create the response for any request based on the status code.
 
