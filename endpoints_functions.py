@@ -24,7 +24,7 @@ with open("info_buscacursos.json", "r") as file:
 
 def check_arguments(arguments, vacantes, formato, formacion_general):
     parameters = {
-        "cxml_semestre": "2021-2",
+        "cxml_semestre": "2022-1",
         "cxml_sigla": "",
         "cxml_nrc": "",
         "cxml_nombre": "",
