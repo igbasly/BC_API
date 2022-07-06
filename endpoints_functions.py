@@ -17,9 +17,9 @@ KEY_CONVERSOR = {
 }
 
 
-def check_arguments(arguments, vacantes, formato, formacion_general):
+def check_arguments(arguments, vacantes, formato):
     parameters = {
-        "cxml_semestre": "2021-2",
+        "cxml_semestre": "2022-1",
         "cxml_sigla": "",
         "cxml_nrc": "",
         "cxml_nombre": "",
@@ -27,6 +27,7 @@ def check_arguments(arguments, vacantes, formato, formacion_general):
         "cxml_categoria": "TODOS",
         "cxml_campus": "TODOS",
         "cxml_unidad_academica": "TODOS",
+        "cxml_area_fg": "TODOS"
     }
 
     bad_arguments = []
@@ -41,11 +42,6 @@ def check_arguments(arguments, vacantes, formato, formacion_general):
             continue
         elif a == "formato":
             if not formato:
-                bad_arguments.append(a)
-            parameters[KEY_CONVERSOR[a]] = "TODOS"
-            continue
-        elif a == "formacion_general":
-            if not formacion_general:
                 bad_arguments.append(a)
             parameters[KEY_CONVERSOR[a]] = "TODOS"
             continue
