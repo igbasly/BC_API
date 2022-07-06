@@ -1,5 +1,4 @@
 from Requests import request_vacancy, request_requirements
-import json
 
 
 KEY_CONVERSOR = {
@@ -16,10 +15,6 @@ KEY_CONVERSOR = {
     "formato": "cxml_formato_cur",
     "formacion_general": "cxml_area_fg"
 }
-
-
-with open("info_buscacursos.json", "r") as file:
-    INFO = json.load(file)
 
 
 def check_arguments(arguments, vacantes, formato):
