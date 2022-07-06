@@ -1,4 +1,5 @@
 from Requests import request_vacancy, request_requirements
+import json
 
 
 KEY_CONVERSOR = {
@@ -15,6 +16,10 @@ KEY_CONVERSOR = {
     "formato": "cxml_formato_cur",
     "formacion_general": "cxml_area_fg"
 }
+
+
+with open("info_buscacursos.json", "r") as file:
+    INFO = json.load(file)
 
 
 def check_arguments(arguments, vacantes, formato, formacion_general):
@@ -47,7 +52,7 @@ def check_arguments(arguments, vacantes, formato, formacion_general):
         elif a == "formacion_general":
             if not formacion_general:
                 bad_arguments.append(a)
-            parameters[KEY_CONVERSOR[a]] = "TODOS"
+            parameters[KEY_CONVERSOR[a]] = INFO["formacion_general"][arguments[a]]
             continue
 
         parameters[KEY_CONVERSOR[a]] = arguments[a]
