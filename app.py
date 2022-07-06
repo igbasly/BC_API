@@ -71,7 +71,7 @@ def index():
 
 
 @app.route("/api/v1", methods=["GET"])
-def BC_API_get(vacantes=False, formato=False, formacion_general=False):
+def BC_API_get(vacantes=False, formato=False):
     """ HTTP GET method for v1
     Args:
         vancante (bool): Allow the use of 'vacantes' parameters in the request.
@@ -84,7 +84,7 @@ def BC_API_get(vacantes=False, formato=False, formacion_general=False):
     """
     arguments = request.args
     parameters, bad_arguments = check_arguments(
-        arguments, vacantes, formato, formacion_general)
+        arguments, vacantes, formato)
 
     if not arguments:
         return response(400, {"message": "(#400) Requests with no arguments."})
@@ -201,7 +201,7 @@ def BC_API_v3_get():
             }
         )
 
-    resp, code = BC_API_get(vac, form, True)
+    resp, code = BC_API_get(vac, form)
 
     if "vacantes" in request.args and code == 200 and vac:
         resp["data"] = manage_vacancies(resp["data"])

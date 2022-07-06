@@ -22,7 +22,7 @@ with open("info_buscacursos.json", "r") as file:
     INFO = json.load(file)
 
 
-def check_arguments(arguments, vacantes, formato, formacion_general):
+def check_arguments(arguments, vacantes, formato):
     parameters = {
         "cxml_semestre": "2022-1",
         "cxml_sigla": "",
@@ -32,6 +32,7 @@ def check_arguments(arguments, vacantes, formato, formacion_general):
         "cxml_categoria": "TODOS",
         "cxml_campus": "TODOS",
         "cxml_unidad_academica": "TODOS",
+        "cxml_area_fg": "TODOS"
     }
 
     bad_arguments = []
@@ -48,11 +49,6 @@ def check_arguments(arguments, vacantes, formato, formacion_general):
             if not formato:
                 bad_arguments.append(a)
             parameters[KEY_CONVERSOR[a]] = "TODOS"
-            continue
-        elif a == "formacion_general":
-            if not formacion_general:
-                bad_arguments.append(a)
-            parameters[KEY_CONVERSOR[a]] = INFO["formacion_general"][arguments[a]]
             continue
 
         parameters[KEY_CONVERSOR[a]] = arguments[a]
