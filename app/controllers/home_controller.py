@@ -1,9 +1,10 @@
 from fastapi import APIRouter
+from fastapi.responses import RedirectResponse
 
 
 router = APIRouter(tags=["Home"])
 
 
-@router.get("/")
+@router.get("/", status_code=303)
 def index():
-    return {"hello": "world!"}
+    return RedirectResponse("/redoc")
