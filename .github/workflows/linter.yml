@@ -1,4 +1,4 @@
-name: Lint & Tests
+name: Lint with Flake8
 
 on:
   push:
@@ -29,6 +29,3 @@ jobs:
           # E203 and W503 break proper PEP 8. This run is just to issue warnings. The file limit is standard black.
           # See https://github.com/psf/black/blob/master/docs/compatible_configs.md#flake8
           flake8 . --count --ignore=E203,W503 --exit-zero --max-complexity=10 --max-line-length=88 --statistics
-      - name: Tests
-        run: |
-          python pytest.py
