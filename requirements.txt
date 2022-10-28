@@ -1,9 +1,0 @@
-pytest
-httplib2
-flask
-flask_restful
-flask-cors
-lxml
-BeautifulSoup4
-gunicorn
-requests
