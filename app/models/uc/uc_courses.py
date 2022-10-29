@@ -1,5 +1,5 @@
 from typing import List, Optional
-from app.models.base import Section, Course, ClassModules
+from app.models.base import Section, Course, ClassModule
 
 
 class UCSection(Section):
@@ -7,7 +7,7 @@ class UCSection(Section):
     need_special_approval: bool
     general_education: Optional[str]
     category: Optional[str]
-    modules: Optional[List[ClassModules]]
+    modules: List[ClassModule]
 
 
 class UCCourse(Course):

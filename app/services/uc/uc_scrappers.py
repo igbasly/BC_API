@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 
 from app.assets import asset_path
 from .constants import INFO_INDEX, SECTION_BASE, COURSE_BASE, MODULE_BASE, DAYS
+from app.models.base import ClassModule
 
 
 def request_table_url(url):
