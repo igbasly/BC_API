@@ -1,4 +1,5 @@
 import json
+import datetime
 from fastapi.testclient import TestClient
 from app import app
 
@@ -17,7 +18,6 @@ def test_get_index():
 
     assert response.status_code == 200
     assert response.json() == {
-        "name": "UC",
         "resources": uc_routes,
         "url": response.url
     }
@@ -32,7 +32,6 @@ def test_get_params():
 
     assert response.status_code == 200
     assert 'resources' in data
-    assert 'types' in data
 
     resources = data['resources']
     for key in params:
@@ -42,3 +41,33 @@ def test_get_params():
             assert len(item['values']) > 0
         else:
             assert item['values'] is None
+
+
+def test_get_search_courses_invalid_search():
+    response = client.get('/api/v4/uc/1999-2/search?foo=bar')
+
+    assert response.status_code == 200
+    assert response.json()['resources'] == []
+
+
+def test_get_search_courses_valid_search():
+    year = datetime.date.today().year
+    params = {
+        "course_code": "mat1610"
+    }
+    response = client.get(f"/api/v4/uc/{year}-1/search", params=params)
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data['resources']) == 1
+    course = data['resources'][0]
+    assert "name" in course and course["course_code"] == 'MAT1610'
+
+    for section in course['sections']:
+        expected_keys = [
+            'course_code', 'semester', 'section_id', 'section', 'teacher_name',
+            'value', 'campus'
+        ]
+        for key in expected_keys:
+            assert section[key] is not None
+        assert len(section['modules']) > 0
