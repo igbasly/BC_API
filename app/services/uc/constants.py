@@ -23,40 +23,6 @@ INFO_INDEX = {
     "available_vacancies": {"index": 14, "function": lambda x: x}
 }
 
-
-COURSE_BASE = {
-    "semester": None,
-    "course_code": None,
-    "name": None,
-    "sections": []
-}
-
-SECTION_BASE = {
-    "semester": None,
-    "section_id": None,
-    "course_code": None,
-    "allow_withdrawal": None,
-    "english_version": None,
-    "section": None,
-    "need_special_approval": None,
-    "general_education": None,
-    "format": None,
-    "category": None,
-    "name": None,
-    "teacher_name": None,
-    "campus": None,
-    "value": None,
-    "total_vacancies": None,
-    "available_vacancies": None,
-    "modules": []
-}
-
-MODULE_BASE = {
-    "day": None,
-    "module": None,
-    "type": None
-}
-
 DAYS = {"L": 0, "M": 1, "W": 2, "J": 3, "V": 4, "S": 5, "D": 6}
 
 TRANSLATOR = {}

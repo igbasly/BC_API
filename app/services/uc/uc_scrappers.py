@@ -1,13 +1,13 @@
 import requests
 import json
-from copy import deepcopy
 from bs4 import BeautifulSoup
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 
 from app.assets import asset_path
-from .constants import INFO_INDEX, SECTION_BASE, COURSE_BASE, MODULE_BASE, DAYS
+from app.models.uc import UCSection, UCCourse
 from app.models.base import ClassModule
+from .constants import INFO_INDEX, DAYS
 
 
 def request_table_url(url):
@@ -85,7 +85,7 @@ def parse_search(results):
             else:
                 section_html.append(elem.get_text().replace("\n", ""))
 
-        section = deepcopy(SECTION_BASE)
+        section = UCSection.get_attributes()
 
         for attr in INFO_INDEX:
             attr_info = INFO_INDEX[attr]
@@ -94,24 +94,23 @@ def parse_search(results):
                 section[attr] = attr_info['function'](aux.strip())
 
         for list_ in section_html[-1]:
-            print(section["name"], list_)
             if ":" not in list_[0] or list_[0] == ":":
-                continue
+                continue  # pragma: no cover
 
             days_str, modules_str = list_[0].split(":")
             if days_str == "" or modules_str == "":
-                continue
+                continue  # pragma: no cover
 
             for day in days_str.split("-"):
                 for mod in modules_str.split(","):
-                    module = deepcopy(MODULE_BASE)
+                    module = ClassModule.get_attributes()
                     module['day'] = DAYS[day]
                     module['module'] = int(mod)
                     module['type'] = list_[1]
                     section["modules"].append(module)
 
         if section["course_code"] not in courses:
-            course = deepcopy(COURSE_BASE)
+            course = UCCourse.get_attributes()
             course['name'] = section['name']
             course['course_code'] = section['course_code']
             courses[section["course_code"]] = course
@@ -142,8 +141,8 @@ def request_buscacursos(params):
     try:
         search = request_table_url(url)
 
-    except HTTPError:
-        search = []
+    except HTTPError:  # pragma: no cover
+        search = []  # pragma: no cover
 
     courses = parse_search(search)
 
