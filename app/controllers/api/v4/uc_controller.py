@@ -1,6 +1,10 @@
 from fastapi import APIRouter, Request, Depends
 from app.models.uc.uc_parameter import UCSearchQuery
-from app.responses import UCResourcesResponse
+from app.responses import (
+    UCResourcesResponse,
+    UCParamsResponse,
+    UCCoursesResponse
+)
 
 from app.services import UCService
 
@@ -26,7 +30,7 @@ def index(request: Request):
     return {"name": router.tags[0], "resources": routes, "url": base_url}
 
 
-@router.get('/parameters', response_model=UCResourcesResponse)
+@router.get('/parameters', response_model=UCParamsResponse)
 def get_parameters(request: Request):
     service = UCService()
     params = service.authorized_params()
@@ -34,7 +38,7 @@ def get_parameters(request: Request):
     return {"resources": params, "url": request.url._url}
 
 
-@router.get('/{semester}/search', response_model=UCResourcesResponse)
+@router.get('/{semester}/search', response_model=UCCoursesResponse)
 def get_search_courses(
     request: Request,
     params: UCSearchQuery = Depends()

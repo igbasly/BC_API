@@ -1,1 +1,6 @@
-from .uc_response import UCResourceResponse, UCResourcesResponse
+from .uc_response import (
+    UCResourceResponse,
+    UCResourcesResponse,
+    UCParamsResponse,
+    UCCoursesResponse
+)
