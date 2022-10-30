@@ -1,6 +1,12 @@
 from typing import Any, Dict, List
 
-from app.models.uc import UCSection, UCCourse, UCCourseRequirements
+from app.models.uc import (
+    UCSection,
+    UCCourse,
+    UCCourseRequirements,
+    UCVacancy,
+    UCSectionVacancies
+)
 from app.models.base import (
     ClassModule,
     CourseRequirementRelation,
@@ -146,3 +152,67 @@ def parse_requirement_search(results: List[Any]) -> List[List[str]]:
     # relations_info = results[1][1].strip()
 
     return requirements
+
+
+def parse_vacancy_results(results: List[str]) -> Dict:
+    vacancies = UCSectionVacancies.get_attributes()
+
+    for row in results:
+        if len(row) < 3:
+            continue
+        vacancy = UCVacancy.get_attributes()
+        info = []
+        if "libre" in row[0].lower():
+            if len(row) == 4:
+                vacancy['type'] = 'free'
+                vacs_num = [int(i) for i in row[1:]]
+            else:
+                vacancy['type'] = 'program'
+                vacs_num = [int(i) for i in row[len(row) - 3:]]
+                info = row[1: len(row) - 3]
+        else:
+            vacancy['type'] = 'school'
+            vacs_num = [int(i) for i in row[len(row) - 3:]]
+            vacancy['school'] = {
+                "code": row[0],
+                "name": row[1]
+            }
+            info = row[2: len(row) - 3]
+        if len(info) > 0:
+            vacancy['program'] = info[0]
+            if len(info) > 1:
+                vacancy['major'] = info[1]
+        vacancy['total'] = vacs_num[0]
+        vacancy['unavailable'] = vacs_num[1]
+        vacancy['available'] = vacs_num[2]
+        vacancies['vacancies'].append(vacancy)
+
+    vacancies['total'] = sum(list(map(
+        lambda v: v['total'], vacancies['vacancies']
+    )))
+    vacancies['available'] = sum(list(map(
+        lambda v: v['available'], vacancies['vacancies']
+    )))
+
+    return vacancies
+
+
+def parse_vacancy_search(search: List[Any]) -> List[Any]:
+    results = []
+
+    for line in search:
+        seccion_html = line.get_text().split("\n")
+        remove = []
+        for i in range(len(seccion_html)):
+            seccion_html[i] = seccion_html[i].replace("\t", "")
+            if seccion_html[i] == "":
+                remove.append(i - len(remove))
+        for i in remove:
+            seccion_html.pop(i)
+        seccion_html = [
+            s.strip(" ") for s in seccion_html[0].split("-")
+        ] + seccion_html[1:]
+        results.append(seccion_html)
+
+    if len(results) > 0:
+        return parse_vacancy_results(results[1:])

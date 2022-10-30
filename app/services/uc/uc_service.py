@@ -3,7 +3,8 @@ from typing import Any, Dict
 from .scrapper.requests import (
     request_parameters,
     request_buscacursos,
-    request_requirements
+    request_requirements,
+    request_vacancies
 )
 from app.services.base_service import BaseService
 from app.models.uc import UCParameter, UCCourse, UCCourseRequirements
@@ -50,6 +51,8 @@ class UCService(BaseService):
         )
         course_info['semester'] = params['semester']
         for section in course_info['sections']:
+            vacs = request_vacancies(params['semester'], section['section_id'])
+            section['vacancies'] = vacs
             section['semester'] = params['semester']
 
         return UCCourse(**course_info)

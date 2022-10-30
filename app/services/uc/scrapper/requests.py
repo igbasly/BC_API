@@ -1,3 +1,4 @@
+from unittest import result
 import requests
 import json
 from bs4 import BeautifulSoup
@@ -6,7 +7,12 @@ from urllib.error import HTTPError
 from urllib.parse import urlencode
 
 from app.assets import asset_path
-from .parsers import parse_search, parse_requirement_search
+from .parsers import (
+    parse_search,
+    parse_requirement_search,
+    parse_vacancy_results,
+    parse_vacancy_search
+)
 
 
 def request_table_url(url):
@@ -136,3 +142,28 @@ def request_requirements(sigla: str) -> List[Dict]:
     parsed_results = parse_requirement_search(results)
 
     return parsed_results
+
+
+def request_vacancies(semester: str, section_id: int) -> List[Dict]:
+    """Make the requests for vacancies to BuscaCursos serves and format the
+    info into the API response format to vancany.
+    Args:
+        semester (str): Semester code of interest.
+        section_id (int): The nrc code from a specific section of a course.
+            This need to be a valid nrc from the semestre requested.
+    Returns:
+        dict: Dict with the vacancy information of the section given in the API
+        response format.
+    """
+    url = (
+        "http://buscacursos.uc.cl/informacionVacReserva"
+        f".ajax.php?nrc={section_id}&termcode={semester}"
+    )
+    try:
+        search = request_table_url(url)
+    except HTTPError:
+        search = []
+
+    results = parse_vacancy_search(search)
+
+    return results
