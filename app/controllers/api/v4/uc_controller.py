@@ -1,9 +1,12 @@
-from fastapi import APIRouter, Request, Depends
-from app.models.uc.uc_parameter import UCSearchQuery
+from fastapi import APIRouter, Request, Depends, Response, status
+
+
+from app.models.uc.uc_parameter import UCSearchQuery, UCCourseInfoQuery
 from app.responses import (
     UCResourcesResponse,
     UCParamsResponse,
-    UCCoursesResponse
+    UCCoursesResponse,
+    UCCourseResponse
 )
 
 from app.services import UCService
@@ -73,3 +76,23 @@ def search_courses(
     courses = service.search_courses(dict_params)
 
     return {"url": request.url._url, "resources": courses}
+
+
+@router.get('/{semester}/{course_code}', response_model=UCCourseResponse)
+def course_information(
+    request: Request,
+    response: Response,
+    params: UCCourseInfoQuery = Depends()
+):
+    service = UCService()
+    course_info = service.course_details(params.dict())
+
+    if course_info:
+        return {"url": request.url._url, "resource": course_info}
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {
+            "url": request.url._url,
+            "error": "Course information not found, please check semester "
+                     "and course code"
+            }

@@ -20,3 +20,8 @@ class UCParamsResponse(UCResourcesResponse):
 
 class UCCoursesResponse(UCResourcesResponse):
     resources: List[UCCourse]
+
+
+class UCCourseResponse(UCResourceResponse):
+    resource: Optional[UCCourse]
+    error: Optional[str]
