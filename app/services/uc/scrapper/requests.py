@@ -1,11 +1,12 @@
 import requests
 import json
 from bs4 import BeautifulSoup
+from typing import Dict, List
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 
 from app.assets import asset_path
-from .parsers import parse_search
+from .parsers import parse_search, parse_requirement_search
 
 
 def request_table_url(url):
@@ -95,3 +96,43 @@ def request_buscacursos(params):
     courses = parse_search(search)
 
     return courses
+
+
+def request_requirements(sigla: str) -> List[Dict]:
+    """Assamble the url with the course code of interest, request the url to UC
+    server and parse the response into an array of Requirements model.
+    Args:
+        sigla (str): Course code of interest.
+    Returns:
+        List: Arrays of UCCourseRequirements dicts.
+    """
+    url = (
+        "http://catalogo.uc.cl/index.php?tmpl=component&"
+        f"option=com_catalogo&view=requisitos&sigla={sigla.upper()}"
+    )
+    try:
+        resp = requests.get(url).text
+
+        soup = BeautifulSoup(resp, "lxml")
+
+        search = soup.find_all(
+            "table", attrs={"class": "tablesorter tablesorter-blue"})
+    except HTTPError:
+        search = []
+
+    results = []
+    for line in search:
+        line = line.get_text().split("\n")
+        remove = []
+        for i in range(len(line)):
+            line[i] = line[i].replace("\t", "")
+            if line[i] == "":
+                remove.append(i - len(remove))
+        for i in remove:
+            line.pop(i)
+        result = [row.split("\xa0\xa0") for row in line]
+        results.extend(result)
+
+    parsed_results = parse_requirement_search(results)
+
+    return parsed_results

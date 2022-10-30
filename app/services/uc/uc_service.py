@@ -2,10 +2,11 @@ from typing import Any, Dict
 
 from .scrapper.requests import (
     request_parameters,
-    request_buscacursos
+    request_buscacursos,
+    request_requirements
 )
 from app.services.base_service import BaseService
-from app.models.uc import UCParameter, UCCourse
+from app.models.uc import UCParameter, UCCourse, UCCourseRequirements
 from .scrapper.constants import TRANSLATOR
 
 
@@ -44,8 +45,19 @@ class UCService(BaseService):
             return
 
         course_info = courses_json[0]
+        course_info['requirements'] = request_requirements(
+            course_info['course_code']
+        )
         course_info['semester'] = params['semester']
         for section in course_info['sections']:
             section['semester'] = params['semester']
 
         return UCCourse(**course_info)
+
+    def course_requirements(self, course_code: str):
+        requirements_json = request_requirements(course_code)
+
+        return UCCourseRequirements(**requirements_json)
+
+    def section_vancancies(self, semester: str, section_id: int):
+        pass
