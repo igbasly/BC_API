@@ -5,6 +5,6 @@ from fastapi.responses import RedirectResponse
 router = APIRouter(tags=["Home"])
 
 
-@router.get("/", status_code=303)
+@router.get("/", status_code=303, include_in_schema=False)
 def index():
-    return RedirectResponse("/redoc")
+    return RedirectResponse("/documentation")
