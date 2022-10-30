@@ -1,12 +1,12 @@
 from typing import Dict, Union
 
-from app.services.uc.uc_scrappers import (
+from .scrapper.requests import (
     request_parameters,
     request_buscacursos
 )
 from app.services.base_service import BaseService
 from app.models.uc import UCParameter, UCCourse
-from .constants import TRANSLATOR
+from .scrapper.constants import TRANSLATOR
 
 
 class UCService(BaseService):
