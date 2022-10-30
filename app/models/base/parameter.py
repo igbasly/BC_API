@@ -1,5 +1,5 @@
 from typing import List, Optional
-from pydantic import BaseModel
+from .base_model import BaseModel
 
 
 class BaseSelectValue(BaseModel):
@@ -19,12 +19,3 @@ class SearchQuery(BaseModel):
     course_code: Optional[str]
     name: Optional[str]
     section_id: Optional[int]
-
-    def sanitized_params(self):
-        params = self.dict()
-        new_dict = {}
-        for key in params:
-            if params[key] is not None:
-                new_dict[key] = params[key]
-
-        return new_dict

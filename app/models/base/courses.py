@@ -1,25 +1,28 @@
-from typing import List
-from pydantic import BaseModel
+from __future__ import annotations
+from typing import List, Literal
+from .base_model import BaseModel
+
+
+class CourseRequirement(BaseModel):
+    type = "req"
+    course_code: str
+
+
+class CourseRequirementRelation(BaseModel):
+    type = "rel"
+    relation: Literal["OR", "AND"]
+    course_codes: List[CourseRequirementRelation | CourseRequirement]
+
+
+class CourseRequirements(BaseModel):
+    requirements: List[CourseRequirementRelation | CourseRequirement]
+    restrictions: List[CourseRequirementRelation | CourseRequirement]
 
 
 class ClassModule(BaseModel):
+    type: str
     day: int
     module: int
-    type: str
-
-    @classmethod
-    def get_attributes(cls: BaseModel):
-        base_attr = cls.__fields__
-        attrs = {}
-        for key in base_attr:
-            type_ = base_attr[key]._type_display()
-            if "List" in type_:
-                attrs[key] = []  # pragma: no cover
-            elif "Dict" in type_:
-                attrs[key] = {}  # pragma: no cover
-            else:
-                attrs[key] = None
-        return attrs
 
 
 class Section(BaseModel):
@@ -38,37 +41,9 @@ class Section(BaseModel):
     available_vacancies: int
     modules: List[ClassModule]
 
-    @classmethod
-    def get_attributes(cls: BaseModel):
-        base_attr = cls.__fields__
-        attrs = {}
-        for key in base_attr:
-            type_ = base_attr[key]._type_display()
-            if "List" in type_:
-                attrs[key] = []  # pragma: no cover
-            elif "Dict" in type_:
-                attrs[key] = {}  # pragma: no cover
-            else:
-                attrs[key] = None
-        return attrs
-
 
 class Course(BaseModel):
     semester: str
     name: str
     course_code: str
     sections: List[Section]
-
-    @classmethod
-    def get_attributes(cls: BaseModel):
-        base_attr = cls.__fields__
-        attrs = {}
-        for key in base_attr:
-            type_ = base_attr[key]._type_display()
-            if "List" in type_:
-                attrs[key] = []  # pragma: no cover
-            elif "Dict" in type_:
-                attrs[key] = {}  # pragma: no cover
-            else:
-                attrs[key] = None
-        return attrs

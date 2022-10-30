@@ -72,7 +72,7 @@ def search_courses(
     Search any course of BuscaCursos UC with the required parameters.
     """
     service = UCService()
-    dict_params = params.sanitized_params()
+    dict_params = params.dict()
     courses = service.search_courses(dict_params)
 
     return {"url": request.url._url, "resources": courses}

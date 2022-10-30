@@ -1,6 +1,6 @@
 from typing import List, Optional, Any
-from pydantic import BaseModel
 
+from app.models.base import BaseModel
 from app.models.uc import UCParameter, UCCourse
 
 

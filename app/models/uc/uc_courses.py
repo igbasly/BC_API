@@ -1,5 +1,12 @@
 from typing import List, Optional
-from app.models.base import Section, Course, ClassModule
+from app.models.base import (
+    Section,
+    Course,
+    ClassModule,
+    CourseRequirements,
+    CourseRequirement,
+    CourseRequirementRelation
+)
 
 
 class UCSection(Section):
@@ -10,5 +17,10 @@ class UCSection(Section):
     modules: List[ClassModule]
 
 
+class UCCourseRequirements(CourseRequirements):
+    equivalencies: List[CourseRequirementRelation | CourseRequirement]
+
+
 class UCCourse(Course):
     sections: List[UCSection]
+    requirements: Optional[UCCourseRequirements]

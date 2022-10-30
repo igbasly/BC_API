@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel
+from app.models.base import BaseModel
 
 from app.models.base import BaseParameter, SearchQuery
 
