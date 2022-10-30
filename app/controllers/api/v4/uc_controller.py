@@ -95,4 +95,4 @@ def course_information(
             "url": request.url._url,
             "error": "Course information not found, please check semester "
                      "and course code"
-            }
+        }
