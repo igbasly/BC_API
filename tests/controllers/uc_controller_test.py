@@ -71,3 +71,28 @@ def test_get_search_courses_valid_search():
         for key in expected_keys:
             assert section[key] is not None
         assert len(section['modules']) > 0
+
+
+def test_get_course_information_invalid():
+    expected_error = "Course information not found, please check semester "\
+                     "and course code"
+    response_bad_params = client.get('/api/v4/uc/1999-2/HOLA123')
+    year = datetime.date.today().year
+    response_multiple_courses = client.get(f"/api/v4/uc/{year}-1/MAT")
+
+    assert response_bad_params.status_code == 404
+    assert response_multiple_courses.status_code == 404
+    assert response_bad_params.json()['error'] == expected_error
+    assert response_multiple_courses.json()['error'] == expected_error
+    assert response_bad_params.json()['resource'] is None
+    assert response_multiple_courses.json()['resource'] is None
+
+
+def test_get_course_information_valid():
+    year = datetime.date.today().year
+    response = client.get(f"/api/v4/uc/{year}-1/MAT1610")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert data['error'] is None
+    assert data['resource']['course_code'] == "MAT1610"

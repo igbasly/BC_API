@@ -12,6 +12,12 @@ class ServiceMock(BaseService):
     def search_courses(self, params):
         return []
 
+    def _translate_params(self, original_params):
+        return original_params
+
+    def course_details(self, params):
+        return {}
+
 
 def test_base_service_class():
     # Check if it's a Abstract class
@@ -34,3 +40,5 @@ def test_abstract_methods_defined():
 
     assert test.authorized_params() == {}
     assert test.search_courses("") == []
+    assert test._translate_params("") == ""
+    assert test.course_details("") == {}
