@@ -1,3 +1,6 @@
+from fastapi.middleware.cors import CORSMiddleware
+
+
 app_configuration = {
     "title": "BuscaCursos UC API",
     "description": "REST API para obtener información desde BuscaCursos UC, \
@@ -17,3 +20,21 @@ app_configuration = {
     "redoc_url": "/documentation",
     "version": "4.0.0"
 }
+
+allowed_origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "https://bc.horariomaker.com",
+    "https://horariomaker.com",
+    "*"
+]
+
+app_middlewares = [
+    {
+        "middleware_class": CORSMiddleware,
+        "allow_origins": allowed_origins,
+        "allow_credentials": True,
+        "allow_methods": ["*"],
+        "allow_headers": ["*"],
+    }
+]
