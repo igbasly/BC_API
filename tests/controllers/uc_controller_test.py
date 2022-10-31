@@ -96,3 +96,65 @@ def test_get_course_information_valid():
     assert response.status_code == 200
     assert 'error' not in data
     assert data['resource']['course_code'] == "MAT1610"
+
+
+def test_get_course_requirements():
+    year = datetime.date.today().year
+    response = client.get(f"/api/v4/uc/{year}-1/IIC2233")
+    data = response.json()['resource']
+
+    assert response.status_code == 200
+    assert 'requirements' in data
+    assert len(data['requirements']['requirements']) == 1
+    assert len(data['requirements']['equivalencies']) == 1
+
+
+def test_get_course_vacancies():
+    year = datetime.date.today().year
+    response = client.get(f"/api/v4/uc/{year}-1/IIC2233")
+    data = response.json()['resource']
+
+    assert response.status_code == 200
+    for section in data['sections']:
+        assert 'vacancies' in section
+        vacancies_info = section['vacancies']
+        assert 'total' in vacancies_info
+        assert 'available' in vacancies_info
+        assert len(vacancies_info['vacancies']) > 1
+
+
+def test_get_multiple_courses_all_valid():
+    year = datetime.date.today().year
+    courses = [
+        "MAT1610",
+        "ING1004",
+        "IIC1103",
+        "MAT1203"
+    ]
+    query = ",".join(courses)
+    response = client.get(f"/api/v4/uc/{year}-1/courses?course_codes={query}")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data['resources']) == 4
+    assert list(map(lambda c: c['course_code'], data['resources'])) == courses
+    assert response.elapsed.total_seconds() < 5
+
+
+def test_get_multiple_courses_invalid():
+    year = datetime.date.today().year
+    courses = [
+        "MAT1610",
+        "IIC1103",
+        "MAT1203",
+        "ING",
+        "Foo"
+    ]
+    query = ",".join(courses)
+    response = client.get(f"/api/v4/uc/{year}-1/courses?course_codes={query}")
+    data = response.json()
+
+    assert response.status_code == 200
+    assert len(data['resources']) == 3
+    assert list(map(
+        lambda c: c['course_code'], data['resources'])) == courses[:3]

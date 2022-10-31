@@ -1,4 +1,3 @@
-from unittest import result
 import requests
 import json
 from bs4 import BeautifulSoup
@@ -10,7 +9,6 @@ from app.assets import asset_path
 from .parsers import (
     parse_search,
     parse_requirement_search,
-    parse_vacancy_results,
     parse_vacancy_search
 )
 
@@ -126,7 +124,7 @@ def request_requirements(sigla: str) -> List[Dict]:
     except HTTPError:
         search = []
 
-    results = []
+    results = []  # pragma: no cover
     for line in search:
         line = line.get_text().split("\n")
         remove = []

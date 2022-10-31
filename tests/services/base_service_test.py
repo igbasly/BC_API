@@ -21,9 +21,6 @@ class ServiceMock(BaseService):
     def course_requirements(self, course_code):
         return {}
 
-    def section_vancancies(self, semester, section_id):
-        return {}
-
 
 def test_base_service_class():
     # Check if it's a Abstract class
@@ -48,3 +45,4 @@ def test_abstract_methods_defined():
     assert test.search_courses("") == []
     assert test._translate_params("") == ""
     assert test.course_details("") == {}
+    assert test.course_requirements("") == {}

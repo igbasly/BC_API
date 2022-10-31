@@ -33,10 +33,6 @@ class MultithreadJob(Thread):
             self.workers.append(worker)
             self.active_workers.append(False)
 
-    def add_job(self, function, args):
-        self.workers.append(Worker(function, args))
-        self.active_workers.append(False)
-
     def run(self):
         while self.completed_workers() < len(self.workers):
             for i in range(len(self.workers)):
