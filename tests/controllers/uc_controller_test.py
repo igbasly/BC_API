@@ -138,7 +138,7 @@ def test_get_multiple_courses_all_valid():
     assert response.status_code == 200
     assert len(data['resources']) == 4
     assert list(map(lambda c: c['course_code'], data['resources'])) == courses
-    assert response.elapsed.total_seconds() < 5
+    assert response.elapsed.total_seconds() < 10
 
 
 def test_get_multiple_courses_invalid():
