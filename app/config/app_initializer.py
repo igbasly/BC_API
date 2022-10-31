@@ -21,20 +21,12 @@ app_configuration = {
     "version": "4.0.0"
 }
 
-allowed_origins = [
-    "http://localhost",
-    "http://localhost:8000",
-    "https://bc.horariomaker.com",
-    "https://horariomaker.com",
-    "*"
-]
-
 app_middlewares = [
     {
         "middleware_class": CORSMiddleware,
-        "allow_origins": allowed_origins,
+        "allow_origins": ["*"],
         "allow_credentials": True,
-        "allow_methods": ["*"],
+        "allow_methods": ["GET"],
         "allow_headers": ["*"],
     }
 ]
