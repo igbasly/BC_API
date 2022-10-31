@@ -5,6 +5,6 @@ from fastapi.responses import RedirectResponse
 router = APIRouter(tags=["Home"])
 
 
-@router.get("/", status_code=303, include_in_schema=False)
+@router.get("/", include_in_schema=False)
 def index():
-    return RedirectResponse("http://igbasly.github.io/BC_API/")
+    return RedirectResponse("https://igbasly.github.io/BC_API/")
