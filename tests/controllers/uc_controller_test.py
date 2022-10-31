@@ -40,7 +40,7 @@ def test_get_params():
         if params[key][0] == "select":
             assert len(item['values']) > 0
         else:
-            assert item['values'] is None
+            assert 'values' not in item
 
 
 def test_get_search_courses_invalid_search():
@@ -84,8 +84,8 @@ def test_get_course_information_invalid():
     assert response_multiple_courses.status_code == 404
     assert response_bad_params.json()['error'] == expected_error
     assert response_multiple_courses.json()['error'] == expected_error
-    assert response_bad_params.json()['resource'] is None
-    assert response_multiple_courses.json()['resource'] is None
+    assert 'resource' not in response_bad_params.json()
+    assert 'resource' not in response_multiple_courses.json()
 
 
 def test_get_course_information_valid():
@@ -94,5 +94,5 @@ def test_get_course_information_valid():
     data = response.json()
 
     assert response.status_code == 200
-    assert data['error'] is None
+    assert 'error' not in data
     assert data['resource']['course_code'] == "MAT1610"

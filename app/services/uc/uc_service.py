@@ -9,6 +9,7 @@ from .scrapper.requests import (
 from app.services.base_service import BaseService
 from app.models.uc import UCParameter, UCCourse, UCCourseRequirements
 from .scrapper.constants import TRANSLATOR
+from app.services.multithread import MultithreadJob
 
 
 class UCService(BaseService):
@@ -51,9 +52,19 @@ class UCService(BaseService):
         )
         course_info['semester'] = params['semester']
         for section in course_info['sections']:
-            vacs = request_vacancies(params['semester'], section['section_id'])
-            section['vacancies'] = vacs
             section['semester'] = params['semester']
+
+        job = MultithreadJob([
+            [request_vacancies, [params['semester'], s['section_id']]]
+            for s in course_info['sections']
+        ])
+        job.start()
+        job.join()
+        vacancies = job.get_results()
+
+        for i in range(len(course_info['sections'])):
+            section = course_info['sections'][i]
+            section['vacancies'] = vacancies[i]
 
         return UCCourse(**course_info)
 

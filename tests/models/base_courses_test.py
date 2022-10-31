@@ -29,9 +29,9 @@ fake_section = {
 }
 
 fake_module = {
+    "type": "Foo",
     "day": 1,
-    "module": 2,
-    "type": "Foo"
+    "module": 2
 }
 
 

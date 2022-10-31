@@ -18,6 +18,12 @@ class ServiceMock(BaseService):
     def course_details(self, params):
         return {}
 
+    def course_requirements(self, course_code):
+        return {}
+
+    def section_vancancies(self, semester, section_id):
+        return {}
+
 
 def test_base_service_class():
     # Check if it's a Abstract class
