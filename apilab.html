@@ -1,137 +1,201 @@
 <!DOCTYPE html>
 <html>
-<title>BC API - BCLab</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
+  <title>BC API - BCLab</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
 
-<script>
-    function setResponse(url, text) {
-        let resp = document.getElementById("response");
-        let urlText = document.getElementById("url");
-        const str = PR.prettyPrintOne(text);
-        resp.innerHTML = str;
+  <script>
+    // const baseURL = 'https://bc.horariomaker.com/api/v4/uc';
+    const baseURL = "http://127.0.0.1:8000/api/v4/uc";
+
+    function setURL(url) {
+      let urlText = document.getElementById("url");
+      if (url != "") {
         urlText.innerText = url;
-        if (url != 'https://bc.horariomaker.com/api/v3?') {
-            urlText.href = url;
-        } else{
-            urlText.href = "";
-        };
-    };
+        urlText.href = url;
+      } else {
+        urlText.innerText = baseURL;
+        urlText.href = "";
+      }
+    }
+
+    function assemblyURL(format) {
+      let form = document.getElementById(`form-${format}`);
+      let query = [];
+      let response = {};
+      let semester = "";
+      for (let i = 0; i < form.length; i++) {
+          const element = form.elements[i];
+          if (element.type != "submit" && element.name != "semester") {
+              if (!(element.value == "" || element.value == "TODOS")){
+                  query.push(element.name + "=" + element.value.replace(" ", "+"))
+              };
+          } else if (element.name == "semester"){
+              semester = element.value;
+          };
+      };
+      if (format !== 'course'){
+        if (query.length > 0){
+          return url = `${baseURL}/${semester}/${format}?${query.join('&')}`;
+        }
+      } else {
+        const query_split = query[0].split('=');
+        if (query_split.length > 1) {
+          return url = `${baseURL}/${semester}/${query_split[1]}`
+        }
+      }
+      return null;
+    }
+
+    function setResponse(url, text) {
+      let resp = document.getElementById("response");
+      const str = PR.prettyPrintOne(text);
+      resp.innerHTML = str;
+      setURL(url)
+    }
 
     async function fetchData() {
-      const resp = await fetch("https://bc.horariomaker.com/api/v3/parametros").then(response => response.json());
-      const params = resp["data"]["parametros"]
+      const resp = await fetch(`${baseURL}/parameters`).then((response) =>
+        response.json()
+      );
+      const params = resp.resources;
       console.log(params);
-      Object.keys(params).map((key) => {
-        const select = document.getElementsByName(key)[0];
-        for (let i=0; i < params[key].length; i++) {
-          const op = params[key][i];
-          const option = document.createElement("option");
-          option.value = op["value"];
-          option.innerHTML = op["name"];
-          select.appendChild(option);
-      };
-      })
+      const right = document.getElementById("half-right");
+      const left = document.getElementById("half-left");
+      const half = params.length / 2;
+      params.forEach((param, index) => {
+        const container = document.createElement("div");
+        container.classList.add("w3-section");
+        const label = document.createElement("label");
+        label.classList.add("w3-left");
+        label.innerHTML = param.name;
+        let input = null;
+
+        if (param.type === "select") {
+          input = document.createElement("select");
+          input.classList.add("w3-select");
+          param.values.forEach((value) => {
+            const option = document.createElement("option");
+            option.value = value.value;
+            option.innerHTML = value.name;
+            input.appendChild(option);
+          });
+        } else {
+          input = document.createElement("input");
+          input.classList.add("w3-input");
+        }
+        input.setAttribute("name", param.name);
+        container.appendChild(label);
+        container.appendChild(input);
+        if (index <= half) {
+          left.appendChild(container);
+        } else {
+          right.appendChild(container);
+        }
+        if (param.name === 'semester') {
+          const form1 = document.getElementById('form-course');
+          const form2 = document.getElementById('form-multiple_courses');
+          const new_sem = container.cloneNode(true);
+          const new_sem2 = container.cloneNode(true);
+          form1.insertBefore(new_sem, form1.firstChild);
+          form2.insertBefore(new_sem2, form2.firstChild);
+        } 
+      });
     }
-</script>
+  </script>
 
-<body class="w3-content" style="max-width:1300px;">
-
-<!-- First Grid: Logo & About -->
-<div class="w3-row" style="height: 100vh;">
-    <div class="w3-half w3-container w3-center" style="background-color: #267CB9; min-height: 100%;">
+  <body class="w3-content" style="max-width: 1300px">
+    <!-- First Grid: Logo & About -->
+    <div class="w3-row" style="height: 100vh">
+      <div
+        class="w3-half w3-container w3-center"
+        style="background-color: #267cb9; min-height: 100%"
+      >
         <div class="w3-padding-64">
-            <h1 class="w3-text-white">BuscaCursos API Lab</h1>
-            <form class="w3-container w3-card w3-white" onsubmit="callAPI().then(data => setResponse(data[0], data[1])); return false;" id="form">
-                <div class="w3-row-padding">
-                    <div class="w3-half">
-                <div class="w3-section">
-                    <label class="w3-left">Semestre:</label>
-                    <select class="w3-select" name="semestre">
-                    </select>
-                </div>
-                <div class="w3-section">
-                    <label class="w3-left">Sigla:</label>
-                    <input class="w3-input" style="width:100%;" type="text" name="sigla" placeholder="Sigla">
-                </div>
-                <div class="w3-section">
-                    <label class="w3-left">NRC:</label>
-                    <input class="w3-input" style="width:100%;" type="number" name="nrc" placeholder="NRC">
-                </div>
-                <div class="w3-section">
-                    <label class="w3-left">Nombre:</label>
-                    <input class="w3-input" style="width:100%;" type="text" name="nombre" placeholder="Nombre">
-                </div>
-                <div class="w3-section">
-                    <label class="w3-left">Profesor:</label>
-                    <input class="w3-input" style="width:100%;" type="text" name="profesor" placeholder="Profesor">
-                </div>
-                    </div>
-                    <div class="w3-half">
-                        <div class="w3-section">
-                            <label class="w3-left">Categoría:</label>
-                            <select class="w3-select"       name="categoria">
-                            </select>
-                        </div>
-                        <div class="w3-section">
-                            <label class="w3-left">Campus:</label>
-                            <select class="w3-select" name="campus">
-                            </select>
-                        </div>
-                        <div class="w3-section">
-                            <label class="w3-left">Unidad Académica:</label>
-                            <select class="w3-select" name="unidad_academica">
-                            </select>
-                        </div>
-                        <div class="w3-section">
-                          <label class="w3-left">Formacion General:</label>
-                          <select class="w3-select" name="formacion_general">
-                          </select>
-                      </div>
-                      <div class="w3-section">
-                        <label class="w3-left">Formato:</label>
-                        <select class="w3-select" name="formato">
-                        </select>
-                    </div>
-                        <div class="w3-section">
-                            <input class="w3-check" id="vac" type="checkbox" value="true"    name="vacantes">
-                            <label class="w3-left">Vacantes</label>
+          <h1 class="w3-text-white">BuscaCursos API Lab</h1>
+          <h2 class="w3-center w3-margin-top w3-margin-bottom">Buscar Cursos <code style="font-size: 1rem; background-color: #333333; color: white; padding: 2px 5px;">/api/v4/uc/{semester}/search</code></h2>
 
-                        </div>
-                        <div class="w3-section">
-                            <input class="w3-check" id="req"        type="checkbox" value="true"    name="requisitos">
-                            <label class="w3-left">Requisitos</label>
-                        </div>
-                        <button type="submit" class="w3-button w3-teal w3-right">Enviar</button>
-                        <button type="reset" class="w3-button w3-gray">Limpiar</button>
-                    </div>
-                    
-                    
-                </div>
-            </form>
+          <form
+            class="w3-container w3-card w3-white"
+            onsubmit="callAPI(assemblyURL('search')).then(data => setResponse(data[0], data[1])); return false;"
+            id="form-search"
+          >
+            <div class="w3-row-padding">
+              <div class="w3-half" id="half-left">
+              </div>
+              <div class="w3-half" id="half-right">
+              </div>
+            </div>
+            <button type="submit" class="w3-button w3-teal w3-right">
+              Enviar
+            </button>
+            <button type="reset" class="w3-button w3-gray">Limpiar</button>
+          </form>
+  
+          <h2 class="w3-center w3-margin-top w3-margin-bottom">Información de curso <code style="font-size: 1rem; background-color: #333333; color: white; padding: 2px 5px;">/api/v4/uc/{semester}/{course_code}</code></h2>
+          <form
+            class="w3-container w3-card w3-white"
+            onsubmit="callAPI(assemblyURL('course')).then(data => setResponse(data[0], data[1])); return false;"
+            id="form-course"
+          >
+            <div class="w3-row-padding">
+              <div class="w3-section">
+                <label class="w3-left">course_code</label>
+                <input name="course_code" class="w3-input">
+              </div>
+            </div>
+            <button type="submit" class="w3-button w3-teal w3-right">
+              Enviar
+            </button>
+            <button type="reset" class="w3-button w3-gray">Limpiar</button>
+          </form>
+          <h2 class="w3-center w3-margin-top w3-margin-bottom">Información de múltiples cursos <code style="font-size: 1rem; background-color: #333333; color: white; padding: 2px 5px;">/api/v4/uc/{semester}/multiple_courses</code></h2>
+          <form
+            class="w3-container w3-card w3-white"
+            onsubmit="callAPI(assemblyURL('multiple_courses')).then(data => setResponse(data[0], data[1])); return false;"
+            id="form-multiple_courses"
+          >
+            <div class="w3-row-padding">
+              <div class="w3-section">
+                <label class="w3-left">course_code</label>
+                <input name="course_codes" class="w3-input" placeholder="ING123,MAT007,CARA02">
+              </div>
+            </div>
+            <button type="submit" class="w3-button w3-teal w3-right">
+              Enviar
+            </button>
+            <button type="reset" class="w3-button w3-gray">Limpiar</button>
+          </form>
         </div>
-    </div>
-    <div class="w3-half w3-container">
-    <div class="w3-padding-64 w3-center">
-      <h2>Respuesta</h2>
-      <div class="w3-container w3-card w3-text-white" style="background-color: #267CB9;">
-        <h4 style="text-align: left;">URL:</h4>
-        <h6 class="w3-white" style="text-align: left;"><a href="" id="url">https://bc.horariomaker.com/api/v3?</a></h6>
-        
-        <h4  style="text-align: left;">Response:</h4>
-        <pre class="w3-white" style="text-align: justify; overflow: scroll; height: 45vh;"><code class="prettyprint lang-json"  id="response"> {} </code></pre>
+      </div>
+      <div class="w3-half w3-container">
+        <div class="w3-padding-64 w3-center">
+          <h2>Respuesta</h2>
+          <div
+            class="w3-container w3-card w3-text-white"
+            style="background-color: #267cb9"
+          >
+            <h4 style="text-align: left">URL:</h4>
+            <h6 class="w3-white" style="text-align: left">
+              <a href="" id="url" target="_blank" rel="nofollow"></a>
+            </h6>
+
+            <h4 style="text-align: left">Response:</h4>
+            <pre
+              class="w3-white"
+              style="text-align: justify; overflow: scroll; height: 45vh"
+            ><code class="prettyprint lang-json"  id="response"> {} </code></pre>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-    
-</div>
-</body>
-<script src="script_dev.js"></script>
-<script>
-  fetchData();
-</script>
+  </body>
+  <script src="script.js"></script>
+  <script>
+    fetchData();
+    setURL('');
+  </script>
 </html>
-
