@@ -1,4 +1,4 @@
-# BuscaCursos UC REST API  | V1 | INACTIVA |
+# BuscaCursos UC REST API  | V1 | (_DEPRECATED_) 
 REST API del sistema BuscaCursos de la PUC Chile.
 
 La versión 1 de la API se encuentra alojada en la url [http://bc.horariomaker.com/api/v1](http://bc.horariomaker.com/api/v1)

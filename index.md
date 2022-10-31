@@ -1,9 +1,10 @@
-# BuscaCursos UC API  | [![Build Status](https://travis-ci.com/igbasly/BC_API.svg?token=rvsCi5nQd3Zv6KdSdS54&branch=master)](https://travis-ci.com/igbasly/BC_API) [![Heroku](https://heroku-badge.herokuapp.com/?app=buscacursos-api&root=favicon.ico)]()
-REST API del sistema BuscaCursos de la PUC Chile.
+# BuscaCursos UC API
+API del sistema BuscaCursos de la PUC Chile.
 
-La API cuenta con 3 versiones:
-* **v1 (Inactiva):** Versión básica para consultas de BuscaCursos. [Documentación](/BC_API/documentation_v1.html)
-* **v2 (Inactiva):** Versión que incluye la opción de vacantes disponibles. [Documentación](/BC_API/documentation_v2.html)
-* **v3:** Versión que además incluye la opción de requisitos de los cursos. [Documentación](/BC_API/documentation_v3.html)
+La API cuenta con 4 versiones:
+* **v1 _(deprecated)_:** Versión básica para consultas de BuscaCursos. [Documentación](/BC_API/documentation_v1.html)
+* **v2 _(deprecated)_:** Versión que incluye la opción de vacantes disponibles. [Documentación](/BC_API/documentation_v2.html)
+* **v3 _(deprecated)_:** Versión que además incluye la opción de requisitos de los cursos. [Documentación](/BC_API/documentation_v3.html)
+* **v4:** Versión actualizada con el nuevo formato estándar de cursos y dependencias. Se puede ver toda la documentación relacionada [Aquí](https://bc.horariomaker.com/documentation)
 
 Puede probar el funcionamiento en el **NUEVO [API LAB](/BC_API/apilab.html)**.
