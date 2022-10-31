@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 
-from .config import MainRouter
+from .config import MainRouter, AppConfiguration
 
 
-app = FastAPI()
+app = FastAPI(
+    **AppConfiguration
+)
 app.include_router(MainRouter)

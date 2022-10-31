@@ -3,3 +3,7 @@ uvicorn[standard]
 requests
 pytest
 pytest-cov
+beautifulsoup4
+pydantic
+httplib2
+lxml

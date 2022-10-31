@@ -14,9 +14,13 @@ Content:
     ```
         from fastapi import APIRouter
 
-        router = APIRouter(tags=["<NAME>"])
+        router = APIRouter(
+            prefix="/<NAME>"
+            tags=["<NAME>"]
+        )
     ```
-    The router should include the tags attribute with the controller's name.
+    The router should include tags and prefix attributes with the
+    controller's name.
 
 APIRouters works very similar to a FastAPI instances, you can easyly add new
 routes with the decorator @router.<HTTP_METHOD>

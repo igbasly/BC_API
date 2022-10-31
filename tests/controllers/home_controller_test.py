@@ -7,4 +7,4 @@ client = TestClient(app)
 def test_index():
     response = client.get('/')
     assert response.status_code == 200
-    assert response.json() == {"hello": "world!"}
+    assert response.url == client.base_url + "/documentation"

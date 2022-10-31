@@ -10,7 +10,7 @@ def load_manifest(manifest_path: str):
         return {}
 
 
-accepted_files = ['png', 'jpeg', 'gif', 'jpg', 'pdf']
+accepted_files = ['png', 'jpeg', 'gif', 'jpg', 'pdf', 'json']
 
 manifest = {}
 

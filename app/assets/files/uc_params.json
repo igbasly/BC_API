@@ -1,0 +1,12 @@
+{
+  "semester": ["select", "cxml_semestre"],
+  "category": ["select", "cxml_categoria"],
+  "campus": ["select", "cxml_campus"],
+  "school": ["select", "cxml_unidad_academica"],
+  "format": ["select", "cxml_formato_cur"],
+  "general_education": ["select", "cxml_area_fg"],
+  "course_code": ["input", "cxml_sigla"],
+  "name": ["input", "cxml_nombre"],
+  "section_id": ["input", "cxml_nrc"],
+  "teacher_name": ["input", "cxml_profesor"]
+}
