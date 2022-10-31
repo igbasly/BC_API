@@ -1,7 +1,7 @@
-from typing import Optional
-from app.models.base import BaseModel
+from typing import Optional, List
+from fastapi import Query
 
-from app.models.base import BaseParameter, SearchQuery
+from app.models.base import BaseParameter, SearchQuery, BaseModel
 
 
 class UCParameter(BaseParameter):
@@ -19,3 +19,8 @@ class UCSearchQuery(SearchQuery):
 class UCCourseInfoQuery(BaseModel):
     semester: str
     course_code: str
+
+
+class UCMultipleCoursesQuery(BaseModel):
+    semester: str
+    course_codes: str

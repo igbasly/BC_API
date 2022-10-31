@@ -1,4 +1,5 @@
 from threading import Thread, Lock
+from time import sleep
 from typing import List
 
 
@@ -51,7 +52,7 @@ class MultithreadJob(Thread):
                         if self.active_workers[j]:
                             self.workers[j].join()
                             self.active_workers[j] = False
-
+            sleep(0.5)
             for i in range(len(self.workers)):
                 worker = self.workers[i]
                 if worker.ready:

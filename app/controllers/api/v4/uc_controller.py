@@ -1,7 +1,11 @@
 from fastapi import APIRouter, Request, Depends, Response, status
 
 
-from app.models.uc.uc_parameter import UCSearchQuery, UCCourseInfoQuery
+from app.models.uc.uc_parameter import (
+    UCSearchQuery,
+    UCCourseInfoQuery,
+    UCMultipleCoursesQuery
+)
 from app.responses import (
     UCResourcesResponse,
     UCParamsResponse,
@@ -74,6 +78,41 @@ def search_courses(
     service = UCService()
     dict_params = params.dict()
     courses = service.search_courses(dict_params)
+
+    return {"url": request.url._url, "resources": courses}
+
+
+@router.get('/{semester}/courses', response_model=UCCoursesResponse)
+def multiple_courses(
+    request: Request,
+    response: Response,
+    params: UCMultipleCoursesQuery = Depends()
+):
+    """
+    Search multiple courses información, obtaining the same information as in \
+    [Course Informarcion](#tag/UC/operation/course_information_api_v4_uc__seme\
+    ster___course_code__get), but you can search multiple courses at once.
+    The course codes should be separated by commas in the query params, and \
+    it has to be valid codes, otherwise they will be ignored.
+    E.g:
+    To obtain información of the following courses, the request url will be \
+    like bellow:
+
+    Semester:
+    * 2020-1
+
+    Courses:
+    * IIC2233
+    * MAT1610
+    * IIC1103
+
+    Request `/api/v4/uc/2020-1/courses?IIC2233,MAT1610,IIC1103`
+    """
+    service = UCService()
+    courses = service.multiple_courses(
+        params.semester,
+        params.course_codes.split(",")
+    )
 
     return {"url": request.url._url, "resources": courses}
 

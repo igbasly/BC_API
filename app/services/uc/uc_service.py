@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from .scrapper.requests import (
     request_parameters,
@@ -73,5 +73,18 @@ class UCService(BaseService):
 
         return UCCourseRequirements(**requirements_json)
 
-    def section_vancancies(self, semester: str, section_id: int):
-        pass
+    def multiple_courses(
+        self,
+        semester: str,
+        course_codes: List[str]
+    ) -> List[UCCourse]:
+        jobs_args = []
+        for course_code in course_codes:
+            params = {"semester": semester, "course_code": course_code}
+            jobs_args.append([self.course_details, [params]])
+        job = MultithreadJob(jobs_args)
+        job.start()
+        job.join()
+        courses = job.get_results()
+
+        return list(filter(lambda c: c is not None, courses))
