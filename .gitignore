@@ -1,3 +1,5 @@
 .DS_Store
 .vscode/settings.json
 __pycache__/
+
+.coverage
