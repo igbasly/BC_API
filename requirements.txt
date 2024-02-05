@@ -1,5 +1,5 @@
 beautifulsoup4==4.11.1
-fastapi==0.85.1
+fastapi==0.109.1
 pydantic==1.10.2
 pytest==7.2.0
 uvicorn[standard]
